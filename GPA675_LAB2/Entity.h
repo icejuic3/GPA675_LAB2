@@ -1,41 +1,31 @@
 #pragma once
 
+#include "Board.h"
+#include <qpoint.h>
+#include <qpainter.h>
 
-#include <QPoint>
-#include <Qpainter>
-
-
-
+using real = double;
 
 class Entity
 {
-protected:
-
-	//Board& mBoard
-	bool mAlive;
-	double mAge;
-
 public:
-
-	Entity();
+	Entity(Board& board);
 	virtual ~Entity();
 
-	double age();
+	double age();											//query
 	void setDead();
-	
-	virtual bool isValid();								//query
-	virtual bool isAlive();								//query
-	virtual void ticPrepare(real elapsedTime);
-	virtual void ticExecute();
-	virtual void draw(Qpainter& painter);
-	virtual bool isColliding(Qpoint const& position);	//query
 
+	virtual bool isValid() = 0;								//query
+	virtual bool isAlive() = 0;								//query
+	virtual void ticPrepare(real elapsedTime) = 0;
+	virtual void ticExecute() = 0;
+	virtual void draw(QPainter& painter) = 0;
+	virtual bool isColliding(QPoint const& position) = 0;	//query
 
 private:
 
-
-
-
-
+protected:
+	Board& mBoard;
+	bool mAlive;
+	double mAge;
 };
-
