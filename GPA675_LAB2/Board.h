@@ -30,6 +30,8 @@ public:
 	//Mutateurs
 	void setState(size_t row, size_t column, Cellstate value);				//mutateur qui modifie la valeur de la cellule sur la grille
 
+	//Fonction de Resize??
+
 	//buffer
 	DataState const& data() const;												// Accesseur en lecture seule sur le "buffer" de la grille.
 	DataState& data();															// Accesseur en lecture/écriture sur le "buffer" de la grille.
