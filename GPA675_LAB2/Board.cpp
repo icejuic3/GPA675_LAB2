@@ -14,17 +14,15 @@ Board::Board(size_t height, size_t width, Cellstate initValue)
     ,mSize{ height * width }
     ,mBoard{ new Cellstate[mSize] }
 {
-
     //validation des valeurs de la grille
-    if (width >= 4 && height >= 3 && width % 2 == 0) {
-
-        for (DataState cur{ mBoard }; cur < mBoard + mSize; ++cur) {
-
-            *cur = initValue;
-        }
+    if (width < 4 || height < 3 || width % 2 != 0) {
+        std::exit(-1);
+        //throw std::invalid_argument("Les dimensions de la grille ne sont pas valide");      //Confirmer ce qu'on doit faire si nous recevons la mauvaise taille de tableau
     }
-    else {
-        throw std::invalid_argument("Les dimensions de la grille ne sont pas valide");      //Confirmer ce qu'on doit faire si nous recevons la mauvaise taille de tableau
+    //si les valeurs sont bonnes alors on initialise le tableau
+    for (DataState cur{ mBoard }; cur < mBoard + mSize; ++cur) {
+
+        *cur = initValue;
     }
 }
 
