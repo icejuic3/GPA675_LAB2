@@ -90,7 +90,35 @@ void Body::removeLast()
 
 void Body::remove(size_t index)
 {
+	if (index > mSize) {
+		return;
+	}
+	if (index == 1) {
+		removefirst();
+	}
+	if (index == mSize) {
+		removeLast();
+	}
 
+	if (index < mSize) {
+		BodyPart* removed = mHead;
+		for (size_t i{}; i < index; ++i) {
+			++removed;
+		}	
+	}
+	else{
+		BodyPart* removed = mTail;
+		for (size_t i{}; i < mSize-index; ++i) {
+			--removed;
+		}
+	}
+	BodyPart* previous = --removed;
+	BodyPart* next = ++removed;
+	previous->next = next;
+	next->previous = previous;
+	removed->next = nullptr;
+	removed->previous = nullptr;
+	delete removed;
 }
 
 void Body::clear()

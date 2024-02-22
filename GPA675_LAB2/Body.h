@@ -49,6 +49,13 @@ public:
 			return temp;
 		}
 
+		Iterator& operator--() { // pre-decrementation
+			if (mRefBodyPart) {
+				mRefBodyPart = mRefBodyPart->previous;
+			}
+			return *this;
+		}
+
 		QPoint& operator*() { return mRefBodyPart->position; }
 		QPoint* operator->() { return &mRefBodyPart->position; }
 
