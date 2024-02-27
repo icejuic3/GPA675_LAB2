@@ -1,5 +1,14 @@
 #pragma once
-class AcceleratingPellet
+
+#include"Pellet.h"
+
+class AcceleratingPellet : public Pellet
 {
+public:
+
+	void applyEffectOnSnake(Snake& snake) override;
+
+private:
+
 };
 

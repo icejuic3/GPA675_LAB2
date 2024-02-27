@@ -26,3 +26,21 @@ bool StaticEntity::isColliding(QPoint const& position)
 {
     return false;
 }
+
+Point StaticEntity::position()
+{
+    return Point();
+}
+
+Color StaticEntity::color()
+{
+    return Color();
+}
+
+void StaticEntity::setPosition(Point position)
+{
+}
+
+void StaticEntity::setColor(Color color)
+{
+}
