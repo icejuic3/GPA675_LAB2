@@ -61,6 +61,35 @@ void Body::addLast(QPoint position)
 
 void Body::add(size_t index, QPoint position)
 {
+	if (index > mSize) {
+		return;
+	}
+	if (index == 1) {
+		addfirst();
+		return;
+	}
+	if (index == mSize) {
+		addLast();
+		return;
+	}
+
+	if (index < mSize/2) {
+		BodyPart* next = mHead;
+		for (size_t i{}; i < index; ++i) {
+			++next;
+		}
+	}
+	else {
+		BodyPart* next = mTail;
+		for (size_t i{}; i < mSize - (index+1); ++i) {
+			--next;
+		}
+	}
+	BodyPart* previous = next->previous;		// a verfifier si removed se decremente lui-meme
+	BodyPart* added = new BodyPart(position, previous, next);
+	next->previous = added;
+	previous->next = added;
+	++mSize;
 }
 
 void Body::removeFirst()
@@ -95,36 +124,39 @@ void Body::remove(size_t index)
 	}
 	if (index == 1) {
 		removefirst();
+		return;
 	}
 	if (index == mSize) {
 		removeLast();
+		return;
 	}
 
-	if (index < mSize) {
-		BodyPart* removed = mHead;
+	if (index < mSize/2) {
+		BodyPart* removed{ mHead };
 		for (size_t i{}; i < index; ++i) {
 			++removed;
 		}	
 	}
 	else{
-		BodyPart* removed = mTail;
-		for (size_t i{}; i < mSize-index; ++i) {
+		BodyPart* removed{ mTail };
+		for (size_t i{}; i < mSize- (index+1); ++i) {
 			--removed;
 		}
 	}
-	BodyPart* previous = --removed;
-	BodyPart* next = ++removed;
+	BodyPart* previous = removed->previous;
+	BodyPart* next = previous->next;
 	previous->next = next;
 	next->previous = previous;
 	removed->next = nullptr;
 	removed->previous = nullptr;
-	delete removed;
+	delete removed;								// verifier s'il delete tout le reste apres
 }
 
 void Body::clear()
 {
 	delete mHead;
 	mHead = nullptr;
+	mTail = nullptr;
 	mSize = 0ull;
 }
 
