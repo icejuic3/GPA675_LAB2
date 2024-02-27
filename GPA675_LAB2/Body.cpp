@@ -160,8 +160,37 @@ void Body::clear()
 	mSize = 0ull;
 }
 
-void Body::swap(size_t index0, QPoint position)
+void Body::swap(size_t index0, size_t index1)
 {
+	BodyPart* firstIndex = nullptr;
+	BodyPart* secondIndex = nullptr;
+	if (index0 < mSize / 2) {
+		firstIndex = mHead;
+		for (size_t i{}; i < index0; ++i) {
+			++firstIndex;
+		}
+	}
+	else {
+		firstIndex = mTail;
+		for (size_t i{}; i < mSize - (index0 + 1); ++i) {
+			--firstIndex;
+		}
+	}
+	if (index1 < mSize / 2) {
+		secondIndex = mHead;
+		for (size_t i{}; i < index1; ++i) {
+			++secondIndex;
+		}
+	}
+	else {
+		secondIndex = mTail;
+		for (size_t i{}; i < mSize - (index1 + 1); ++i) {
+			--secondIndex;
+		}
+	}
+	std::swap(firstIndex->previous, secondIndex->previous);
+	std::swap(firstIndex->next, secondIndex->next);
+	std::swap(firstIndex->position, secondIndex->position);
 }
 
 void Body::swap(Body& otherBody)
@@ -172,16 +201,25 @@ void Body::swap(Body& otherBody)
 
 void Body::rotate(int indexFrom)
 {
-	if (indexFrom > mSize / 2) {
-		//parcour par la fin
-		BodyPart* tail{ mTail };
-		for (int i{ 0 }; i < (mSize - indexFrom); ++i) {
-			
+	if (index < mSize / 2) {
+		BodyPart* newHead = mHead;
+		for (size_t i{}; i < index; ++i) {
+			++newHead;
 		}
 	}
 	else {
-		//parcour par le debut
+		BodyPart* newHead = mTail;
+		for (size_t i{}; i < mSize - (index + 1); ++i) {
+			--newHead;
+		}
 	}
+	BodyPart* newTail = newHead->previous;
+	mHead->previous = mTail;
+	newTail->next = nullptr;
+	newHead->previous = nullptr;
+	mTail->next = mHead;
+	mHead = newHead;
+	mTail = newTail;
 }
 
 bool Body::isColliding(QPoint const& position) const
