@@ -2,10 +2,9 @@
 #include "Entity.h"
 
 
-class StaticEntity:Entity
+class StaticEntity : public Entity
 {
 public:
-
 
 	// Inherited via Entity
 	bool isValid() override;
@@ -14,10 +13,15 @@ public:
 	void ticExecute() override;
 	void draw(QPainter& painter) override;
 	bool isColliding(QPoint const& position) override;
-
+	//Point position();										//query							
+	//Color color();										//query
+	//void setPosition(Point position);
+	//void setColor(Color color);	
 
 private:
-	//Point
+
+	//Point mPosition;
+	//Color mColor;
 
 };
 
