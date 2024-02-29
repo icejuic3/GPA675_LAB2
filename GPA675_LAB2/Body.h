@@ -1,7 +1,7 @@
 #pragma once
 // #include "Snake.h"
 #include <QPainter>
-#include <QPointF>
+#include <QPoint>
 
 class Body																	
 {	

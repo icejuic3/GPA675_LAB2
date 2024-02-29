@@ -3,8 +3,11 @@
 Body::Body()
 	: mHead{}
 	, mTail{}
-	, mSize{}
+	, mSize{0}
 {
+	QPoint initPos = (0, 0);
+	addFirst(initPos);
+	mTail = nullptr;
 }
 
 Body::~Body()
