@@ -65,22 +65,23 @@ void Body::add(size_t index, QPoint position)
 		return;
 	}
 	if (index == 1) {
-		addfirst();
+		addFirst(position);
 		return;
 	}
 	if (index == mSize) {
-		addLast();
+		addLast(position);
 		return;
 	}
 
+	BodyPart* next{ nullptr };
 	if (index < mSize/2) {
-		BodyPart* next = mHead;
+		next = mHead;
 		for (size_t i{}; i < index; ++i) {
 			++next;
 		}
 	}
 	else {
-		BodyPart* next = mTail;
+		next = mTail;
 		for (size_t i{}; i < mSize - (index+1); ++i) {
 			--next;
 		}
@@ -123,7 +124,7 @@ void Body::remove(size_t index)
 		return;
 	}
 	if (index == 1) {
-		removefirst();
+		removeFirst();
 		return;
 	}
 	if (index == mSize) {
@@ -131,14 +132,16 @@ void Body::remove(size_t index)
 		return;
 	}
 
+	BodyPart* removed{ nullptr };
+
 	if (index < mSize/2) {
-		BodyPart* removed{ mHead };
+		removed = mHead ;
 		for (size_t i{}; i < index; ++i) {
 			++removed;
 		}	
 	}
 	else{
-		BodyPart* removed{ mTail };
+		removed = mTail ;
 		for (size_t i{}; i < mSize- (index+1); ++i) {
 			--removed;
 		}
@@ -201,15 +204,16 @@ void Body::swap(Body& otherBody)
 
 void Body::rotate(int indexFrom)
 {
-	if (index < mSize / 2) {
-		BodyPart* newHead = mHead;
-		for (size_t i{}; i < index; ++i) {
+	BodyPart* newHead = nullptr;
+	if (indexFrom < mSize / 2) {
+		newHead = mHead;
+		for (size_t i{}; i < indexFrom; ++i) {
 			++newHead;
 		}
 	}
 	else {
-		BodyPart* newHead = mTail;
-		for (size_t i{}; i < mSize - (index + 1); ++i) {
+		newHead = mTail;
+		for (size_t i{}; i < mSize - (indexFrom + 1); ++i) {
 			--newHead;
 		}
 	}
