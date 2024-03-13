@@ -1,5 +1,5 @@
-#include "AcceleratingPellet.h"
-
-void AcceleratingPellet::applyEffectOnSnake(Snake& snake)
-{
-}
+//#include "AcceleratingPellet.h"
+//
+//void AcceleratingPellet::applyEffectOnSnake(Snake& snake)
+//{
+//}

@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Board.h"
+#ifndef ENTITY_H
+#define ENTITY_H
 #include <qpoint.h>
 #include <qpainter.h>
+#include "Board.h"
 
 using real = double;
 
@@ -22,10 +24,9 @@ public:
 	virtual void draw(QPainter& painter) = 0;
 	virtual bool isColliding(QPoint const& position) = 0;	//query
 
-private:
-
 protected:
 	Board& mBoard;
 	bool mAlive;
 	double mAge;
 };
+#endif

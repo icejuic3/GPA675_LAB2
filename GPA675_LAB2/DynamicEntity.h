@@ -1,22 +1,19 @@
 #pragma once
 #include "Entity.h"
 
-
-
-class DynamicEntity:Entity
+class DynamicEntity : public Entity
 {
 public:
-	
 
+	DynamicEntity(Board& board);
+	~DynamicEntity();
 
 
 	// Inherited via Entity
-	bool isValid() override;
-	bool isAlive() override;
-	void ticPrepare(real elapsedTime) override;
-	void ticExecute() override;
-	void draw(QPainter& painter) override;
-	bool isColliding(QPoint const& position) override;
-
+	virtual bool isValid() = 0;
+	virtual bool isAlive() = 0;
+	virtual void ticPrepare(real elapsedTime) = 0;
+	virtual void ticExecute() = 0;
+	virtual void draw(QPainter& painter) = 0;
+	virtual bool isColliding(QPoint const& position) = 0;
 };
-
