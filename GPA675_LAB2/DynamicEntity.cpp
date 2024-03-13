@@ -1,28 +1,10 @@
 #include "DynamicEntity.h"
 
-bool DynamicEntity::isValid()
-{
-	return false;
-}
-
-bool DynamicEntity::isAlive()
-{
-	return false;
-}
-
-void DynamicEntity::ticPrepare(real elapsedTime)
+DynamicEntity::DynamicEntity(Board& board)
+	:Entity(board)
 {
 }
 
-void DynamicEntity::ticExecute()
+DynamicEntity::~DynamicEntity()
 {
-}
-
-void DynamicEntity::draw(QPainter& painter)
-{
-}
-
-bool DynamicEntity::isColliding(QPoint const& position)
-{
-	return false;
 }

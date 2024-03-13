@@ -1,5 +1,18 @@
 #include "StaticEntity.h"
 
+StaticEntity::StaticEntity(Board& board)
+    : Entity(board)
+    , mColor{Qt::blue}
+    , mPosition{ 500,500 }
+    , mRadius{ 10.0 }
+{
+    
+}
+
+StaticEntity::~StaticEntity()
+{
+}
+
 bool StaticEntity::isValid()
 {
     return false;
@@ -7,40 +20,48 @@ bool StaticEntity::isValid()
 
 bool StaticEntity::isAlive()
 {
-    return false;
+    return mAlive;
 }
 
 void StaticEntity::ticPrepare(real elapsedTime)
 {
+
 }
 
 void StaticEntity::ticExecute()
 {
+    mAge += 1;
 }
 
 void StaticEntity::draw(QPainter& painter)
 {
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(mColor);
+    painter.drawEllipse(QRectF(mPosition, QSize(mRadius, mRadius)));
 }
 
 bool StaticEntity::isColliding(QPoint const& position)
 {
-    return false;
+
+    return mPosition == position;
 }
 
-Point StaticEntity::position()
+QPoint StaticEntity::position() const
 {
-    return Point();
+    return mPosition;
 }
 
-Color StaticEntity::color()
+QColor StaticEntity::color() const
 {
-    return Color();
+    return mColor;
 }
 
-void StaticEntity::setPosition(Point position)
+void StaticEntity::setPosition(QPoint position)
 {
+    mPosition = position;
 }
 
-void StaticEntity::setColor(Color color)
+void StaticEntity::setColor(QColor color)
 {
+    mColor = color;
 }

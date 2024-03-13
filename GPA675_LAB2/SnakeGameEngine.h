@@ -7,22 +7,28 @@
 #include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QElapsedTimer>
+#include <QSize>
 
 #include "Entity.h"
 
 class QPainter;
 
-		
-class SnakeGameEngine : public Entity
+class SnakeGameEngine
 {
 private:
-	std::list<Entity*> mEntity;
+	QSize mSize;
+	qreal mSpeed;
+	qreal mTotalElapsedTime;
+	std::list<Entity*> mEntities;
+
 public:
-	SnakeGameEngine(Entity& entity);
-	~SnakeGameEngine() ;
+	//
+	SnakeGameEngine(QSize const& size);
+	~SnakeGameEngine();
+
 	void tic(qreal elapsedTime);
 	void draw(QPainter& painter);
-	void clearAllEntity();	
+	void clearAllEntity();
 	void addEntity(Entity* entity);
 };
 

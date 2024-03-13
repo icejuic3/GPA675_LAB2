@@ -1,7 +1,14 @@
 #pragma once
 
-#include"DynamicEntity.h"
 #include <QString>
+#include "DynamicEntity.h"
+#include "Body.h"
+//#include "SnakeKeyboardController.h"
+//#include "SnakeKeyboardAbsoluteController.h"
+//#include "Controller.h"
+//#include "PressedKeys.h"
+
+using SpeedType = double;
 
 enum class Direction : int {
 	toUp = 0,
@@ -10,104 +17,67 @@ enum class Direction : int {
 	toLeft = 3
 };
 
-using SpeedType = double;
-
-class Controller
+class Snake : public DynamicEntity
 {
-public:
-	
-	Controller(Snake& snake);
-	virtual ~Controller();
-	virtual void control();
-
 private:
 
-	Snake& mControlledSnake;
-
-	class SnakeKeyboardController
-	{
-
-	};
-
-	class SnakeKeyboardAbsoluteController
-	{
-		snakeKeyboardAbsoluteController();
-
-	};
-
-};
-
-
-class Snake:DynamicEntity
-{
-
-public:
-
-	Snake();
-	Snake(Snake::DynamicEntity other);
-	Snake& operator=(Snake::DynamicEntity other);
-	~Snake();
-
-	bool isValid() override;									//Query
-	bool isAlive() override;									//Query
-	void ticPrepare(real elapsedTime) override;					
-	void ticExecute() override;					
-	void draw(QPainter& painter) override;					
-	bool isColliding(QPoint const& position) override;			//Query
-
-	QString name();												//query
-	int score();												//query
-	size_t bodyLength();										//query
-	QPoint headPosition();										//query
-	Direction headDirection();									//query
-	SpeedType speed();											//query
-	QColor headColor();											//query
-	QColor bodyColor();											//query
-	bool isReverseProhibited();									//query
-	Controller& controller();
-	void setName(QString name);
-	void reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed);
-	void setSpeed(SpeedType speed);
-	void setColors(QColor head, QColor body);
-	void prohibitedReverse(bool Prohibited);
-	void adjustScore(int score);
-	void turnRight();
-	void turnLeft();
-	void goUp();
-	void goRight();
-	void goDown();
-	void goLeft();
-	void goToward(Direction direction);
-	void grow(size_t size = 1);
-	void shrink(size_t size = 1);
-	void setSpeed(SpeedType speed);
-	void increaseSpeed(SpeedType amout);
-	void decreaseSpeed(SpeedType amout);
-	void decelerate(SpeedType percentLess);
-	void accelerate(SpeedType percentMore);
-
-
-
-private:
-
+	//Controller* mController;
 	QString mName;
 	int mScore = 0;
 	Body mBody;
-	Direction mHeadDirection = Direction::toUp;
+	Direction mHeadDirection;
 	SpeedType mSpeed;
 	size_t mSizeToGrow = 0;
-	QColor mHeadColor = QColor(0, 255, 0);
-	QColor mBodyColor = QColor(0, 128, 0);
-	Controller mController = SnakeKeyboardAbsoluteController();
+	QColor mHeadColor;
+	QColor mBodyColor;
 	bool mReverseProhibited;
 
-	const std::array<Direction, 4> LUTTurnLeftDirection;
-	const std::array<Direction, 4> LUTTurnRightDirection;
-	const std::array<Direction, 4> LUTOppositeDirection;
-	const std::array<QPoint, 4> LUTDirectionDisplacement;
-	const std::array<void(Snake::*)(),4> LUTDirectionAction;
+	const std::array<Direction, 4> LUTTurnLeftDirection{ Direction::toLeft,Direction::toUp, Direction::toRight,Direction::toDown };
+	const std::array<Direction, 4> LUTTurnRightDirection{ Direction::toRight,Direction::toDown, Direction::toLeft,Direction::toUp };
+	const std::array<Direction, 4> LUTOppositeDirection{ Direction::toDown, Direction::toLeft,Direction::toUp,Direction::toRight };
 
+	const std::array<QPoint, 4> LUTDirectionDisplacement{}; //teleport?
+	const std::array<void(Snake::*)(), 4> LUTDirectionAction; //a revoir
 
+public:
+	Snake(Board& board);
+	//Snake(Snake::DynamicEntity other);			//Bonus
+	//Snake& operator=(Snake::DynamicEntity other);	//Bonus
+	~Snake() override;
+	bool isValid() override;									//a terminer
+	bool isAlive() override;									//a terminer							
+	void ticPrepare(real elapsedTime) override;
+	void ticExecute() override;
+	void draw(QPainter& painter) override;						//a verifier	
+	bool isColliding(QPoint const& position) override;			//fait		
+	QString name();												//fait
+	int score();												//fait
+	size_t bodyLength();										//fait
+	QPoint headPosition();										//fait
+	Direction headDirection();									//fait
+	SpeedType speed();											//fait
+	QColor headColor();											//fait
+	QColor bodyColor();											//fait
+	bool isReverseProhibited();									//fait
+	//Controller* controller();									//fait
+	void setName(QString name);									//fait
+	void reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed);	//fait
+	void setColors(QColor head, QColor body);					//fait
+	void prohibitedReverse(bool Prohibited);					//fait
+	void adjustScore(int score);								//fait
+	void turnRight();											//fait
+	void turnLeft();											//fait
+	void goUp();												//fait
+	void goRight();												//fait
+	void goDown();												//fait
+	void goLeft();												//fait
+	void goToward(Direction direction);							//fait
+	void grow(size_t size = 1);									//fait
+	void shrink(size_t size = 1);								//fait
+	void setSpeed(SpeedType speed);								//fait
+	void increaseSpeed(SpeedType amout);						//fait
+	void decreaseSpeed(SpeedType amout);						//fait
+	void decelerate(SpeedType percentLess);						//fait
+	void accelerate(SpeedType percentMore);						//fait
 
 };
-

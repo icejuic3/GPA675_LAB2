@@ -1,29 +1,29 @@
 #include "Board.h"
+#include "Entity.h"
 
 Board::Board()
     :mHeight{ 0 }
-    ,mWidth{ 0 }
-    ,mSize{ 0 }
-    ,mBoard{ nullptr }
+    , mWidth{ 0 }
+    , mSize{ 0 }
+    , mBoard{nullptr}
 {
 }
 
-Board::Board(size_t height, size_t width, Cellstate initValue)
+Board::Board(size_t height, size_t width)
     :mHeight{ height }
-    ,mWidth{ width }
-    ,mSize{ height * width }
-    ,mBoard{ new Cellstate[mSize] }
-{
+    , mWidth{ width }
+    , mSize{ height * width }
+    , mBoard{ new CellType[mSize] }									//initialisation du pointeur de ligne
+{  
     //validation des valeurs de la grille
     if (width < 4 || height < 3 || width % 2 != 0) {
-        
-        //retourne message d'erreur **peut-etre remplacer la mauvaise valeur?
-        throw std::invalid_argument("Les dimensions de la grille ne sont pas valide");      
-    }
-    //si les valeurs sont bonnes alors on initialise le tableau
-    for (DataState cur{ mBoard }; cur < mBoard + mSize; ++cur) {
 
-        *cur = initValue;
+        //retourne message d'erreur **peut-etre remplacer la mauvaise valeur?
+        throw std::invalid_argument("Les dimensions de la grille ne sont pas valide");
+    }
+
+    for (DataType cur{ mBoard }; cur < mBoard + mSize; ++cur) {
+        *cur = nullptr;											//l'état est sauvegarder a l'endroit où pointe le pointeur
     }
 }
 
@@ -34,8 +34,8 @@ Board& Board::operator=(Board const&)
 
 Board::~Board()
 {
-    delete[]mBoard;
-    mBoard = nullptr;
+    //delete[]mBoard;
+    //mBoard = nullptr;
 }
 
 size_t Board::getWidth() const
@@ -51,24 +51,4 @@ size_t Board::getHeight() const
 size_t Board::getSize() const
 {
     return mSize;
-}
-
-void Board::setState(size_t row, size_t column, Cellstate value)
-{
-    mBoard[row * mWidth + column] = value;
-}
-
-DataState const& Board::data() const
-{
-    return mBoard;
-}
-
-DataState& Board::data()
-{
-    return mBoard;
-}
-
-Cellstate Board::value(size_t row, size_t column) const
-{
-    return mBoard[row * mWidth + column];
 }

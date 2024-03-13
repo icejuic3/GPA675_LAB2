@@ -3,9 +3,9 @@
 Body::Body()
 	: mHead{}
 	, mTail{}
-	, mSize{0}
+	, mSize{ 0 }
 {
-	QPoint initPos = (0, 0);
+	QPoint initPos = QPoint(0, 0);
 	addFirst(initPos);
 	mTail = nullptr;
 }
@@ -77,7 +77,7 @@ void Body::add(size_t index, QPoint position)
 	}
 
 	BodyPart* next{ nullptr };
-	if (index < mSize/2) {
+	if (index < mSize / 2) {
 		next = mHead;
 		for (size_t i{}; i < index; ++i) {
 			++next;
@@ -85,7 +85,7 @@ void Body::add(size_t index, QPoint position)
 	}
 	else {
 		next = mTail;
-		for (size_t i{}; i < mSize - (index+1); ++i) {
+		for (size_t i{}; i < mSize - (index + 1); ++i) {
 			--next;
 		}
 	}
@@ -118,7 +118,7 @@ void Body::removeLast()
 	temp->previous = nullptr;
 	delete temp;
 	--mSize;
-	
+
 }
 
 void Body::remove(size_t index)
@@ -137,15 +137,15 @@ void Body::remove(size_t index)
 
 	BodyPart* removed{ nullptr };
 
-	if (index < mSize/2) {
-		removed = mHead ;
+	if (index < mSize / 2) {
+		removed = mHead;
 		for (size_t i{}; i < index; ++i) {
 			++removed;
-		}	
+		}
 	}
-	else{
-		removed = mTail ;
-		for (size_t i{}; i < mSize- (index+1); ++i) {
+	else {
+		removed = mTail;
+		for (size_t i{}; i < mSize - (index + 1); ++i) {
 			--removed;
 		}
 	}

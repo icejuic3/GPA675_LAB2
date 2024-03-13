@@ -1,10 +1,9 @@
 #pragma once
-// #include "Snake.h"
 #include <QPainter>
 #include <QPoint>
 
-class Body																	
-{	
+class Body
+{
 private:
 
 	struct BodyPart
@@ -13,10 +12,10 @@ private:
 		BodyPart* next;
 		BodyPart* previous;
 
-		BodyPart(QPoint const & pos, BodyPart* next = nullptr, BodyPart* previous = nullptr)
+		BodyPart(QPoint const& pos, BodyPart* next = nullptr, BodyPart* previous = nullptr)
 			: position{ pos }
 			, next{ next }
-			, previous{ previous}
+			, previous{ previous }
 		{}
 		~BodyPart() {
 			delete next;
@@ -25,7 +24,7 @@ private:
 	};
 
 
-public:	
+public:
 
 	class Iterator
 	{
@@ -88,7 +87,7 @@ public:
 	void rotate(int indexFrom);
 	bool isColliding(QPoint const& position) const;
 	void draw(QPainter& painter);
-	
+
 private:
 	size_t mSize;
 	BodyPart* mHead;

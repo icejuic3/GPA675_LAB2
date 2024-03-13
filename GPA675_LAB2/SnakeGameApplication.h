@@ -5,8 +5,10 @@
 #include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QElapsedTimer>
-
+#include "Board.h"
 #include "SnakeGameEngine.h"
+
+using PressedKeys = std::vector<Qt::Key>;
 
 
 class SnakeGameApplication : public QWidget
@@ -14,20 +16,22 @@ class SnakeGameApplication : public QWidget
 	Q_OBJECT
 public:
 	SnakeGameApplication();
-	~SnakeGameApplication();
+	~SnakeGameApplication() override = default;
 protected:
-	//void keyPressEvent(QKeyEvent* event) override;
-	//void keyReleaseEvent(QKeyEvent* event) override;
+	void keyPressEvent(QKeyEvent* event) override;
+	void keyReleaseEvent(QKeyEvent* event) override;
 	void paintEvent(QPaintEvent* event) override;
 private slots:
 
-	void tic(qreal elapsedTime);
+	void tic();
 
 private:
 	QSize const mWindowSize;
 	QTimer mTimer;
 	QElapsedTimer mElapsedTimer;
-
-	/*SnakeGameEngine mSnakeGameEngine;*/
+	PressedKeys mPressedKeys;
+	//Composition
+	SnakeGameEngine mSnakeGameEngine;
+	Board mBoard;
 };
 #endif //SNAKE_GAME_APPLICATIONn_H

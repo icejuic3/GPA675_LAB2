@@ -1,7 +1,7 @@
 #include "Entity.h"
 
 Entity::Entity(Board& board)
-	:mBoard{ board }
+	: mBoard{ board }
 	, mAge{}
 	, mAlive{ true }
 {
