@@ -112,6 +112,7 @@
     <ClInclude Include="GrowingPellet.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Pellet.h" />
+    <ClInclude Include="PressedKeys.h" />
     <ClInclude Include="Snake.h" />
     <QtMoc Include="SnakeGameApplication.h" />
     <ClInclude Include="SnakeGameEngine.h" />
