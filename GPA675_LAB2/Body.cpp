@@ -1,11 +1,18 @@
 #include "Body.h"
 
 Body::Body()
+	: mHead{nullptr}
+	, mTail{nullptr}
+	, mSize{}
+{
+
+}
+
+Body::Body(QPoint initPos)
 	: mHead{}
 	, mTail{}
-	, mSize{ 0 }
+	, mSize{}
 {
-	QPoint initPos = QPoint(0, 0);
 	addFirst(initPos);
 	mTail = nullptr;
 }
@@ -221,8 +228,8 @@ void Body::rotate(int indexFrom)
 		}
 	}
 	BodyPart* newTail = newHead->previous;
-	mHead->previous = mTail;
 	newTail->next = nullptr;
+	mHead->previous = mTail;
 	newHead->previous = nullptr;
 	mTail->next = mHead;
 	mHead = newHead;
@@ -236,5 +243,10 @@ bool Body::isColliding(QPoint const& position) const
 
 void Body::draw(QPainter& painter)
 {
-	painter.setPen(Qt::NoPen);
+	BodyPart* cur{ mHead };
+	while (cur != nullptr) {
+		
+	painter.drawPoint(cur->position);
+		cur = cur->next;
+	}	
 }

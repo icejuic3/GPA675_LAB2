@@ -1,9 +1,9 @@
 #include "SnakeGameApplication.h"
-#include "Pellet.h"
-
 #include <QKeyEvent>
 #include <QDebug>
 #include <QPainter>
+#include "Pellet.h"
+#include "Snake.h"
 
 
 
@@ -23,7 +23,8 @@ SnakeGameApplication::SnakeGameApplication()
     mTimer.start();
     
 
-    mSnakeGameEngine.addEntity(new Pellet(mBoard));
+    mSnakeGameEngine.addEntity(new Snake(mBoard));
+    
 }
 
 void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
