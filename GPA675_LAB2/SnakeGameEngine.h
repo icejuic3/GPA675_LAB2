@@ -10,6 +10,8 @@
 #include <QSize>
 
 #include "Entity.h"
+#include "Snake.h"
+#include "Pellet.h"
 
 class QPainter;
 
@@ -34,7 +36,9 @@ public:
 
 	// random position
 	QPoint randomPosition();
+	void randomPellet();
 
+	void startGameEngine();
 
 };
 
