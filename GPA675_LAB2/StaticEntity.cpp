@@ -3,8 +3,8 @@
 StaticEntity::StaticEntity(Board& board)
     : Entity(board)
     , mColor{Qt::blue}
-    , mPosition{ 500,500 }
-    , mRadius{ 10.0 }
+    , mPosition{ 32,32 }
+    , mRadius{ 1 }
 {
     
 }

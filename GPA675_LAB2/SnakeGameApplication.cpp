@@ -6,13 +6,14 @@
 #include <QPainter>
 
 
+
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
     , mWindowSize(1024, 1024)
     , mTimer()
     , mElapsedTimer()
     , mSnakeGameEngine(mWindowSize)
-    , mBoard{ Board(1024, 1024) }
+    , mBoard{ Board(64, 64) }
 {
     setWindowTitle("Snake Equipe D");
     setFixedSize(mWindowSize);
@@ -46,6 +47,7 @@ void SnakeGameApplication::keyReleaseEvent(QKeyEvent* event)
 void SnakeGameApplication::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
+    painter.scale(16, 16);
     painter.setRenderHint(QPainter::Antialiasing);
 
     mSnakeGameEngine.draw(painter);
