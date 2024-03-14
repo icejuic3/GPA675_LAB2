@@ -20,6 +20,7 @@ private:
 	qreal mSpeed;
 	qreal mTotalElapsedTime;
 	std::list<Entity*> mEntities;
+	Board mBoard;
 
 public:
 	//
@@ -30,6 +31,11 @@ public:
 	void draw(QPainter& painter);
 	void clearAllEntity();
 	void addEntity(Entity* entity);
+
+	// random position
+	QPoint randomPosition();
+
+
 };
 
 #endif

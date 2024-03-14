@@ -31,6 +31,19 @@ void SnakeGameEngine::addEntity(Entity* entity)
 {
     mEntities.push_back(entity);
 }
+QPoint SnakeGameEngine::randomPosition()
+{
+    int xPos = rand() % 64;
+    int yPos = rand() % 64;
+    while (nullptr != mBoard.value(xPos,yPos))
+    {
+        xPos = rand() % 64;
+        yPos = rand() % 64;
+    }
+    QPoint a(xPos, yPos);
+
+    return a;
+}
 void SnakeGameEngine::clearAllEntity()
 {
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
