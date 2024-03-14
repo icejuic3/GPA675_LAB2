@@ -1,11 +1,8 @@
 #include "Snake.h"
-#include "Controller.h"
-#include "SnakeKeyboardAbsoluteController.h"
-#include "SnakeKeyboardRelativeController.h"
 
 Snake::Snake(Board& board)
     :DynamicEntity(board)
-    , mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
+    //,mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
     , mBody{Body(QPoint(32,32))}
@@ -13,7 +10,7 @@ Snake::Snake(Board& board)
     , mSpeed{}
     , mSizeToGrow{ 0 }
     , mHeadColor{ QColor(0, 255, 0) }
-    , mBodyColor{ QColor(0, 0, 255) }
+    , mBodyColor{ QColor(0, 122, 0) }
     , mReverseProhibited{}
     , LUTTurnLeftDirection{}
     , LUTTurnRightDirection{}
@@ -25,9 +22,7 @@ Snake::Snake(Board& board)
 
 Snake::~Snake()
 {
-    
-    delete mController;
-    mController = nullptr;
+    //delete mController;
 }
 
 bool Snake::isValid()
@@ -75,6 +70,9 @@ void Snake::ticPrepare(real elapsedTime)
 
 
 
+
+
+
     //2) verifier s'il y collision  --> fruit, serpent, mur --> a la prochaine position
 
 
@@ -100,8 +98,8 @@ void Snake::ticPrepare(real elapsedTime)
 
 void Snake::ticExecute()
 {
-
-
+    grow(1);
+    mBody.removeLast();
     //1) Mettre a jour la position de la tete du serpent et ajouter les nouveaux segments
 
 
@@ -143,19 +141,29 @@ void Snake::draw(QPainter& painter)
 
     if (!mBody.isEmpty()) {
 
-        QPoint headPos = headPosition(); // R?cup?re la position de la t?te
-        //painter.setPen(Qt::NoPen);
-        painter.setPen(QPen(mHeadColor)); // D?finit la couleur pour la t?te
-        painter.drawPoint(headPos); // Dessine un pixel pour la t?te
-
-        for (auto it(mBody.begin()); it != mBody.end(); ++it) {
+        /*for (auto it(mBody.begin()); it != mBody.end(); ++it) {
+            
             if (it == mBody.begin()) {
                 painter.setPen(QPen(mHeadColor));
+                painter.drawPoint(*it);
+                
             }
             else {
                 painter.setPen(QPen(mBodyColor));
+                painter.drawPoint(*it);
             }
-            mBody.draw(painter);
+        }*/
+        for (auto it(mBody.begin()); it != mBody.end(); ++it) {
+
+            if (it == mBody.begin()) {
+                painter.setPen(QPen(mHeadColor));
+                painter.drawPoint(*it);
+
+            }
+            else {
+                painter.setPen(QPen(mBodyColor));
+                painter.drawPoint(*it);
+            }
         }
     }
 }
@@ -210,10 +218,10 @@ bool Snake::isReverseProhibited()
     return mReverseProhibited;
 }
 
-Controller* Snake::controller()
-{
-    return mController;
-}
+//Controller* Snake::controller()
+//{
+//    return mController;
+//}
 
 void Snake::setName(QString name)
 {

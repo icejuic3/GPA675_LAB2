@@ -90,7 +90,7 @@ public:
 	void draw(QPainter& painter);
 
 	Iterator begin() { return Iterator(mHead); }
-	Iterator end() { return Iterator(nullptr); }
+	Iterator end() { return Iterator(); }
 
 private:
 	size_t mSize;
