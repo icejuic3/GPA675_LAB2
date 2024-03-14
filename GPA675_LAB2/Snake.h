@@ -80,4 +80,6 @@ public:
 	void decelerate(SpeedType percentLess);						//fait
 	void accelerate(SpeedType percentMore);						//fait
 
+	
+
 };

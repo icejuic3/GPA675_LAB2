@@ -70,9 +70,6 @@ void Snake::ticPrepare(real elapsedTime)
 
 
 
-
-
-
     //2) verifier s'il y collision  --> fruit, serpent, mur --> a la prochaine position
 
 
