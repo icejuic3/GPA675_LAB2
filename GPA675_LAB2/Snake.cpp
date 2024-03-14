@@ -25,6 +25,7 @@ Snake::Snake(Board& board)
 
 Snake::~Snake()
 {
+    
     delete mController;
     mController = nullptr;
 }
@@ -209,13 +210,6 @@ Controller* Snake::controller()
 {
     return mController;
 }
-
-
-
-//Controller* Snake::controller()
-//{
-//    return mController;
-//}
 
 void Snake::setName(QString name)
 {
