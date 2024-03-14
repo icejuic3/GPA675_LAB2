@@ -14,7 +14,7 @@ Body::Body(QPoint initPos)
 	, mSize{}
 {
 	addFirst(initPos);
-	mTail = nullptr;
+	mTail = mHead;
 }
 
 Body::~Body()
@@ -54,7 +54,19 @@ QPoint* Body::last() const
 
 void Body::addFirst(QPoint position)
 {
-	mHead = new BodyPart(position, mHead, nullptr);
+	if (!mHead) { // la liste est vide
+		mHead = new BodyPart(position, nullptr, nullptr);
+		mTail = mHead;
+	}
+	else if (mSize == 1) {
+		mHead = new BodyPart(position, mHead, nullptr);
+		mTail->previous = mHead;
+	}
+	else {
+		BodyPart* newHead = new BodyPart(position, mHead, nullptr);
+		mHead->previous = newHead;
+		mHead = newHead;
+	}
 	++mSize;
 }
 
@@ -122,6 +134,7 @@ void Body::removeLast()
 	}
 	BodyPart* temp{ mTail };
 	mTail = mTail->previous;
+	mTail->next = nullptr;
 	temp->previous = nullptr;
 	delete temp;
 	--mSize;
@@ -245,8 +258,7 @@ void Body::draw(QPainter& painter)
 {
 	BodyPart* cur{ mHead };
 	while (cur != nullptr) {
-		
-	painter.drawPoint(cur->position);
+		painter.drawPoint(cur->position);
 		cur = cur->next;
 	}	
 }

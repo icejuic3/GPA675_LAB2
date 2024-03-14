@@ -1,6 +1,6 @@
 #include "SnakeGameEngine.h"
 #include "Entity.h"
-
+#include "Snake.h"
 
 
 SnakeGameEngine::SnakeGameEngine(QSize const& size)
@@ -18,6 +18,14 @@ SnakeGameEngine::~SnakeGameEngine()
 void SnakeGameEngine::tic(qreal elapsedTime)
 {
     mTotalElapsedTime += elapsedTime;
+    for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
+        Snake* snake{ dynamic_cast<Snake*>(*i) };
+        if (snake) {  
+            snake->ticExecute();
+        }
+
+    }
+
 }
 void SnakeGameEngine::addEntity(Entity* entity)
 {
