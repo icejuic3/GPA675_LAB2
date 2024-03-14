@@ -92,6 +92,7 @@
     <ClCompile Include="AcceleratingPellet.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Body.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GrowingPellet.cpp" />
@@ -101,6 +102,9 @@
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SnakeGameApplication.cpp" />
     <ClCompile Include="SnakeGameEngine.cpp" />
+    <ClCompile Include="SnakeKeyboardAbsoluteController.cpp" />
+    <ClCompile Include="SnakeKeyboardController.cpp" />
+    <ClCompile Include="SnakeKeyboardRelativeController.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +120,9 @@
     <ClInclude Include="Snake.h" />
     <QtMoc Include="SnakeGameApplication.h" />
     <ClInclude Include="SnakeGameEngine.h" />
+    <ClInclude Include="SnakeKeyboardAbsoluteController.h" />
+    <ClInclude Include="SnakeKeyboardController.h" />
+    <ClInclude Include="SnakeKeyboardRelativeController.h" />
     <ClInclude Include="StaticEntity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

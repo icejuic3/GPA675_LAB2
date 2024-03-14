@@ -3,10 +3,12 @@
 #include <QString>
 #include "DynamicEntity.h"
 #include "Body.h"
+//#include "Controller.h"
 //#include "SnakeKeyboardController.h"
 //#include "SnakeKeyboardAbsoluteController.h"
-//#include "Controller.h"
-//#include "PressedKeys.h"
+#include "PressedKeys.h"
+
+class Controller;
 
 using SpeedType = double;
 
@@ -21,7 +23,7 @@ class Snake : public DynamicEntity
 {
 private:
 
-	//Controller* mController;
+	Controller* mController;
 	QString mName;
 	int mScore = 0;
 	Body mBody;
@@ -59,7 +61,7 @@ public:
 	QColor headColor();											//fait
 	QColor bodyColor();											//fait
 	bool isReverseProhibited();									//fait
-	//Controller* controller();									//fait
+	Controller* controller();								
 	void setName(QString name);									//fait
 	void reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed);	//fait
 	void setColors(QColor head, QColor body);					//fait
@@ -79,5 +81,4 @@ public:
 	void decreaseSpeed(SpeedType amout);						//fait
 	void decelerate(SpeedType percentLess);						//fait
 	void accelerate(SpeedType percentMore);						//fait
-
 };
