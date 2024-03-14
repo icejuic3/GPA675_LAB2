@@ -1,6 +1,5 @@
+#pragma once
 #include "Snake.h"
-
-
 
 class Controller
 {
@@ -24,5 +23,4 @@ private:
 		snakeKeyboardAbsoluteController();
 
 	};
-
-}; #pragma once
+}; 

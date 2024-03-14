@@ -52,3 +52,8 @@ size_t Board::getSize() const
 {
     return mSize;
 }
+
+CellType Board::value(int column, int row) const
+{
+    return mBoard[row * mWidth + (column)];
+}
