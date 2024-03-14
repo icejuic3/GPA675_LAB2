@@ -1,8 +1,11 @@
 #include "Snake.h"
+#include "Controller.h"
+#include "SnakeKeyboardAbsoluteController.h"
+#include "SnakeKeyboardRelativeController.h"
 
 Snake::Snake(Board& board)
     :DynamicEntity(board)
-    //,mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
+    , mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
     , mBody{}
@@ -22,7 +25,8 @@ Snake::Snake(Board& board)
 
 Snake::~Snake()
 {
-    //delete mController;
+    delete mController;
+    mController = nullptr;
 }
 
 bool Snake::isValid()
@@ -200,6 +204,13 @@ bool Snake::isReverseProhibited()
 {
     return mReverseProhibited;
 }
+
+Controller* Snake::controller()
+{
+    return mController;
+}
+
+
 
 //Controller* Snake::controller()
 //{
