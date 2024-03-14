@@ -27,6 +27,8 @@ public:
 	size_t getSize() const;
 	//Entity* value(size_t row, size_t column) const;						//accesseur retournant la valeur de la cellule sur la grille
 
+	CellType value(int column, int row) const;
+
 	//Mutateurs
 
 	//Fonction de Resize??
