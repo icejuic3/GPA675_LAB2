@@ -70,6 +70,7 @@ public:
 	};
 
 	Body();
+	Body(QPoint initPos);
 	~Body();
 	bool isEmpty() const;
 	size_t size() const;
@@ -87,6 +88,9 @@ public:
 	void rotate(int indexFrom);
 	bool isColliding(QPoint const& position) const;
 	void draw(QPainter& painter);
+
+	Iterator begin() { return Iterator(mHead); }
+	Iterator end() { return Iterator(nullptr); }
 
 private:
 	size_t mSize;

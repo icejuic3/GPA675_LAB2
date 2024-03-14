@@ -5,19 +5,19 @@ Snake::Snake(Board& board)
     //,mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
-    , mBody{}
+    , mBody{Body(QPoint(32,32))}
     , mHeadDirection{ Direction::toUp }
     , mSpeed{}
     , mSizeToGrow{ 0 }
     , mHeadColor{ QColor(0, 255, 0) }
-    , mBodyColor{ QColor(0, 128, 0) }
+    , mBodyColor{ QColor(0, 0, 255) }
     , mReverseProhibited{}
     , LUTTurnLeftDirection{}
     , LUTTurnRightDirection{}
     , LUTOppositeDirection{}
     , LUTDirectionAction{}
 {
-
+    grow(1);
 }
 
 Snake::~Snake()
@@ -145,13 +145,17 @@ void Snake::draw(QPainter& painter)
         //painter.setPen(Qt::NoPen);
         painter.setPen(QPen(mHeadColor)); // D?finit la couleur pour la t?te
         painter.drawPoint(headPos); // Dessine un pixel pour la t?te
+
+        for (auto it(mBody.begin()); it != mBody.end(); ++it) {
+            if (it == mBody.begin()) {
+                painter.setPen(QPen(mHeadColor));
+            }
+            else {
+                painter.setPen(QPen(mBodyColor));
+            }
+            mBody.draw(painter);
+        }
     }
-
-
-    /************configuration corps***********************/
-    painter.setBrush(QBrush(mBodyColor));
-    mBody.draw(painter);                        //a revoir avec william pour le dessin du corps
-
 }
 
 bool Snake::isColliding(QPoint const& position)
@@ -340,7 +344,24 @@ void Snake::goToward(Direction direction)
 
 void Snake::grow(size_t size)
 {
-    mSizeToGrow += size;
+    //mSizeToGrow += size; 
+    for (size_t i{}; i < size; ++i) {
+        QPoint curPos = headPosition();
+        QPoint newPos = curPos;
+        if (headDirection() == Direction::toUp) {
+            newPos.setY(curPos.y() - 1);
+        }
+        else if (headDirection() == Direction::toRight) {
+            newPos.setX(curPos.x() + 1);
+        }
+        else if (headDirection() == Direction::toDown) {
+            newPos.setY(curPos.y() + 1);
+        }
+        else if (headDirection() == Direction::toLeft) {
+            newPos.setX(curPos.x() - 1);
+        }
+        mBody.addFirst(newPos);
+    }
 }
 
 void Snake::shrink(size_t size)
