@@ -22,8 +22,11 @@ SnakeGameApplication::SnakeGameApplication()
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
     
-
+    Pellet* a = new Pellet(mBoard);
+    a->setPosition(QPoint(32, 20));
     mSnakeGameEngine.addEntity(new Snake(mBoard));
+    mSnakeGameEngine.addEntity(a);
+
     
 }
 

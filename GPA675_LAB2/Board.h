@@ -25,17 +25,18 @@ public:
 	size_t getWidth() const;
 	size_t getHeight() const;
 	size_t getSize() const;
-	//Entity* value(size_t row, size_t column) const;						//accesseur retournant la valeur de la cellule sur la grille
 
 	CellType value(int column, int row) const;
 
 	//Mutateurs
-
+	CellType setValue(int column, int row, CellType ptr);
+	void reset(int column, int row);
 	//Fonction de Resize??
 
 	//buffer
 	//Entity* const& data() const;												// Accesseur en lecture seule sur le "buffer" de la grille.
 	//Entity* data();															// Accesseur en lecture/?criture sur le "buffer" de la grille.
+	
 
 private:
 

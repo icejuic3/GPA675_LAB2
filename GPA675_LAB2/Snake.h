@@ -33,6 +33,7 @@ private:
 	QColor mHeadColor;
 	QColor mBodyColor;
 	bool mReverseProhibited;
+	qreal mTicTime;
 
 	const std::array<Direction, 4> LUTTurnLeftDirection{ Direction::toLeft,Direction::toUp, Direction::toRight,Direction::toDown };
 	const std::array<Direction, 4> LUTTurnRightDirection{ Direction::toRight,Direction::toDown, Direction::toLeft,Direction::toUp };
@@ -81,4 +82,7 @@ public:
 	void decreaseSpeed(SpeedType amout);						//fait
 	void decelerate(SpeedType percentLess);						//fait
 	void accelerate(SpeedType percentMore);						//fait
+	void addFirst(QPoint pos);
+	void addLast(QPoint pos);
+	void removeLast();
 };

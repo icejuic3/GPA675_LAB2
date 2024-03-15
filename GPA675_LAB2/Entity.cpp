@@ -4,6 +4,7 @@ Entity::Entity(Board& board)
 	: mBoard{ board }
 	, mAge{}
 	, mAlive{ true }
+	, mColliding{nullptr}
 {
 }
 

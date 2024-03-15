@@ -11,6 +11,7 @@ StaticEntity::StaticEntity(Board& board)
 
 StaticEntity::~StaticEntity()
 {
+    mBoard.setValue(mPosition.x(), mPosition.y(), nullptr);
 }
 
 bool StaticEntity::isValid()
@@ -25,6 +26,10 @@ bool StaticEntity::isAlive()
 
 void StaticEntity::ticPrepare(real elapsedTime)
 {
+    if (isColliding(mPosition)) {
+        mAlive = false;
+        return;
+    }
 
 }
 
@@ -36,14 +41,13 @@ void StaticEntity::ticExecute()
 void StaticEntity::draw(QPainter& painter)
 {
     painter.setPen(Qt::NoPen);
-    painter.setBrush(mColor);
-    painter.drawEllipse(QRectF(mPosition, QSize(mRadius, mRadius)));
+    painter.setPen(mColor);
+    painter.drawPoint(mPosition);
 }
 
 bool StaticEntity::isColliding(QPoint const& position)
 {
-
-    return mPosition == position;
+    return mBoard.value(position.x(),position.y()) != this;
 }
 
 QPoint StaticEntity::position() const
@@ -59,6 +63,7 @@ QColor StaticEntity::color() const
 void StaticEntity::setPosition(QPoint position)
 {
     mPosition = position;
+    mBoard.setValue(position.x(), position.y(), this);
 }
 
 void StaticEntity::setColor(QColor color)

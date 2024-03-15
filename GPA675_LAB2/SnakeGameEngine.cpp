@@ -18,12 +18,19 @@ SnakeGameEngine::~SnakeGameEngine()
 void SnakeGameEngine::tic(qreal elapsedTime)
 {
     mTotalElapsedTime += elapsedTime;
-    for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
-        Snake* snake{ dynamic_cast<Snake*>(*i) };
-        if (snake) {  
-            snake->ticExecute();
+    for (auto i = mEntities.begin(); i != mEntities.end();) {
+        if (!(*i)->isAlive()) {
+            delete* i;
+            i = mEntities.erase(i);
         }
-
+        else {
+            (*i)->ticPrepare(elapsedTime);
+            ++i;
+        }
+    /*Snake* snake{ dynamic_cast<Snake*>(*i) };
+        if (snake) {  
+            snake->ticPrepare(elapsedTime);
+        }*/
     }
 
 }
@@ -38,6 +45,7 @@ void SnakeGameEngine::clearAllEntity()
         // Pour acc?der aux donn?es de l'objet Entity, on doit d?r?f?rencer le pointeur
         // puis appeler la m?thode ou acc?der aux membres
         (*i)->setDead();
+        
     }
 
 }
