@@ -315,7 +315,7 @@ void Snake::removeLast()
 {
     QPoint pos = *mBody.last();
     mBody.removeLast();
-    mBoard.setValue(pos.x(), pos.y(), nullptr);
+    mBoard.reset(pos.x(), pos.y());
 }
 
 void Snake::setColors(QColor head, QColor body)
