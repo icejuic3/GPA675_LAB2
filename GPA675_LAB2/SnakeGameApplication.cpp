@@ -6,14 +6,13 @@
 #include "Snake.h"
 
 
-
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
     , mWindowSize(1024, 1024)
     , mTimer()
     , mElapsedTimer()
     , mSnakeGameEngine(mWindowSize)
- 
+    , mBoard{ Board(64, 64) }
 {
     setWindowTitle("Snake Equipe D");
     setFixedSize(mWindowSize);
@@ -22,13 +21,12 @@ SnakeGameApplication::SnakeGameApplication()
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
 
-    mSnakeGameEngine.startGameEngine();
-    
     Pellet* a = new Pellet(mBoard);
     a->setPosition(QPoint(32, 20));
-    mSnakeGameEngine.addEntity(new Snake(mBoard));
+    mSnakeGameEngine.addEntity(new Snake(mBoard));  //rajoute le serpent au board
     mSnakeGameEngine.addEntity(a);
     
+    mSnakeGameEngine.startGameEngine();
 }
 
 void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
