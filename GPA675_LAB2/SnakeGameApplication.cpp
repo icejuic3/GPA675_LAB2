@@ -13,7 +13,7 @@ SnakeGameApplication::SnakeGameApplication()
     , mTimer()
     , mElapsedTimer()
     , mSnakeGameEngine(mWindowSize)
-    , mBoard{ Board(64, 64) }
+ 
 {
     setWindowTitle("Snake Equipe D");
     setFixedSize(mWindowSize);
@@ -21,9 +21,14 @@ SnakeGameApplication::SnakeGameApplication()
     mTimer.setSingleShot(true);
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
-    
 
-    mSnakeGameEngine.addEntity(new Snake(mBoard));
+
+
+
+    mSnakeGameEngine.startGameEngine();
+
+
+    
     
 }
 

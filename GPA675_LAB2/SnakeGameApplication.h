@@ -32,6 +32,6 @@ private:
 	PressedKeys mPressedKeys;
 	//Composition
 	SnakeGameEngine mSnakeGameEngine;
-	Board mBoard;
+	
 };
 #endif //SNAKE_GAME_APPLICATIONn_H

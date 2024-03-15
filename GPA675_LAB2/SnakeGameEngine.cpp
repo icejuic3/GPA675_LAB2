@@ -1,6 +1,6 @@
 #include "SnakeGameEngine.h"
-#include "Entity.h"
-#include "Snake.h"
+
+
 
 
 SnakeGameEngine::SnakeGameEngine(QSize const& size)
@@ -8,6 +8,7 @@ SnakeGameEngine::SnakeGameEngine(QSize const& size)
     , mEntities{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
+    , mBoard{ Board(64, 64) }
 {
 }
 
@@ -23,14 +24,48 @@ void SnakeGameEngine::tic(qreal elapsedTime)
         if (snake) {  
             snake->ticExecute();
         }
+      
 
     }
-
 }
 void SnakeGameEngine::addEntity(Entity* entity)
 {
+
     mEntities.push_back(entity);
 }
+QPoint SnakeGameEngine::randomPosition()
+{
+    int xPos = rand() % 64;
+    int yPos = rand() % 64;
+    while (nullptr != mBoard.value(xPos,yPos))
+    {
+        xPos = rand() % 64;
+        yPos = rand() % 64;
+    }
+    QPoint a(xPos, yPos);
+
+    return a;
+}
+
+void SnakeGameEngine::randomPellet()
+{
+    Pellet* a = new Pellet(mBoard);
+    a->setPosition(randomPosition());    
+    addEntity(a);
+
+}
+
+void SnakeGameEngine::startGameEngine()
+{
+    int a = 0;
+    while (a < 64 )
+    {
+        randomPellet();
+        a++;
+    }
+    
+}
+
 void SnakeGameEngine::clearAllEntity()
 {
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
