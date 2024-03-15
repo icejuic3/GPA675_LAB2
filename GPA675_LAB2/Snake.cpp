@@ -1,4 +1,5 @@
 #include "Snake.h"
+#include "Pellet.h"
 
 Snake::Snake(Board& board)
     :DynamicEntity(board)
@@ -66,7 +67,15 @@ void Snake::ticPrepare(real elapsedTime)
     }
    
     if (mTicTime > 1 / mSpeed) {
-        ticExecute();
+
+        grow(1);
+        if (dynamic_cast<Pellet*>(mColliding)) {
+            mColliding = nullptr;
+        }
+        else {
+            removeLast();
+        }
+
         mTicTime = 0;
     }
          
@@ -77,7 +86,7 @@ void Snake::ticPrepare(real elapsedTime)
 
 
 
-
+    
 
 
 
@@ -108,9 +117,8 @@ void Snake::ticPrepare(real elapsedTime)
 void Snake::ticExecute()
 {
     //1) Mettre a jour la position de la tete du serpent et ajouter les nouveaux segments
-
-    grow(1);
-    removeLast();
+    
+    
 
     //2) collision avec fruit->augmentation de la taille du serpent et point
 
@@ -381,7 +389,7 @@ void Snake::goToward(Direction direction)
 
 void Snake::grow(size_t size)
 {
-    //mSizeToGrow += size; 
+
     for (size_t i{}; i < size; ++i) {
         QPoint curPos = headPosition();
         QPoint newPos = curPos;
@@ -399,6 +407,7 @@ void Snake::grow(size_t size)
         }
         addFirst(newPos);
     }
+    mSizeToGrow = 0;
 }
 
 void Snake::shrink(size_t size)

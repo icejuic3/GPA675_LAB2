@@ -21,6 +21,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
     mTotalElapsedTime += elapsedTime;
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
 
+
         (*i)->ticPrepare(elapsedTime);
 
         Snake* snake{ dynamic_cast<Snake*>(*i) };
