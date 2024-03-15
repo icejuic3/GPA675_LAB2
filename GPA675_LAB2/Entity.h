@@ -28,5 +28,6 @@ protected:
 	Board& mBoard;
 	bool mAlive;
 	double mAge;
+	Entity* mColliding;
 };
 #endif

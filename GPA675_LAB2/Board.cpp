@@ -57,3 +57,17 @@ CellType Board::value(int column, int row) const
 {
     return mBoard[row * mWidth + (column)];
 }
+
+CellType Board::setValue(int column, int row, CellType ptr)
+{
+    // Retourne le contenu de la case visee (nullptr si vide, l'entite presente sinon)
+    CellType entity = value(column, row);
+    mBoard[row * mWidth + column] = ptr;
+    return entity;
+
+}
+
+void Board::reset(int column, int row)
+{
+    mBoard[row * mWidth + column] = nullptr;
+}
