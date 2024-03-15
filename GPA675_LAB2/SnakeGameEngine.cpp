@@ -18,19 +18,19 @@ SnakeGameEngine::~SnakeGameEngine()
 void SnakeGameEngine::tic(qreal elapsedTime)
 {
     mTotalElapsedTime += elapsedTime;
+    for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
+            (*i)->ticPrepare(elapsedTime);
+            
+    }
+
     for (auto i = mEntities.begin(); i != mEntities.end();) {
         if (!(*i)->isAlive()) {
             delete* i;
             i = mEntities.erase(i);
         }
         else {
-            (*i)->ticPrepare(elapsedTime);
             ++i;
         }
-    /*Snake* snake{ dynamic_cast<Snake*>(*i) };
-        if (snake) {  
-            snake->ticPrepare(elapsedTime);
-        }*/
     }
 
 }
