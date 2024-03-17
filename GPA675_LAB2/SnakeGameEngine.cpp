@@ -1,5 +1,5 @@
 #include "SnakeGameEngine.h"
-
+#include "control.h"
 
 
 
@@ -9,6 +9,7 @@ SnakeGameEngine::SnakeGameEngine(QSize const& size)
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
+    , mPressedKeys{}
 {
 }
 
@@ -21,13 +22,20 @@ void SnakeGameEngine::tic(qreal elapsedTime)
     mTotalElapsedTime += elapsedTime;
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
 
-
         (*i)->ticPrepare(elapsedTime);
 
         Snake* snake{ dynamic_cast<Snake*>(*i) };
         if (snake) {
+
+            if (!mPressedKeys.empty()) {
+                
+                snake->updateKeys(mPressedKeys);
+                mPressedKeys.clear();
+            }
+
             snake->ticExecute();
-        }
+
+        } 
     }
 
 
@@ -41,11 +49,12 @@ void SnakeGameEngine::tic(qreal elapsedTime)
         }
     }
 }
+
 void SnakeGameEngine::addEntity(Entity* entity)
 {
-
     mEntities.push_back(entity);
 }
+
 QPoint SnakeGameEngine::randomPosition()
 {
     int xPos = rand() % 64;
@@ -79,6 +88,11 @@ void SnakeGameEngine::startGameEngine()
     
 }
 
+void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)
+{
+    mPressedKeys = pressedKeys;
+}
+
 void SnakeGameEngine::clearAllEntity()
 {
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
@@ -102,4 +116,3 @@ void SnakeGameEngine::draw(QPainter& painter)
         
     }
 }
-

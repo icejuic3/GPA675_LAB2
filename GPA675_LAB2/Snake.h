@@ -3,9 +3,6 @@
 #include <QString>
 #include "DynamicEntity.h"
 #include "Body.h"
-//#include "Controller.h"
-//#include "SnakeKeyboardController.h"
-//#include "SnakeKeyboardAbsoluteController.h"
 #include "PressedKeys.h"
 
 class Controller;
@@ -42,6 +39,8 @@ private:
 	const std::array<QPoint, 4> LUTDirectionDisplacement{}; //teleport?
 	const std::array<void(Snake::*)(), 4> LUTDirectionAction; //a revoir
 
+	PressedKeys mPressedKeys;
+
 public:
 	Snake(Board& board);
 	//Snake(Snake::DynamicEntity other);			//Bonus
@@ -63,6 +62,7 @@ public:
 	QColor bodyColor();											//fait
 	bool isReverseProhibited();									//fait
 	Controller* controller();								
+	void updateKeys(const PressedKeys& pressedKeys);
 	void setName(QString name);									//fait
 	void reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed);	//fait
 	void setColors(QColor head, QColor body);					//fait

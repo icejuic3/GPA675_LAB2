@@ -21,15 +21,18 @@ protected:
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
 	void paintEvent(QPaintEvent* event) override;
+
+
 private slots:
 
 	void tic();
 
 private:
+
+	PressedKeys mPressedKeys;
 	QSize const mWindowSize;
 	QTimer mTimer;
 	QElapsedTimer mElapsedTimer;
-	PressedKeys mPressedKeys;
 	//Composition
 	SnakeGameEngine mSnakeGameEngine;
 	Board mBoard;

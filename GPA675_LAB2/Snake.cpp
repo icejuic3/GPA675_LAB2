@@ -1,9 +1,12 @@
 #include "Snake.h"
 #include "Pellet.h"
 
+#include "SnakeKeyboardController.h"
+#include "SnakeKeyboardAbsoluteController.h"
+
 Snake::Snake(Board& board)
     :DynamicEntity(board)
-    //,mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
+    , mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
     , mBody{Body(QPoint(32,32))}
@@ -19,7 +22,9 @@ Snake::Snake(Board& board)
     , LUTDirectionAction{}
     , mTicTime{0.0}
 {
-    grow(1);
+    grow(2);
+
+    //mBoard.setValue(32, 32, this);  //assigne un pointeur du board au premier Body
 }
 
 Snake::~Snake()
@@ -62,38 +67,42 @@ bool Snake::isAlive()
 
 void Snake::ticPrepare(real elapsedTime)
 {
+
+
     if (elapsedTime > 0) {
         mTicTime += elapsedTime;
     }
    
     if (mTicTime > 1 / mSpeed) {
 
-        grow(1);
-        if (dynamic_cast<Pellet*>(mColliding)) {
-            mColliding = nullptr;
+
+        /***************mouvement********************/
+
+        mController->control(mPressedKeys);
+
+        
+
+        /********************************************/
+
+        grow(1);                                    //utiliser pour faire avancer le serpent en grandissant la partie avant
+        if (dynamic_cast<Pellet*>(mColliding)) {    //si collision avec une Pellet
+            mColliding = nullptr;                   //reset l'etat de collision
         }
         else {
-            removeLast();
+            removeLast();                           //sinon retire une partie arriere
         }
-
         mTicTime = 0;
     }
-         
-    //1) calculer la nouvelle position de la tete du serpent dependament de la direction
-
-    QPoint newPos{ headPosition() };
-
-
-
-
     
 
 
 
 
+
+
+    //1) calculer la nouvelle position de la tete du serpent dependament de la direction
     //2) verifier s'il y collision  --> fruit, serpent, mur --> a la prochaine position
-
-
+    // 
     //if (isColliding()) {        //si il y a collision
 
     //    if (!isAlive) {         //confirme si cest avec un mur ou serpent
@@ -107,10 +116,7 @@ void Snake::ticPrepare(real elapsedTime)
 
     //}
 
-
-
     //3) preparer les changements de taille du serpent -> croissance, retrecissement
-
 
 }
 
@@ -157,24 +163,11 @@ void Snake::draw(QPainter& painter)
 
     if (!mBody.isEmpty()) {
 
-        /*for (auto it(mBody.begin()); it != mBody.end(); ++it) {
-            
-            if (it == mBody.begin()) {
-                painter.setPen(QPen(mHeadColor));
-                painter.drawPoint(*it);
-                
-            }
-            else {
-                painter.setPen(QPen(mBodyColor));
-                painter.drawPoint(*it);
-            }
-        }*/
         for (auto it(mBody.begin()); it != mBody.end(); ++it) {
 
             if (it == mBody.begin()) {
                 painter.setPen(QPen(mHeadColor));
                 painter.drawPoint(*it);
-
             }
             else {
                 painter.setPen(QPen(mBodyColor));
@@ -182,6 +175,17 @@ void Snake::draw(QPainter& painter)
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 bool Snake::isColliding(QPoint const& position)
@@ -234,10 +238,15 @@ bool Snake::isReverseProhibited()
     return mReverseProhibited;
 }
 
-//Controller* Snake::controller()
-//{
-//    return mController;
-//}
+Controller* Snake::controller()
+{
+    return mController;
+}
+
+void Snake::updateKeys(const PressedKeys& pressedKeys)
+{
+    mPressedKeys = pressedKeys;
+}
 
 void Snake::setName(QString name)
 {
