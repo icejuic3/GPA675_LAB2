@@ -22,7 +22,7 @@ Snake::Snake(Board& board)
     , LUTDirectionAction{}
     , mTicTime{0.0}
 {
-    grow(2);
+    grow(6);
 
     //mBoard.setValue(32, 32, this);  //assigne un pointeur du board au premier Body
 }
