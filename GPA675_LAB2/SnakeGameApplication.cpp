@@ -34,9 +34,7 @@ void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
     if (!event->isAutoRepeat()) {
         mPressedKeys.push_back(static_cast<Qt::Key>(event->key()));
 
-
         mSnakeGameEngine.snakeDirection(mPressedKeys);
-
     }
 }
 

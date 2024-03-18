@@ -22,21 +22,18 @@ void SnakeGameEngine::tic(qreal elapsedTime)
     mTotalElapsedTime += elapsedTime;
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
 
-        (*i)->ticPrepare(elapsedTime);
-
         Snake* snake{ dynamic_cast<Snake*>(*i) };
+
         if (snake) {
-
-            if (!mPressedKeys.empty()) {
-                
-                snake->updateKeys(mPressedKeys);
-                mPressedKeys.clear();
+            if (!mPressedKeys.empty()) {   
+                snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
+                mPressedKeys.clear();   
             }
-
-            snake->ticExecute();
-
         } 
+        (*i)->ticPrepare(elapsedTime);
+        (*i)->ticExecute();
     }
+
 
 
     for (auto i = mEntities.begin(); i != mEntities.end();) {
