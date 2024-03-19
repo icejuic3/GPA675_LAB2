@@ -21,7 +21,7 @@ Snake::Snake(Board& board)
     , LUTOppositeDirection{ Direction::toDown, Direction::toLeft,Direction::toUp,Direction::toRight }
     , LUTDirectionAction{}
     , mTicTime{0.0}
-    ,mBodylength{3}
+    ,mBodylength{6}
 {
     for (size_t i{}; i < mBodylength; ++i) {
 
@@ -69,17 +69,9 @@ bool Snake::isValid()
 bool Snake::isAlive()
 {
     
-    //if (mBody.size() > 4) {
-
-    //    if (mBody.isColliding(headPosition())) {
-
-    //        return false;
-    //    }
-    //}
-
-    ////v?rifier si le serpent ? frapp? un mur    
-    ////a confirmer si on a des bordures
-
+    if (mBody.size() < 4 || !mAlive) {
+        return false;
+    }
 
     return true;
 }
@@ -124,6 +116,10 @@ void Snake::ticPrepare(real elapsedTime)
             mSizeToGrow = 1;
             mScore += 1;
         }
+        if (dynamic_cast<Snake*>(mColliding)) {
+
+            mAlive = false;
+        }
         
         mTicTime = 0;
     }
@@ -159,16 +155,10 @@ void Snake::ticExecute()
     //3) collision avec mur ou lui meme/autre serpent  --> reduire serpent ou le detruire.
 
 
-
-
-
     if (dynamic_cast<Pellet*>(mColliding)) {    //si collision avec une Pellet
         grow(mSizeToGrow);
         mColliding = nullptr;                   //reset l'etat de collision
     }
-
-
-
 
 
 }

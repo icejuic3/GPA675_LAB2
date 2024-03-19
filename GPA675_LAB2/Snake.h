@@ -32,6 +32,7 @@ private:
 	bool mReverseProhibited;
 	qreal mTicTime;
 	size_t mBodylength;
+	bool mAlive;
 
 	const std::array<Direction, 4> LUTTurnLeftDirection;
 	const std::array<Direction, 4> LUTTurnRightDirection;
