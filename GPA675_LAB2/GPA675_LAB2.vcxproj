@@ -96,6 +96,7 @@
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
+    <ClCompile Include="GamingState.cpp" />
     <ClCompile Include="GrowingPellet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FiniteStateMachine.h" />
+    <ClInclude Include="GamingState.h" />
     <ClInclude Include="GrowingPellet.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Pellet.h" />

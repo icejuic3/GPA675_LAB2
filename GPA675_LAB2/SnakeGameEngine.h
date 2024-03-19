@@ -23,16 +23,17 @@ class QPainter;
 class SnakeGameEngine
 {
 private:
-	QSize mSize;
+	std::list<Entity*> mEntities;
 	qreal mSpeed;
 	qreal mTotalElapsedTime;
-	std::list<Entity*> mEntities;
 	Board mBoard;
 	PressedKeys mPressedKeys;
+	QSize mSize;				//deplacer dans gamingState
 
 public:
 	//
-	SnakeGameEngine(QSize const& size);
+	SnakeGameEngine(QSize const& size); 
+	//SnakeGameEngine();
 	~SnakeGameEngine();
 
 	void tic(qreal elapsedTime);

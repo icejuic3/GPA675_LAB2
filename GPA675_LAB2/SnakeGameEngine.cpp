@@ -4,12 +4,13 @@
 
 
 SnakeGameEngine::SnakeGameEngine(QSize const& size)
-    : mSize{ size }
-    , mEntities{}
+//SnakeGameEngine::SnakeGameEngine()
+    : mEntities{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
     , mPressedKeys{}
+    , mSize{ size }
 {
 }
 
