@@ -4,5 +4,7 @@
 
 class Obstacle : public StaticEntity
 {
+public:
+	Obstacle(Board& board);
 };
 

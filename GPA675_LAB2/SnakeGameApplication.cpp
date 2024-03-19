@@ -21,12 +21,14 @@ SnakeGameApplication::SnakeGameApplication()
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
 
-    Pellet* a = new Pellet(mBoard);
-    a->setPosition(QPoint(32, 20));
-    mSnakeGameEngine.addEntity(new Snake(mBoard));  //rajoute le serpent au board
-    mSnakeGameEngine.addEntity(a);
+
+
+    //Pellet* a = new Pellet(mBoard);
+    //a->setPosition(QPoint(32, 20));
+    //mSnakeGameEngine.addEntity(new Snake(mBoard));  //rajoute le serpent au board
+    //mSnakeGameEngine.addEntity(a);
     
-    //mSnakeGameEngine.startGameEngine();
+    mSnakeGameEngine.startGameEngine();
 }
 
 void SnakeGameApplication::keyPressEvent(QKeyEvent* event)

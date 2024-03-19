@@ -1,5 +1,6 @@
 #include "Snake.h"
 #include "Pellet.h"
+#include "Obstacle.h"
 
 #include "SnakeKeyboardController.h"
 #include "SnakeKeyboardAbsoluteController.h"
@@ -11,7 +12,7 @@ Snake::Snake(Board& board)
     , mScore{ 0 }
     , mBody{Body(QPoint(32,32))}
     , mHeadDirection{ Direction::toUp }
-    , mSpeed{1}
+    , mSpeed{10}
     , mSizeToGrow{ 0 }
     , mHeadColor{ QColor(0, 255, 0) }
     , mBodyColor{ QColor(0, 122, 0) }
@@ -100,6 +101,12 @@ void Snake::ticExecute()
         mSizeToGrow = 1;
         mColliding = nullptr;                   //reset l'etat de collision
     }
+    if (dynamic_cast<Obstacle*>(mColliding)) {    //si collision avec une Pellet
+
+        mAlive = false;
+        mColliding = nullptr;                  //reset l'etat de collision
+    }
+   
     if (dynamic_cast<Snake*>(mColliding)) {
 
         mAlive = false;

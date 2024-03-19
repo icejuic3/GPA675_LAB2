@@ -13,6 +13,8 @@
 #include "Snake.h"
 #include "Pellet.h"
 #include "PressedKeys.h"
+#include "control.h"
+#include "Obstacle.h"
 
 class QPainter;
 
@@ -39,7 +41,7 @@ public:
 	// random position
 	QPoint randomPosition();
 	void randomPellet();
-
+	void arene();
 	void startGameEngine();
 
 	void snakeDirection(const PressedKeys& pressedKeys);

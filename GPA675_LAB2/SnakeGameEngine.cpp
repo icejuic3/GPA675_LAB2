@@ -1,5 +1,5 @@
 #include "SnakeGameEngine.h"
-#include "control.h"
+
 
 
 
@@ -74,8 +74,50 @@ void SnakeGameEngine::randomPellet()
 
 }
 
+void SnakeGameEngine::arene()
+{
+ 
+
+    // Création des obstacles sur les bords verticaux
+    for (size_t i = 0; i < mBoard.getHeight(); ++i) {
+        Obstacle* o1 = new Obstacle(mBoard);
+        Obstacle* o2 = new Obstacle(mBoard);
+        // Bord de gauche
+        QPoint pos1(0, i);
+        // Bord de droite
+        QPoint pos2(mBoard.getWidth() - 1, i);
+
+        o1->setPosition(pos1);
+        o2->setPosition(pos2);
+        addEntity(o1);
+        addEntity(o2);
+    }
+
+    // Création des obstacles sur les bords horizontaux
+    for (size_t i = 0; i < mBoard.getWidth(); ++i) {
+        Obstacle* o1 = new Obstacle(mBoard);
+        Obstacle* o2 = new Obstacle(mBoard);
+        // Bord du haut
+        QPoint pos1(i, 0);
+        // Bord du bas
+        QPoint pos2(i, mBoard.getHeight() - 1);
+
+        o1->setPosition(pos1);
+        o2->setPosition(pos2);
+        addEntity(o1);
+        addEntity(o2);
+    }
+    // Rajout des coins si necessaire
+
+}
+
 void SnakeGameEngine::startGameEngine()
 {
+    clearAllEntity();
+    addEntity(new Snake(mBoard));
+    arene();
+    randomPellet();
+
     int a = 0;
     while (a < 64 )
     {
