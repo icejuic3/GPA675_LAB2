@@ -7,6 +7,7 @@
 #include <QElapsedTimer>
 #include "Board.h"
 #include "SnakeGameEngine.h"
+#include "FiniteStateMachine.h"
 
 using PressedKeys = std::vector<Qt::Key>;
 

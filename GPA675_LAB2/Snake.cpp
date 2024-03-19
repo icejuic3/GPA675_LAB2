@@ -21,27 +21,10 @@ Snake::Snake(Board& board)
     , LUTOppositeDirection{ Direction::toDown, Direction::toLeft,Direction::toUp,Direction::toRight }
     , LUTDirectionAction{}
     , mTicTime{0.0}
-    ,mBodylength{6}
+    , mBodylength{2}
+    , mAlive{true}
 {
-    for (size_t i{}; i < mBodylength; ++i) {
-
-        QPoint curPos = headPosition();
-        QPoint newPos = curPos;
-
-        if (headDirection() == Direction::toUp) {
-            newPos.setY(curPos.y() - 1);
-        }
-        else if (headDirection() == Direction::toRight) {
-            newPos.setX(curPos.x() + 1);
-        }
-        else if (headDirection() == Direction::toDown) {
-            newPos.setY(curPos.y() + 1);
-        }
-        else if (headDirection() == Direction::toLeft) {
-            newPos.setX(curPos.x() - 1);
-        }
-        addFirst(newPos);
-    }
+    grow(mBodylength);
 
     //mBoard.setValue(32, 32, this);  //assigne un pointeur du board au premier Body
 }
@@ -69,7 +52,7 @@ bool Snake::isValid()
 bool Snake::isAlive()
 {
     
-    if (mBody.size() < 4 || !mAlive) {
+    if (mBody.size() < 2 || !mAlive) {
         return false;
     }
 
@@ -85,67 +68,23 @@ void Snake::ticPrepare(real elapsedTime)
    
     if (mTicTime > 1 / mSpeed) {
 
-        /***************Controller********************/
-        if (!mPressedKeys.empty()) {
+        //prepare le changement de direction du serpent
+        if (!mPressedKeys.empty()) {                
             mController->control(mPressedKeys);       
             mPressedKeys.clear();
         }
-        /********************************************/
 
-        /******************avance de 1 case**********/
-        QPoint curPos = headPosition();
-        QPoint newPos = curPos;
-        if (headDirection() == Direction::toUp) {
-            newPos.setY(curPos.y() - 1);
-        }
-        else if (headDirection() == Direction::toRight) {
-            newPos.setX(curPos.x() + 1);
-        }
-        else if (headDirection() == Direction::toDown) {
-            newPos.setY(curPos.y() + 1);
-        }
-        else if (headDirection() == Direction::toLeft) {
-            newPos.setX(curPos.x() - 1);
-        }
-        addFirst(newPos);                               //utiliser pour faire avancer le serpent en grandissant la partie avant
-        removeLast();
+        if (mSizeToGrow) {
 
-                                   
-        if (dynamic_cast<Pellet*>(mColliding)) {        //si collision avec une Pellet
-           
-            mSizeToGrow = 1;
-            mScore += 1;
+            grow(1);
         }
-        if (dynamic_cast<Snake*>(mColliding)) {
+        else {
 
-            mAlive = false;
+            advance(1);
         }
-        
+
         mTicTime = 0;
     }
-    
-
-
-
-
-    //1) calculer la nouvelle position de la tete du serpent dependament de la direction
-    //2) verifier s'il y collision  --> fruit, serpent, mur --> a la prochaine position
-    // 
-    //if (isColliding()) {        //si il y a collision
-
-    //    if (!isAlive) {         //confirme si cest avec un mur ou serpent
-
-    //                
-    //    }
-
-    //    mScore += 1;            //sinon cest un fruit
-    //    grow(1);
-
-
-    //}
-
-    //3) preparer les changements de taille du serpent -> croissance, retrecissement
-
 }
 
 void Snake::ticExecute()
@@ -156,10 +95,16 @@ void Snake::ticExecute()
 
 
     if (dynamic_cast<Pellet*>(mColliding)) {    //si collision avec une Pellet
-        grow(mSizeToGrow);
+
+        mScore = +1;
+        mSizeToGrow = 1;
         mColliding = nullptr;                   //reset l'etat de collision
     }
+    if (dynamic_cast<Snake*>(mColliding)) {
 
+        mAlive = false;
+        mColliding = nullptr;
+    }
 
 }
 
@@ -310,6 +255,30 @@ void Snake::decelerate(SpeedType percentLess)
     mSpeed *= 1 - percentLess; //percentless doit etre deja en pourcentage
 }
 
+void Snake::advance(size_t size)
+{
+    for (size_t i{}; i < size; ++i) {
+
+        QPoint curPos = headPosition();
+        QPoint newPos = curPos;
+
+        if (headDirection() == Direction::toUp) {
+            newPos.setY(curPos.y() - 1);
+        }
+        else if (headDirection() == Direction::toRight) {
+            newPos.setX(curPos.x() + 1);
+        }
+        else if (headDirection() == Direction::toDown) {
+            newPos.setY(curPos.y() + 1);
+        }
+        else if (headDirection() == Direction::toLeft) {
+            newPos.setX(curPos.x() - 1);
+        }
+        addFirst(newPos);
+        removeLast();
+    }
+}
+
 void Snake::addLast(QPoint pos)
 {
     mBody.addLast(pos);
@@ -390,7 +359,7 @@ void Snake::grow(size_t size)
 
         QPoint curPos = headPosition();
         QPoint newPos = curPos;
-
+        
         if (headDirection() == Direction::toUp) {
             newPos.setY(curPos.y() - 1);
         }
@@ -403,7 +372,7 @@ void Snake::grow(size_t size)
         else if (headDirection() == Direction::toLeft) {
             newPos.setX(curPos.x() - 1);
         }
-        addLast(newPos);
+        addFirst(newPos);
     }
     mSizeToGrow = 0;
 }

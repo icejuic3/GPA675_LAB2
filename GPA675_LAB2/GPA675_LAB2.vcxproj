@@ -95,6 +95,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="GrowingPellet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -102,10 +103,13 @@
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SnakeGameApplication.cpp" />
     <ClCompile Include="SnakeGameEngine.cpp" />
+    <ClCompile Include="SnakeGameState.cpp" />
     <ClCompile Include="SnakeKeyboardAbsoluteController.cpp" />
     <ClCompile Include="SnakeKeyboardController.cpp" />
     <ClCompile Include="SnakeKeyboardRelativeController.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
+    <ClCompile Include="Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AcceleratingPellet.h" />
@@ -114,16 +118,20 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="GrowingPellet.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Pellet.h" />
     <ClInclude Include="PressedKeys.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="SnakeGameState.h" />
+    <ClInclude Include="Transition.h" />
     <QtMoc Include="SnakeGameApplication.h" />
     <ClInclude Include="SnakeGameEngine.h" />
     <ClInclude Include="SnakeKeyboardAbsoluteController.h" />
     <ClInclude Include="SnakeKeyboardController.h" />
     <ClInclude Include="SnakeKeyboardRelativeController.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="StaticEntity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
