@@ -257,7 +257,9 @@ bool Body::isColliding(QPoint const& position) const
 void Body::draw(QPainter& painter)
 {
 	BodyPart* cur{ mHead };
+
 	while (cur != nullptr) {
+
 		painter.drawPoint(cur->position);
 		cur = cur->next;
 	}	

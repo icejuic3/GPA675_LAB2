@@ -3,9 +3,6 @@
 #include <QString>
 #include "DynamicEntity.h"
 #include "Body.h"
-//#include "Controller.h"
-//#include "SnakeKeyboardController.h"
-//#include "SnakeKeyboardAbsoluteController.h"
 #include "PressedKeys.h"
 
 class Controller;
@@ -25,22 +22,26 @@ private:
 
 	Controller* mController;
 	QString mName;
-	int mScore = 0;
+	int mScore;
 	Body mBody;
 	Direction mHeadDirection;
 	SpeedType mSpeed;
-	size_t mSizeToGrow = 0;
+	size_t mSizeToGrow;
 	QColor mHeadColor;
 	QColor mBodyColor;
 	bool mReverseProhibited;
 	qreal mTicTime;
+	size_t mBodylength;
+	bool mAlive;
 
-	const std::array<Direction, 4> LUTTurnLeftDirection{ Direction::toLeft,Direction::toUp, Direction::toRight,Direction::toDown };
-	const std::array<Direction, 4> LUTTurnRightDirection{ Direction::toRight,Direction::toDown, Direction::toLeft,Direction::toUp };
-	const std::array<Direction, 4> LUTOppositeDirection{ Direction::toDown, Direction::toLeft,Direction::toUp,Direction::toRight };
+	const std::array<Direction, 4> LUTTurnLeftDirection;
+	const std::array<Direction, 4> LUTTurnRightDirection;
+	const std::array<Direction, 4> LUTOppositeDirection;
 
 	const std::array<QPoint, 4> LUTDirectionDisplacement{}; //teleport?
 	const std::array<void(Snake::*)(), 4> LUTDirectionAction; //a revoir
+
+	PressedKeys mPressedKeys;
 
 public:
 	Snake(Board& board);
@@ -61,12 +62,13 @@ public:
 	SpeedType speed();											//fait
 	QColor headColor();											//fait
 	QColor bodyColor();											//fait
-	bool isReverseProhibited();									//fait
+	//bool isReverseProhibited();									//fait
 	Controller* controller();								
+	void updateKeys(const PressedKeys& pressedKeys);
 	void setName(QString name);									//fait
 	void reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed);	//fait
 	void setColors(QColor head, QColor body);					//fait
-	void prohibitedReverse(bool Prohibited);					//fait
+	//void prohibitedReverse();									//fait
 	void adjustScore(int score);								//fait
 	void turnRight();											//fait
 	void turnLeft();											//fait

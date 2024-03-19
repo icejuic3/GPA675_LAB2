@@ -61,10 +61,11 @@ CellType Board::value(int column, int row) const
 CellType Board::setValue(int column, int row, CellType ptr)
 {
     // Retourne le contenu de la case visee (nullptr si vide, l'entite presente sinon)
+    //verification de collision
+
     CellType entity = value(column, row);
     mBoard[row * mWidth + column] = ptr;
     return entity;
-
 }
 
 void Board::reset(int column, int row)

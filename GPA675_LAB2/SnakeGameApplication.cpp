@@ -26,13 +26,15 @@ SnakeGameApplication::SnakeGameApplication()
     mSnakeGameEngine.addEntity(new Snake(mBoard));  //rajoute le serpent au board
     mSnakeGameEngine.addEntity(a);
     
-    mSnakeGameEngine.startGameEngine();
+    //mSnakeGameEngine.startGameEngine();
 }
 
 void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
 {
     if (!event->isAutoRepeat()) {
         mPressedKeys.push_back(static_cast<Qt::Key>(event->key()));
+
+        mSnakeGameEngine.snakeDirection(mPressedKeys);
     }
 }
 

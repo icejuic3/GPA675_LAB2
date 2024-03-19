@@ -1,9 +1,12 @@
 #include "Snake.h"
 #include "Pellet.h"
 
+#include "SnakeKeyboardController.h"
+#include "SnakeKeyboardAbsoluteController.h"
+
 Snake::Snake(Board& board)
     :DynamicEntity(board)
-    //,mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
+    , mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
     , mBody{Body(QPoint(32,32))}
@@ -13,13 +16,34 @@ Snake::Snake(Board& board)
     , mHeadColor{ QColor(0, 255, 0) }
     , mBodyColor{ QColor(0, 122, 0) }
     , mReverseProhibited{}
-    , LUTTurnLeftDirection{}
-    , LUTTurnRightDirection{}
-    , LUTOppositeDirection{}
+    , LUTTurnLeftDirection{ Direction::toLeft,Direction::toUp, Direction::toRight,Direction::toDown }
+    , LUTTurnRightDirection{ Direction::toRight,Direction::toDown, Direction::toLeft,Direction::toUp }
+    , LUTOppositeDirection{ Direction::toDown, Direction::toLeft,Direction::toUp,Direction::toRight }
     , LUTDirectionAction{}
     , mTicTime{0.0}
+    ,mBodylength{6}
 {
-    grow(1);
+    for (size_t i{}; i < mBodylength; ++i) {
+
+        QPoint curPos = headPosition();
+        QPoint newPos = curPos;
+
+        if (headDirection() == Direction::toUp) {
+            newPos.setY(curPos.y() - 1);
+        }
+        else if (headDirection() == Direction::toRight) {
+            newPos.setX(curPos.x() + 1);
+        }
+        else if (headDirection() == Direction::toDown) {
+            newPos.setY(curPos.y() + 1);
+        }
+        else if (headDirection() == Direction::toLeft) {
+            newPos.setX(curPos.x() - 1);
+        }
+        addFirst(newPos);
+    }
+
+    //mBoard.setValue(32, 32, this);  //assigne un pointeur du board au premier Body
 }
 
 Snake::~Snake()
@@ -44,56 +68,69 @@ bool Snake::isValid()
 
 bool Snake::isAlive()
 {
-    ////v?rifier si le serpent s'est frapp? lui m?me
-    //if (mBody.size() > 4) {
-
-    //    if (mBody.isColliding(headPosition())) {
-
-    //        return false;
-    //    }
-    //}
-
-    ////v?rifier si le serpent ? frapp? un mur    
-    ////a confirmer si on a des bordures
-
+    
+    if (mBody.size() < 4 || !mAlive) {
+        return false;
+    }
 
     return true;
 }
 
 void Snake::ticPrepare(real elapsedTime)
 {
+
     if (elapsedTime > 0) {
         mTicTime += elapsedTime;
     }
    
     if (mTicTime > 1 / mSpeed) {
 
-        grow(1);
-        if (dynamic_cast<Pellet*>(mColliding)) {
-            mColliding = nullptr;
+        /***************Controller********************/
+        if (!mPressedKeys.empty()) {
+            mController->control(mPressedKeys);       
+            mPressedKeys.clear();
         }
-        else {
-            removeLast();
-        }
+        /********************************************/
 
+        /******************avance de 1 case**********/
+        QPoint curPos = headPosition();
+        QPoint newPos = curPos;
+        if (headDirection() == Direction::toUp) {
+            newPos.setY(curPos.y() - 1);
+        }
+        else if (headDirection() == Direction::toRight) {
+            newPos.setX(curPos.x() + 1);
+        }
+        else if (headDirection() == Direction::toDown) {
+            newPos.setY(curPos.y() + 1);
+        }
+        else if (headDirection() == Direction::toLeft) {
+            newPos.setX(curPos.x() - 1);
+        }
+        addFirst(newPos);                               //utiliser pour faire avancer le serpent en grandissant la partie avant
+        removeLast();
+
+                                   
+        if (dynamic_cast<Pellet*>(mColliding)) {        //si collision avec une Pellet
+           
+            mSizeToGrow = 1;
+            mScore += 1;
+        }
+        if (dynamic_cast<Snake*>(mColliding)) {
+
+            mAlive = false;
+        }
+        
         mTicTime = 0;
     }
-         
-    //1) calculer la nouvelle position de la tete du serpent dependament de la direction
-
-    QPoint newPos{ headPosition() };
-
-
-
-
     
 
 
 
 
+    //1) calculer la nouvelle position de la tete du serpent dependament de la direction
     //2) verifier s'il y collision  --> fruit, serpent, mur --> a la prochaine position
-
-
+    // 
     //if (isColliding()) {        //si il y a collision
 
     //    if (!isAlive) {         //confirme si cest avec un mur ou serpent
@@ -107,49 +144,27 @@ void Snake::ticPrepare(real elapsedTime)
 
     //}
 
-
-
     //3) preparer les changements de taille du serpent -> croissance, retrecissement
-
 
 }
 
 void Snake::ticExecute()
 {
     //1) Mettre a jour la position de la tete du serpent et ajouter les nouveaux segments
-    
-    
-
     //2) collision avec fruit->augmentation de la taille du serpent et point
-
-
-
-
-
-
-
     //3) collision avec mur ou lui meme/autre serpent  --> reduire serpent ou le detruire.
 
 
-
-
-
-
-    /************segment pour grandir serpent**************/
-    //if (mSizeToGrow > 0) {
-    //
-    //    for (size_t i{}; i < mSizeToGrow; ++i) {
-    //        mBody.addLast()
-    //    }
-    //}
-
+    if (dynamic_cast<Pellet*>(mColliding)) {    //si collision avec une Pellet
+        grow(mSizeToGrow);
+        mColliding = nullptr;                   //reset l'etat de collision
+    }
 
 
 }
 
 void Snake::draw(QPainter& painter)
 {
-
     /**************configuration t?te********************************/
     //section a revoir si on dessine une forme comme un rectangle pour utiliser le Qbrush
     //ou si nous changeons directement la couleur du pixel avec painter.drawPoint();
@@ -157,24 +172,11 @@ void Snake::draw(QPainter& painter)
 
     if (!mBody.isEmpty()) {
 
-        /*for (auto it(mBody.begin()); it != mBody.end(); ++it) {
-            
-            if (it == mBody.begin()) {
-                painter.setPen(QPen(mHeadColor));
-                painter.drawPoint(*it);
-                
-            }
-            else {
-                painter.setPen(QPen(mBodyColor));
-                painter.drawPoint(*it);
-            }
-        }*/
         for (auto it(mBody.begin()); it != mBody.end(); ++it) {
 
             if (it == mBody.begin()) {
                 painter.setPen(QPen(mHeadColor));
                 painter.drawPoint(*it);
-
             }
             else {
                 painter.setPen(QPen(mBodyColor));
@@ -229,15 +231,15 @@ QColor Snake::bodyColor()
     return mBodyColor;
 }
 
-bool Snake::isReverseProhibited()
+Controller* Snake::controller()
 {
-    return mReverseProhibited;
+    return mController;
 }
 
-//Controller* Snake::controller()
-//{
-//    return mController;
-//}
+void Snake::updateKeys(const PressedKeys& pressedKeys)
+{
+    mPressedKeys = pressedKeys;
+}
 
 void Snake::setName(QString name)
 {
@@ -332,11 +334,6 @@ void Snake::setColors(QColor head, QColor body)
     mBodyColor = body;
 }
 
-void Snake::prohibitedReverse(bool Prohibited)
-{
-    mReverseProhibited = Prohibited;
-}
-
 void Snake::adjustScore(int score)
 {
     mScore = score;
@@ -354,45 +351,46 @@ void Snake::turnLeft()
 
 void Snake::goUp()
 {
-    if (!isReverseProhibited() || mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toUp)]) {
+    if (mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toUp)]) {
         mHeadDirection = Direction::toUp;
     }
 }
 
 void Snake::goRight()
 {
-    if (!isReverseProhibited() || mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toRight)]) {
+    if (mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toRight)]) {
         mHeadDirection = Direction::toRight;
     }
 }
 
 void Snake::goDown()
 {
-    if (!isReverseProhibited() || mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toDown)]) {
+    if (mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toDown)]) {
         mHeadDirection = Direction::toDown;
     }
 }
 
 void Snake::goLeft()
 {
-    if (!isReverseProhibited() || mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toLeft)]) {
+    if (mHeadDirection != LUTOppositeDirection[static_cast<int>(Direction::toLeft)]) {
         mHeadDirection = Direction::toLeft;
     }
 }
 
 void Snake::goToward(Direction direction)
 {
-    if (!isReverseProhibited() || mHeadDirection != LUTOppositeDirection[static_cast<int>(direction)]) {
+    if (mHeadDirection != LUTOppositeDirection[static_cast<int>(direction)]) {
         mHeadDirection = direction;
     }
 }
 
 void Snake::grow(size_t size)
 {
-
     for (size_t i{}; i < size; ++i) {
+
         QPoint curPos = headPosition();
         QPoint newPos = curPos;
+
         if (headDirection() == Direction::toUp) {
             newPos.setY(curPos.y() - 1);
         }
@@ -405,7 +403,7 @@ void Snake::grow(size_t size)
         else if (headDirection() == Direction::toLeft) {
             newPos.setX(curPos.x() - 1);
         }
-        addFirst(newPos);
+        addLast(newPos);
     }
     mSizeToGrow = 0;
 }

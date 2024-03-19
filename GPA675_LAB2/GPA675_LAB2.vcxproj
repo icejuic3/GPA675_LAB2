@@ -111,6 +111,7 @@
     <ClInclude Include="AcceleratingPellet.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Body.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GrowingPellet.h" />

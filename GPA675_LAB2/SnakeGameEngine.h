@@ -12,6 +12,7 @@
 #include "Entity.h"
 #include "Snake.h"
 #include "Pellet.h"
+#include "PressedKeys.h"
 
 class QPainter;
 
@@ -23,6 +24,7 @@ private:
 	qreal mTotalElapsedTime;
 	std::list<Entity*> mEntities;
 	Board mBoard;
+	PressedKeys mPressedKeys;
 
 public:
 	//
@@ -39,6 +41,8 @@ public:
 	void randomPellet();
 
 	void startGameEngine();
+
+	void snakeDirection(const PressedKeys& pressedKeys);
 
 };
 
