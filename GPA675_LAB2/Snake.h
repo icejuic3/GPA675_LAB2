@@ -38,8 +38,8 @@ private:
 	const std::array<Direction, 4> LUTTurnRightDirection;
 	const std::array<Direction, 4> LUTOppositeDirection;
 
-	const std::array<QPoint, 4> LUTDirectionDisplacement{}; //teleport?
-	const std::array<void(Snake::*)(), 4> LUTDirectionAction; //a revoir
+	const std::array<QPoint, 4> LUTDirectionDisplacement{}; 
+	const std::array<void(Snake::*)(), 4> LUTDirectionAction; 
 
 	PressedKeys mPressedKeys;
 
@@ -78,6 +78,7 @@ public:
 	void goLeft();												//fait
 	void goToward(Direction direction);							//fait
 	void grow(size_t size = 1);									//fait
+	void advance(size_t size = 1);								//fait
 	void shrink(size_t size = 1);								//fait
 	void setSpeed(SpeedType speed);								//fait
 	void increaseSpeed(SpeedType amout);						//fait
