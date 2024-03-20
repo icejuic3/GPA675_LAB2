@@ -1,6 +1,13 @@
 #include "SnakeGameApplication.h"
 
 
+#include "HomeState.h"
+#include "GamingState.h"
+#include "GameOverState.h"
+
+
+
+
 
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
@@ -8,8 +15,12 @@ SnakeGameApplication::SnakeGameApplication()
     , mTimer()
     , mElapsedTimer()
     , mSnakeGameEngine(mWindowSize)
+
     , mSnakeScenario(&mSnakeGameEngine)
     //, mBoard{ Board(64, 64) }
+
+    , mFsm{}
+
 {
     setWindowTitle("Snake Equipe D");
     setFixedSize(mWindowSize);
@@ -48,7 +59,33 @@ void SnakeGameApplication::paintEvent(QPaintEvent* event)
     painter.scale(16, 16);
     painter.setRenderHint(QPainter::Antialiasing);
 
+
+    if (mFsm.currentState() != nullptr) {
+
+        auto* gamingState = dynamic_cast<Gamin>
+
+        //mFsm.currentState()->draw(painter); // Appel de la méthode draw de l'état courant
+    }
+
+
+    mFsm.currentState().
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*************************code a supprimer***********************************************/
+
     mSnakeGameEngine.draw(painter);
+    /****************************************************************************************/
 }
 
 void SnakeGameApplication::tic()

@@ -133,6 +133,10 @@ void SnakeGameEngine::startGameEngine()
     
 }
 
+void SnakeGameEngine::endGameEngine()
+{
+}
+
 void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)
 {
     mPressedKeys = pressedKeys;
