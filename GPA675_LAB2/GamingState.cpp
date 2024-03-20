@@ -12,7 +12,7 @@ GamingState::~GamingState()
 
 void GamingState::draw(QPainter& painter)
 {
-	mSnakeEngine->draw(painter);
+	mSnakeEngine.draw(painter);
 }
 
 bool GamingState::isValid()
@@ -22,17 +22,17 @@ bool GamingState::isValid()
 
 void GamingState::entering()
 {
-	mSnakeEngine->startGameEngine();
+	mSnakeEngine.startGameEngine();
 }
 
 void GamingState::exiting()
 {
-	mSnakeEngine->endGameEngine();
+	mSnakeEngine.endGameEngine();
 }
 
 void GamingState::tic(qreal elapsedTime)
 {
-	mSnakeEngine->tic(elapsedTime);
+	mSnakeEngine.tic(elapsedTime);
 
 	if (mScenario->isGameOver()) {
 		mTransitions.push_back(new GameTransition(this, mGameOver));
@@ -41,6 +41,6 @@ void GamingState::tic(qreal elapsedTime)
 
 void GamingState::initialiseTransition()
 {
-	mTransitions.push_back(new KeyboardTransition(this, this, Qt::Key_Enter));
+	//mTransitions.push_back(new KeyboardTransition(this, this, Qt::Key_Enter));
 
 }
