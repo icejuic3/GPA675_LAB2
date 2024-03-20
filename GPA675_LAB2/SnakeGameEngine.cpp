@@ -111,6 +111,11 @@ void SnakeGameEngine::arene()
 
 }
 
+void SnakeGameEngine::addSnake()
+{
+    addEntity(new Snake(mBoard));
+}
+
 void SnakeGameEngine::startGameEngine()
 {
     clearAllEntity();

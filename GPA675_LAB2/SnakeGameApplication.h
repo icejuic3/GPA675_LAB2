@@ -8,6 +8,12 @@
 #include "Board.h"
 #include "SnakeGameEngine.h"
 #include "FiniteStateMachine.h"
+#include <QKeyEvent>
+#include <QDebug>
+#include <QPainter>
+#include "Pellet.h"
+#include "Snake.h"
+#include "SnakeScenario.h"
 
 using PressedKeys = std::vector<Qt::Key>;
 
@@ -36,6 +42,7 @@ private:
 	QElapsedTimer mElapsedTimer;
 	//Composition
 	SnakeGameEngine mSnakeGameEngine;
-	Board mBoard;
+	SnakeScenario mSnakeScenario;
+	//Board mBoard;
 };
 #endif //SNAKE_GAME_APPLICATIONn_H

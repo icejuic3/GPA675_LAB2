@@ -99,7 +99,8 @@ void Snake::ticExecute()
 
         mScore = +1;
         mSizeToGrow = 1;
-        mColliding = nullptr;                   //reset l'etat de collision
+        mColliding = nullptr;     //reset l'etat de collision
+
     }
     if (dynamic_cast<Obstacle*>(mColliding)) {    //si collision avec une Pellet
 

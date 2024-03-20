@@ -42,8 +42,8 @@ public:
 	QPoint randomPosition();
 	void randomPellet();
 	void arene();
+	void addSnake();
 	void startGameEngine();
-
 	void snakeDirection(const PressedKeys& pressedKeys);
 
 };
