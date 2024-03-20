@@ -169,8 +169,9 @@ void SnakeGameEngine::addSnake(int nbSnake)
 
 }
 
-
-
+void SnakeGameEngine::endGameEngine()
+{
+}
 
 void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)
 {

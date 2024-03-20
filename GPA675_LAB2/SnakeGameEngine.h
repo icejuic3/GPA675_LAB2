@@ -50,7 +50,15 @@ public:
 	void randomAccPellet();
 	//
 	void arene();
+
+
 	void addSnake(int nbSnake);
+
+	void startGameEngine();
+
+	void endGameEngine();
+
+
 	void snakeDirection(const PressedKeys& pressedKeys);
 
 };

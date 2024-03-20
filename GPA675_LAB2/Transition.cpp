@@ -1,7 +1,7 @@
 #include "Transition.h"
 
-Transition::Transition()
-	:mNextState{nullptr}
+Transition::Transition(State* sourceState, State* nextState)
+	:mNextState{nextState}
 {
 }
 
