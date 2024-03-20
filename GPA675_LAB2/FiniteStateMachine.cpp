@@ -56,3 +56,8 @@ void FiniteStateMachine::changeState(State* nextState)
 		}
 	}
 }
+
+const std::vector<State*>& FiniteStateMachine::getStates() const
+{
+	return mStates;
+}

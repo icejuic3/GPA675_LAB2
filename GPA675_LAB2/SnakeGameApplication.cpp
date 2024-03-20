@@ -4,10 +4,7 @@
 #include "HomeState.h"
 #include "GamingState.h"
 #include "GameOverState.h"
-
-
-
-
+#include "PauseState.h"
 
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
@@ -57,31 +54,40 @@ void SnakeGameApplication::keyReleaseEvent(QKeyEvent* event)
 void SnakeGameApplication::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.scale(16, 16);
     painter.setRenderHint(QPainter::Antialiasing);
+    painter.scale(16, 16);
 
 
     if (mFsm.currentState() != nullptr) {
 
-        auto* gamingState = dynamic_cast<Gamin>
+        auto* homeState = dynamic_cast<HomeState*> (mFsm.currentState());
+        auto* gamingState = dynamic_cast<GamingState*> (mFsm.currentState());
+        auto* gameOverState = dynamic_cast<GameOverState*> (mFsm.currentState());
+        auto* pauseState = dynamic_cast<PauseState*> (mFsm.currentState());
 
-        //mFsm.currentState()->draw(painter); // Appel de la méthode draw de l'état courant
+
+        if (homeState) {
+            homeState->draw(painter);
+        }
+        else if (gamingState) {
+
+            gamingState->draw(painter);
+        }
+        else if (gameOverState) {
+
+            gameOverState->draw(painter);
+        }
+        else if (pauseState) {
+
+            pauseState->draw(painter);
+        }
+
+
+        //***A utiliser si on ne fait pas de changement de windows******//
+        //auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
+        //state->draw(painter);    
+
     }
-
-
-    mFsm.currentState().
-
-
-
-
-
-
-
-
-
-
-
-
 
     /*************************code a supprimer***********************************************/
 
@@ -92,8 +98,19 @@ void SnakeGameApplication::paintEvent(QPaintEvent* event)
 void SnakeGameApplication::tic()
 {
     double elapsedTime{ mElapsedTimer.restart() / 1.0e3 };
-    mSnakeGameEngine.tic(elapsedTime);
-    repaint();
 
+    if (mFsm.currentState() != nullptr) {
+        auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
+
+        if (state) {
+            state->tic(elapsedTime);
+        }
+    }
+
+    /*************************code a supprimer***********************************************/
+    mSnakeGameEngine.tic(elapsedTime);
+    /****************************************************************************************/
+    
+    repaint();
     mTimer.start();
 }

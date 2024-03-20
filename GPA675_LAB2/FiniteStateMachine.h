@@ -12,6 +12,7 @@ public:
 	State* currentState();
 	void changeState(State* nextState);
 
+	const std::vector<State*>& getStates() const;
 
 private:
 	

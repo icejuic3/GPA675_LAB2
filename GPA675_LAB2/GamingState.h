@@ -2,6 +2,7 @@
 #include "SnakeGameState.h"
 #include "SnakeGameScenario.h"
 #include "GameOverState.h"
+#include "PauseState.h"
 
 class GamingState : public SnakeGameState
 {
