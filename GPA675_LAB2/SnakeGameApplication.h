@@ -36,15 +36,17 @@ private slots:
 
 private:
 
+	FiniteStateMachine mFsm;
 	PressedKeys mPressedKeys;
 	QSize const mWindowSize;
 	QTimer mTimer;
 	QElapsedTimer mElapsedTimer;
 	//Composition
+
 	SnakeGameEngine mSnakeGameEngine;
 
 	SnakeScenario mSnakeScenario;
-	//Board mBoard;
+
 
 
 	FiniteStateMachine mFsm;

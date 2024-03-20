@@ -5,7 +5,7 @@ class State;
 class Transition
 {
 public:
-	Transition(State* sourceState, State* targetState);
+	Transition(State* nextState);
 	virtual ~Transition() = default;
 
 	virtual bool isTransiting() = 0;	

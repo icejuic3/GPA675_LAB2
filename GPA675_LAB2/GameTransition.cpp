@@ -1,7 +1,7 @@
 #include "GameTransition.h"
 
-GameTransition::GameTransition(State* sourceState, State* nextState)
-    :Transition(sourceState, nextState)
+GameTransition::GameTransition(State* nextState)
+    :Transition(nextState)
     ,mTransiting{true}
 {
 }

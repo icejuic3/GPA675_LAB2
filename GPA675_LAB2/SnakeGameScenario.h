@@ -13,7 +13,6 @@ public:
 	bool isGameOver();
 
 protected:
-
 	SnakeGameEngine& mEngine;
 };
 

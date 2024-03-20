@@ -1,11 +1,11 @@
 #pragma once
 #include "SnakeGameState.h"
-#include "GamingState.h"
+#include "FiniteStateMachine.h"
 
 class HomeState: public SnakeGameState
 {
 public:
-	HomeState();
+	HomeState(FiniteStateMachine* fsm);
 	~HomeState() override;
 
 	// Inherited via SnakeGameState
@@ -14,4 +14,8 @@ public:
 	void entering() override;
 	void exiting() override;
 	void tic(qreal elapsedTime) override;
+
+private:
+
+	FiniteStateMachine* mFsm;
 };

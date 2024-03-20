@@ -7,9 +7,8 @@
 class GamingState : public SnakeGameState
 {
 public:
-
-	GamingState();
-	~GamingState();
+	GamingState(FiniteStateMachine* fsm);
+	~GamingState() override;
 	
 	void draw(QPainter& painter) override;
 	
@@ -18,12 +17,9 @@ public:
 	void exiting() override;
 	void tic(qreal elapsedTime) override;
 
-
-
-	void initialiseTransition();
-
 private:
-	
+	FiniteStateMachine* mFsm;
 	SnakeGameScenario* mScenario;
-	GameOverState* mGameOver;
+	//GameOverState* mGameOver;
+	//PauseState* mPause;
 };

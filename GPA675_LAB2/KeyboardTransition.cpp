@@ -1,7 +1,7 @@
 #include "KeyboardTransition.h"
 
-KeyboardTransition::KeyboardTransition(State* sourceState, State* nextState, Qt::Key key)
-	:Transition(sourceState,nextState)
+KeyboardTransition::KeyboardTransition(State* nextState, Qt::Key key)
+	:Transition(nextState)
 	,mkey{key}
 	,mTransiting{false}
 {

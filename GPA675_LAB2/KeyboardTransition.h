@@ -6,7 +6,7 @@
 class KeyboardTransition: public Transition
 {
 public:
-	KeyboardTransition(State* sourceState, State* nextState, Qt::Key key);
+	KeyboardTransition(State* nextState, Qt::Key key);
 	~KeyboardTransition();
 
 	bool isTransiting() override;

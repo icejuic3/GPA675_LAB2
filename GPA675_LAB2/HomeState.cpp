@@ -1,7 +1,14 @@
 #include "HomeState.h"
 #include "KeyboardTransition.h"
 
-HomeState::HomeState()
+#include "HomeState.h"
+#include "GamingState.h"
+#include "GameOverState.h"
+#include "PauseState.h"
+
+HomeState::HomeState(FiniteStateMachine* fsm)
+	://mGamingState()
+	mFsm{fsm}
 {
 }
 
@@ -28,7 +35,7 @@ void HomeState::exiting()
 
 void HomeState::tic(qreal elapsedTime)
 {
+	GamingState* gamingState = static_cast<GamingState*>(mFsm->getState(StateType::Gaming));
 
-	mTransitions.push_back(new KeyboardTransition(this, this, Qt::Key_Enter));
-
+	mTransitions.push_back(new KeyboardTransition(gamingState, Qt::Key_Enter));
 }

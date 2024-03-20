@@ -2,12 +2,12 @@
 #ifndef SNAKE_GAME_ENGINE
 #define SNAKE_GAME_ENGINE
 
-
-#include <list>
 #include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QSize>
+
+#include "SnakeGameScenario.h"
 
 #include "Entity.h"
 #include "Snake.h"
@@ -28,12 +28,12 @@ private:
 	qreal mTotalElapsedTime;
 	Board mBoard;
 	PressedKeys mPressedKeys;
-	QSize mSize;				//deplacer dans gamingState
+	//QSize mSize;				
 
 public:
 	//
-	SnakeGameEngine(QSize const& size); 
-	//SnakeGameEngine();
+	//SnakeGameEngine(QSize const& size); 
+	SnakeGameEngine();
 	~SnakeGameEngine();
 
 	void tic(qreal elapsedTime);
