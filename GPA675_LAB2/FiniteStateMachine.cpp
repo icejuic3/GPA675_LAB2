@@ -9,17 +9,17 @@ FiniteStateMachine::FiniteStateMachine()
 	,mInitialState{nullptr}
 	,mCurrentState{nullptr}
 {
-	mStates.push_back(new HomeState());       // État d'accueil
-	mStates.push_back(new GamingState());     // État de jeu
+	mStates.push_back(new HomeState(this));       // État d'accueil
+	mStates.push_back(new GamingState(this));     // État de jeu
 	mStates.push_back(new GameOverState());   // État de fin de jeu
 	mStates.push_back(new PauseState());      // État de pause
 
 	mInitialState = mStates[0];
-	mCurrentState = mInitialState;
 
 	if (mInitialState) {
 		mInitialState->entering();
 	}
+	mCurrentState = mInitialState;
 }
 
 FiniteStateMachine::~FiniteStateMachine()
@@ -31,8 +31,22 @@ FiniteStateMachine::~FiniteStateMachine()
 
 void FiniteStateMachine::tic(qreal elapsedTime)
 {
-	if (mCurrentState) {
-		mCurrentState->tic(elapsedTime);
+	//mCurrentState = mInitialState;
+
+	mCurrentState->tic(elapsedTime);	//fait le tic pour l'etat present
+
+	State* nextState = dynamic_cast<State*>(mCurrentState->isTransiting());
+	
+	if (mCurrentState != nextState && nextState!=nullptr) {	//valide si le prochain etat n'est pas semblable
+
+		if (mCurrentState) {			//si non null
+			mCurrentState->exiting();	//sortir de l'etat
+		}
+			mCurrentState = nextState;	//met a jour l'etat
+
+		if (mCurrentState) {			//si non null
+			mCurrentState->entering();	//rentrer dans l'etat
+		}
 	}
 }
 
@@ -41,23 +55,10 @@ State* FiniteStateMachine::currentState()
 	return mCurrentState;
 }
 
-void FiniteStateMachine::changeState(State* nextState)
+State* FiniteStateMachine::getState(StateType stateType)
 {
-	if (mCurrentState != nextState) {
-
-		if (mCurrentState) {
-			mCurrentState->exiting();
-		}
-
-		mCurrentState = nextState;
-
-		if (mCurrentState) {
-			mCurrentState->entering();
-		}
+	if (static_cast<size_t>(stateType) < mStates.size()) {
+		return mStates[static_cast<size_t>(stateType)];
 	}
-}
-
-const std::vector<State*>& FiniteStateMachine::getStates() const
-{
-	return mStates;
+	return nullptr;											
 }

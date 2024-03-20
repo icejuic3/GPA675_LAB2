@@ -8,16 +8,14 @@
 
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
+    , mFsm{}
     , mWindowSize(1024, 1024)
     , mTimer()
     , mElapsedTimer()
-    , mSnakeGameEngine(mWindowSize)
-
     , mSnakeScenario(&mSnakeGameEngine)
-    //, mBoard{ Board(64, 64) }
-
     , mFsm{}
-
+    //, mSnakeGameEngine(mWindowSize)
+    //, mBoard{ Board(64, 64) }
 {
     setWindowTitle("Snake Equipe D");
     setFixedSize(mWindowSize);
@@ -25,6 +23,7 @@ SnakeGameApplication::SnakeGameApplication()
     mTimer.setSingleShot(true);
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
+
 
     mSnakeScenario.snakeOrigin();
    // mSnakeGameEngine.startGameEngine();
@@ -35,7 +34,7 @@ void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
     if (!event->isAutoRepeat()) {
         mPressedKeys.push_back(static_cast<Qt::Key>(event->key()));
 
-        mSnakeGameEngine.snakeDirection(mPressedKeys);
+        //mSnakeGameEngine.snakeDirection(mPressedKeys);
     }
 }
 
@@ -49,7 +48,6 @@ void SnakeGameApplication::keyReleaseEvent(QKeyEvent* event)
     }
 }
 
-
 void SnakeGameApplication::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
@@ -59,38 +57,13 @@ void SnakeGameApplication::paintEvent(QPaintEvent* event)
 
     if (mFsm.currentState() != nullptr) {
 
-        auto* homeState = dynamic_cast<HomeState*> (mFsm.currentState());
-        auto* gamingState = dynamic_cast<GamingState*> (mFsm.currentState());
-        auto* gameOverState = dynamic_cast<GameOverState*> (mFsm.currentState());
-        auto* pauseState = dynamic_cast<PauseState*> (mFsm.currentState());
-
-
-        if (homeState) {
-            homeState->draw(painter);
-        }
-        else if (gamingState) {
-
-            gamingState->draw(painter);
-        }
-        else if (gameOverState) {
-
-            gameOverState->draw(painter);
-        }
-        else if (pauseState) {
-
-            pauseState->draw(painter);
-        }
-
-
-        //***A utiliser si on ne fait pas de changement de windows******//
-        //auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
-        //state->draw(painter);    
-
+        auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
+        state->draw(painter);    
     }
 
     /*************************code a supprimer***********************************************/
 
-    mSnakeGameEngine.draw(painter);
+    //mSnakeGameEngine.draw(painter);
     /****************************************************************************************/
 }
 
@@ -98,16 +71,10 @@ void SnakeGameApplication::tic()
 {
     double elapsedTime{ mElapsedTimer.restart() / 1.0e3 };
 
-    if (mFsm.currentState() != nullptr) {
-        auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
-
-        if (state) {
-            state->tic(elapsedTime);
-        }
-    }
-
+    mFsm.tic(elapsedTime);  
+    
     /*************************code a supprimer***********************************************/
-    mSnakeGameEngine.tic(elapsedTime);
+    //mSnakeGameEngine.tic(elapsedTime);
     /****************************************************************************************/
     
     repaint();

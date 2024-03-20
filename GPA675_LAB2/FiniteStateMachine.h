@@ -1,6 +1,12 @@
 #pragma once
 #include "State.h"
 
+enum class StateType :size_t {
+	Home		= 0,
+	Gaming		= 1,
+	GameOver	= 2,
+	Pause		= 3,
+};
 
 class FiniteStateMachine
 {
@@ -10,9 +16,7 @@ public:
 
 	void tic(qreal elapsedTime);
 	State* currentState();
-	void changeState(State* nextState);
-
-	const std::vector<State*>& getStates() const;
+	State* getState(StateType stateType);
 
 private:
 	

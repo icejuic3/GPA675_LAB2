@@ -2,7 +2,14 @@
 #include "KeyboardTransition.h"
 #include "GameTransition.h"
 
-GamingState::GamingState()
+#include "HomeState.h"
+#include "GamingState.h"
+#include "GameOverState.h"
+#include "PauseState.h"
+
+GamingState::GamingState(FiniteStateMachine* fsm)
+	:mFsm{ fsm }
+	,mScenario{}
 {
 }
 
@@ -34,13 +41,12 @@ void GamingState::tic(qreal elapsedTime)
 {
 	mSnakeEngine.tic(elapsedTime);
 
+	PauseState* pauseState = static_cast<PauseState*>(mFsm->getState(StateType::Pause));
+	GameOverState* gameOver = static_cast<GameOverState*>(mFsm->getState(StateType::GameOver));
+
+
 	if (mScenario->isGameOver()) {
-		mTransitions.push_back(new GameTransition(this, mGameOver));
+
+		mTransitions.push_back(new GameTransition(gameOver));
 	}
-}
-
-void GamingState::initialiseTransition()
-{
-	//mTransitions.push_back(new KeyboardTransition(this, this, Qt::Key_Enter));
-
 }

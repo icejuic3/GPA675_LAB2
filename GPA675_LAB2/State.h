@@ -6,7 +6,6 @@
 #include <QSize>
 #include "Transition.h"
 
-
 class State
 {
 public:
