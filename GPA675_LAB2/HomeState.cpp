@@ -18,6 +18,9 @@ HomeState::~HomeState()
 
 void HomeState::draw(QPainter& painter)
 {
+	//painter.setPen(Qt::NoPen);
+	painter.setPen(Qt::black);
+	painter.drawPoint(QPoint(12, 12));
 }
 
 bool HomeState::isValid()
