@@ -4,10 +4,7 @@
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QSize>
-
 #include "Transition.h"
-
-
 
 class State
 {
@@ -21,8 +18,6 @@ public:
 	virtual void exiting() = 0;
 	virtual void tic(qreal elapsedTime) = 0;
 
-
 protected:
 	std::vector<Transition*> mTransitions;
 };
-

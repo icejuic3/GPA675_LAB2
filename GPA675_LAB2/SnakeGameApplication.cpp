@@ -1,18 +1,21 @@
 #include "SnakeGameApplication.h"
-#include <QKeyEvent>
-#include <QDebug>
-#include <QPainter>
-#include "Pellet.h"
-#include "Snake.h"
 
+
+#include "HomeState.h"
+#include "GamingState.h"
+#include "GameOverState.h"
+#include "PauseState.h"
 
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
+    , mFsm{}
     , mWindowSize(1024, 1024)
     , mTimer()
     , mElapsedTimer()
-    , mSnakeGameEngine(mWindowSize)
-    , mBoard{ Board(64, 64) }
+    , mSnakeScenario(&mSnakeGameEngine)
+    , mFsm{}
+    //, mSnakeGameEngine(mWindowSize)
+    //, mBoard{ Board(64, 64) }
 {
     setWindowTitle("Snake Equipe D");
     setFixedSize(mWindowSize);
@@ -22,13 +25,8 @@ SnakeGameApplication::SnakeGameApplication()
     mTimer.start();
 
 
-
-    //Pellet* a = new Pellet(mBoard);
-    //a->setPosition(QPoint(32, 20));
-    //mSnakeGameEngine.addEntity(new Snake(mBoard));  //rajoute le serpent au board
-    //mSnakeGameEngine.addEntity(a);
-    
-    mSnakeGameEngine.startGameEngine();
+    mSnakeScenario.snakeOrigin();
+   // mSnakeGameEngine.startGameEngine();
 }
 
 void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
@@ -36,7 +34,7 @@ void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
     if (!event->isAutoRepeat()) {
         mPressedKeys.push_back(static_cast<Qt::Key>(event->key()));
 
-        mSnakeGameEngine.snakeDirection(mPressedKeys);
+        //mSnakeGameEngine.snakeDirection(mPressedKeys);
     }
 }
 
@@ -50,21 +48,35 @@ void SnakeGameApplication::keyReleaseEvent(QKeyEvent* event)
     }
 }
 
-
 void SnakeGameApplication::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.scale(16, 16);
     painter.setRenderHint(QPainter::Antialiasing);
+    painter.scale(16, 16);
 
-    mSnakeGameEngine.draw(painter);
+
+    if (mFsm.currentState() != nullptr) {
+
+        auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
+        state->draw(painter);    
+    }
+
+    /*************************code a supprimer***********************************************/
+
+    //mSnakeGameEngine.draw(painter);
+    /****************************************************************************************/
 }
 
 void SnakeGameApplication::tic()
 {
     double elapsedTime{ mElapsedTimer.restart() / 1.0e3 };
-    mSnakeGameEngine.tic(elapsedTime);
-    repaint();
 
+    mFsm.tic(elapsedTime);  
+    
+    /*************************code a supprimer***********************************************/
+    //mSnakeGameEngine.tic(elapsedTime);
+    /****************************************************************************************/
+    
+    repaint();
     mTimer.start();
 }

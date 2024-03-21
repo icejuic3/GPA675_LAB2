@@ -3,13 +3,14 @@
 
 
 
-SnakeGameEngine::SnakeGameEngine(QSize const& size)
-    : mSize{ size }
-    , mEntities{}
+//SnakeGameEngine::SnakeGameEngine(QSize const& size)
+SnakeGameEngine::SnakeGameEngine()
+    : mEntities{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
     , mPressedKeys{}
+    //, mSize{ size }
 {
 }
 
@@ -111,6 +112,11 @@ void SnakeGameEngine::arene()
 
 }
 
+void SnakeGameEngine::addSnake()
+{
+    addEntity(new Snake(mBoard));
+}
+
 void SnakeGameEngine::startGameEngine()
 {
     clearAllEntity();
@@ -125,6 +131,10 @@ void SnakeGameEngine::startGameEngine()
         a++;
     }
     
+}
+
+void SnakeGameEngine::endGameEngine()
+{
 }
 
 void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)

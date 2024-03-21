@@ -1,13 +1,13 @@
 #include "Transition.h"
 
-Transition::Transition()
-	:mNextState{nullptr}
+Transition::Transition(State* nextState)
+	:mNextState{nextState}
 {
 }
 
 State* Transition::state()
 {
-	return mNextState;
+	return mNextState;		//retourne le prochaine etat
 }
 
 void Transition::setState(State* state)

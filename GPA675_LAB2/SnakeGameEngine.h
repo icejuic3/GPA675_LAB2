@@ -2,12 +2,12 @@
 #ifndef SNAKE_GAME_ENGINE
 #define SNAKE_GAME_ENGINE
 
-
-#include <list>
 #include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QSize>
+
+#include "SnakeGameScenario.h"
 
 #include "Entity.h"
 #include "Snake.h"
@@ -21,16 +21,17 @@ class QPainter;
 class SnakeGameEngine
 {
 private:
-	QSize mSize;
+	std::list<Entity*> mEntities;
 	qreal mSpeed;
 	qreal mTotalElapsedTime;
-	std::list<Entity*> mEntities;
 	Board mBoard;
 	PressedKeys mPressedKeys;
+	//QSize mSize;				
 
 public:
 	//
-	SnakeGameEngine(QSize const& size);
+	//SnakeGameEngine(QSize const& size); 
+	SnakeGameEngine();
 	~SnakeGameEngine();
 
 	void tic(qreal elapsedTime);
@@ -42,7 +43,11 @@ public:
 	QPoint randomPosition();
 	void randomPellet();
 	void arene();
+	void addSnake();
 	void startGameEngine();
+
+	void endGameEngine();
+
 
 	void snakeDirection(const PressedKeys& pressedKeys);
 

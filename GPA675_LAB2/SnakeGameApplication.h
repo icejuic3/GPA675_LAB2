@@ -8,6 +8,12 @@
 #include "Board.h"
 #include "SnakeGameEngine.h"
 #include "FiniteStateMachine.h"
+#include <QKeyEvent>
+#include <QDebug>
+#include <QPainter>
+#include "Pellet.h"
+#include "Snake.h"
+#include "SnakeScenario.h"
 
 using PressedKeys = std::vector<Qt::Key>;
 
@@ -30,12 +36,20 @@ private slots:
 
 private:
 
+	FiniteStateMachine mFsm;
 	PressedKeys mPressedKeys;
 	QSize const mWindowSize;
 	QTimer mTimer;
 	QElapsedTimer mElapsedTimer;
 	//Composition
+
 	SnakeGameEngine mSnakeGameEngine;
-	Board mBoard;
+
+	SnakeScenario mSnakeScenario;
+
+
+
+	FiniteStateMachine mFsm;
+
 };
 #endif //SNAKE_GAME_APPLICATIONn_H
