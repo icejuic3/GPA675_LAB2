@@ -44,7 +44,6 @@ void GamingState::tic(qreal elapsedTime)
 	PauseState* pauseState = static_cast<PauseState*>(mFsm->getState(StateType::Pause));
 	GameOverState* gameOver = static_cast<GameOverState*>(mFsm->getState(StateType::GameOver));
 
-
 	if (mScenario->isGameOver()) {
 
 		mTransitions.push_back(new GameTransition(gameOver));
