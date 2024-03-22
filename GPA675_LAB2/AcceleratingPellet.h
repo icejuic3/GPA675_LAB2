@@ -1,14 +1,17 @@
-//#pragma once
-//
-//#include"Pellet.h"
-//
-//class AcceleratingPellet : public Pellet
-//{
-//public:
-//
-//	void applyEffectOnSnake(Snake& snake) override;
-//
-//private:
-//
-//};
-//
+#pragma once
+#ifndef ACCELERATING_PELET_H
+#define ACCELERATING_PELET_H
+
+#include"Pellet.h"
+
+class AcceleratingPellet : public Pellet
+{
+public:
+
+	// Changement de couleur en rouge
+	AcceleratingPellet(Board& board);
+
+private:
+
+};
+#endif //ACCELERATING_PELET_H

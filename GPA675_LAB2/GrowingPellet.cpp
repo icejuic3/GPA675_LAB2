@@ -1,5 +1,7 @@
-//#include "GrowingPellet.h"
-//
-//void GrowingPellet::applyEffectOnSnake(Snake& snake)
-//{
-//}
+#include "GrowingPellet.h"
+
+GrowingPellet::GrowingPellet(Board& board)
+	:Pellet(board)
+{
+	this->setColor(Qt::red);
+}
