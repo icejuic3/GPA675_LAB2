@@ -12,7 +12,7 @@ public:
 	State();
 	virtual ~State() = default;
 
-	Transition* isTransiting();
+	State* isTransiting();
 	virtual bool isValid() = 0;
 	virtual void entering() = 0;
 	virtual void exiting() = 0;

@@ -1,11 +1,11 @@
 #pragma once
 #include "SnakeGameState.h"
-#include "HomeState.h"
+#include "FiniteStateMachine.h"
 
 class GameOverState: public SnakeGameState
 {
 public:
-	GameOverState();
+	GameOverState(FiniteStateMachine* fsm);
 	~GameOverState() override;
 
 	void draw(QPainter& painter) override;
@@ -13,6 +13,9 @@ public:
 	void entering() override;
 	void exiting() override;
 	void tic(qreal elapsedTime) override;
+	void updateKeys(const PressedKeys& pressedKeys) override;
 
+private:
+	FiniteStateMachine* mFsm;
+	PressedKeys mPressedKeys;
 };
-

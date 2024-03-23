@@ -9,9 +9,10 @@ FiniteStateMachine::FiniteStateMachine()
 	,mInitialState{nullptr}
 	,mCurrentState{nullptr}
 {
+
 	mStates.push_back(new HomeState(this));       // État d'accueil
 	mStates.push_back(new GamingState(this));     // État de jeu
-	mStates.push_back(new GameOverState());   // État de fin de jeu
+	mStates.push_back(new GameOverState(this));   // État de fin de jeu
 	mStates.push_back(new PauseState());      // État de pause
 
 	mInitialState = mStates[0];
@@ -39,14 +40,9 @@ void FiniteStateMachine::tic(qreal elapsedTime)
 	
 	if (mCurrentState != nextState && nextState!=nullptr) {	//valide si le prochain etat n'est pas semblable
 
-		if (mCurrentState) {			//si non null
-			mCurrentState->exiting();	//sortir de l'etat
-		}
-			mCurrentState = nextState;	//met a jour l'etat
-
-		if (mCurrentState) {			//si non null
-			mCurrentState->entering();	//rentrer dans l'etat
-		}
+		mCurrentState->exiting();	//sortir de l'etat present
+		mCurrentState = nextState;	//met a jour l'etat
+		mCurrentState->entering();	//rentrer dans le prochain etat
 	}
 }
 

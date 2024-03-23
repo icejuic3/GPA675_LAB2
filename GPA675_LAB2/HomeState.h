@@ -14,8 +14,9 @@ public:
 	void entering() override;
 	void exiting() override;
 	void tic(qreal elapsedTime) override;
+	void updateKeys(const PressedKeys& pressedKeys) override;
 
 private:
-
 	FiniteStateMachine* mFsm;
+	PressedKeys mPressedKeys;
 };

@@ -6,17 +6,16 @@
 class KeyboardTransition: public Transition
 {
 public:
-	KeyboardTransition(State* nextState, Qt::Key key);
+	KeyboardTransition(State* nextState);
 	~KeyboardTransition();
 
 	bool isTransiting() override;
 
 protected:
-	void keyPressEvent(QKeyEvent* event);
-	void keyReleaseEvent(QKeyEvent* event);
+	//void keyPressEvent(QKeyEvent* event);
+	//void keyReleaseEvent(QKeyEvent* event);
 
 private:
 
-	Qt::Key mkey; // La touche qui déclenchera la transition
-	bool mTransiting;
+	State* mNextState;
 };

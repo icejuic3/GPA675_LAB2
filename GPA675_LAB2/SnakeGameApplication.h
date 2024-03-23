@@ -5,17 +5,13 @@
 #include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QElapsedTimer>
-#include "Board.h"
-#include "SnakeGameEngine.h"
-#include "FiniteStateMachine.h"
 #include <QKeyEvent>
 #include <QDebug>
 #include <QPainter>
-#include "Pellet.h"
-#include "Snake.h"
-#include "SnakeScenario.h"
+#include "FiniteStateMachine.h"
+#include "PressedKeys.h"
 
-using PressedKeys = std::vector<Qt::Key>;
+//using PressedKeys = std::vector<Qt::Key>;
 
 
 class SnakeGameApplication : public QWidget
@@ -24,6 +20,7 @@ class SnakeGameApplication : public QWidget
 public:
 	SnakeGameApplication();
 	~SnakeGameApplication() override = default;
+
 protected:
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
@@ -41,15 +38,6 @@ private:
 	QSize const mWindowSize;
 	QTimer mTimer;
 	QElapsedTimer mElapsedTimer;
-	//Composition
-
-	SnakeGameEngine mSnakeGameEngine;
-
-	SnakeScenario mSnakeScenario;
-
-
-
-	FiniteStateMachine mFsm;
 
 };
 #endif //SNAKE_GAME_APPLICATIONn_H
