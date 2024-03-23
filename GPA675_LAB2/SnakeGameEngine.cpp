@@ -7,7 +7,7 @@ SnakeGameEngine::SnakeGameEngine()
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
     , mPressedKeys{}
-    , mSnakeScenario{}
+    , mSnakeScenario{nullptr}
 {
 }
 
@@ -39,7 +39,11 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             delete* i;
             i = mEntities.erase(i);
             //Ajouter un etat pour l'ajout d'entity
-            randomGrowingPellet();
+            
+            if ((*i) == dynamic_cast<StaticEntity*> (*i)) {
+
+                randomGrowingPellet();  //verifie si l'entite morte est une Statique
+            }
         }
         else {
             
@@ -167,6 +171,10 @@ void SnakeGameEngine::addSnake(int nbSnake)
 
 void SnakeGameEngine::startGameEngine()
 {
+
+
+
+
     //mSnakeScenario.snakeOrigin();
 }
 

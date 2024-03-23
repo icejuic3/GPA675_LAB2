@@ -7,7 +7,7 @@ class SnakeGameScenario
 public:
 
 	SnakeGameScenario(SnakeGameEngine& engine);
-	virtual ~SnakeGameScenario() = 0;
+	virtual ~SnakeGameScenario() = default;
 
 	virtual void startGame() = 0;
 
