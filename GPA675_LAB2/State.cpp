@@ -6,12 +6,13 @@ State::State()
 {
 }
 
-Transition* State::isTransiting() {
+State* State::isTransiting() {
 
 	for (auto& transition : mTransitions) {
 		
 		if (transition->isTransiting()) {
-			return transition;
+
+			return transition->state();
 		}
 	}
 

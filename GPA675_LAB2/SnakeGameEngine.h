@@ -55,12 +55,10 @@ public:
 	void addSnake(int nbSnake);
 
 	void startGameEngine();
-
 	void endGameEngine();
 
 
 	void snakeDirection(const PressedKeys& pressedKeys);
-
 };
 
 #endif

@@ -13,6 +13,7 @@ public:
 	virtual void entering() = 0;
 	virtual void exiting() = 0;
 	virtual void tic(qreal elapsedTime) = 0;
+	virtual void updateKeys(const PressedKeys& pressedKeys) = 0;
 	
 protected:
 	SnakeGameEngine mSnakeEngine;

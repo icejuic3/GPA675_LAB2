@@ -9,9 +9,9 @@
 #include <QDebug>
 #include <QPainter>
 #include "FiniteStateMachine.h"
+#include "PressedKeys.h"
 
-
-using PressedKeys = std::vector<Qt::Key>;
+//using PressedKeys = std::vector<Qt::Key>;
 
 
 class SnakeGameApplication : public QWidget

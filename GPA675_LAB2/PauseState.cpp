@@ -29,3 +29,7 @@ void PauseState::exiting()
 void PauseState::tic(qreal elapsedTime)
 {
 }
+
+void PauseState::updateKeys(const PressedKeys& pressedKeys)
+{
+}

@@ -10,7 +10,6 @@ SnakeGameEngine::SnakeGameEngine()
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
     , mPressedKeys{}
-    //, mSize{ size }
 {
 }
 
