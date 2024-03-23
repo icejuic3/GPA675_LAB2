@@ -48,6 +48,20 @@ void GamingState::tic(qreal elapsedTime)
 
 		mTransitions.push_back(new GameTransition(gameOver));
 	}
+
+
+
+	for (Qt::Key key : mPressedKeys) {
+		if (key == Qt::Key_Escape) {
+			QCoreApplication::quit();		//met fin a l'application
+		}
+	}
+
+
+
+
+
+
 }
 
 void GamingState::updateKeys(const PressedKeys& pressedKeys)

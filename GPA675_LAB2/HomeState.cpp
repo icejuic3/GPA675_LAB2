@@ -3,7 +3,6 @@
 #include "GameOverState.h"
 #include "PauseState.h"
 #include "KeyboardTransition.h"
-#include <Qrect>
 
 
 HomeState::HomeState(FiniteStateMachine* fsm)
@@ -71,12 +70,21 @@ void HomeState::tic(qreal elapsedTime)
 	for (Qt::Key key : mPressedKeys) {
 		if (key == Qt::Key_1 ) {
 			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 1 a été pressée
+
+
 		}
 		else if (key == Qt::Key_2) {
-			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 2 a été pressée, faire quelque chose
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 2 a été pressée
+
+
 		}
 		else if (key == Qt::Key_3) {
-			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 3 a été pressée, faire quelque chose
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 3 a été pressée
+
+
+		}
+		else if (key == Qt::Key_Escape) {
+			QCoreApplication::quit();		//met fin a l'application
 		}
 	}
 }

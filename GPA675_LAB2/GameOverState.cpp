@@ -61,6 +61,14 @@ void GameOverState::exiting()
 void GameOverState::tic(qreal elapsedTime)
 {
 	//mSnakeEngine.tic(elapsedTime);
+
+
+
+
+
+
+
+
 }
 
 void GameOverState::updateKeys(const PressedKeys& pressedKeys)
