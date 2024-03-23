@@ -2,10 +2,10 @@
 #include "State.h"
 
 enum class StateType :size_t {
-	Home		= 0,
-	Gaming		= 1,
-	GameOver	= 2,
-	Pause		= 3,
+	Home = 0,
+	Gaming = 1,
+	GameOver = 2,
+	Pause = 3,
 };
 
 class FiniteStateMachine
