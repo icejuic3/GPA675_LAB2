@@ -12,8 +12,7 @@ SnakeGameApplication::SnakeGameApplication()
     , mWindowSize(1024, 1024)
     , mTimer()
     , mElapsedTimer()
-    , mSnakeScenario(&mSnakeGameEngine)
-    , mFsm{}
+    //, mSnakeScenario(&mSnakeGameEngine)
     //, mSnakeGameEngine(mWindowSize)
     //, mBoard{ Board(64, 64) }
 {
@@ -25,9 +24,11 @@ SnakeGameApplication::SnakeGameApplication()
     mTimer.start();
 
 
+
     //mSnakeScenario.snakeBlockade();
 
     mSnakeScenario.snakeOrigin();
+
    // mSnakeGameEngine.startGameEngine();
 }
 

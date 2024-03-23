@@ -43,13 +43,9 @@ private:
 	QElapsedTimer mElapsedTimer;
 	//Composition
 
-	SnakeGameEngine mSnakeGameEngine;
+	//SnakeGameEngine mSnakeGameEngine;
 
-	SnakeScenario mSnakeScenario;
-
-
-
-	FiniteStateMachine mFsm;
+	//SnakeScenario mSnakeScenario;
 
 };
 #endif //SNAKE_GAME_APPLICATIONn_H
