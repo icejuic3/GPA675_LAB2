@@ -7,6 +7,7 @@
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
     , mFsm{}
+    , mPressedKeys{}
     , mWindowSize(1024, 1024)
     , mTimer()
     , mElapsedTimer()
@@ -24,6 +25,13 @@ void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
     if (!event->isAutoRepeat()) {
         mPressedKeys.push_back(static_cast<Qt::Key>(event->key()));
 
+
+        if (mFsm.currentState() != nullptr) {
+
+            auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
+            
+            state->updateKeys(mPressedKeys);
+        }
     }
 }
 

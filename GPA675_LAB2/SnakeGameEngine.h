@@ -45,12 +45,10 @@ public:
 	void arene();
 	void addSnake();
 	void startGameEngine();
-
 	void endGameEngine();
 
 
 	void snakeDirection(const PressedKeys& pressedKeys);
-
 };
 
 #endif

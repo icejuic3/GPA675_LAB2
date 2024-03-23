@@ -1,9 +1,8 @@
 #include "KeyboardTransition.h"
 
-KeyboardTransition::KeyboardTransition(State* nextState, Qt::Key key)
+KeyboardTransition::KeyboardTransition(State* nextState)
 	:Transition(nextState)
-	,mkey{key}
-	,mTransiting{false}
+	,mNextState{nextState}
 {
 }
 
@@ -13,19 +12,9 @@ KeyboardTransition::~KeyboardTransition()
 
 bool KeyboardTransition::isTransiting()
 {
-	return mTransiting;
-}
-
-void KeyboardTransition::keyPressEvent(QKeyEvent* event)
-{
-	if (event->key() == mkey) {
-		mTransiting = true;
+	if (mNextState == nullptr) {
+		return false;
 	}
-}
 
-void KeyboardTransition::keyReleaseEvent(QKeyEvent* event)
-{
-	if (event->key() == mkey) {
-		mTransiting = false;
-	}
+	return true;
 }

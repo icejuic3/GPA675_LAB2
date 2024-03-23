@@ -49,3 +49,9 @@ void GamingState::tic(qreal elapsedTime)
 		mTransitions.push_back(new GameTransition(gameOver));
 	}
 }
+
+void GamingState::updateKeys(const PressedKeys& pressedKeys)
+{
+	mSnakeEngine.snakeDirection(pressedKeys);
+	mPressedKeys = pressedKeys;
+}

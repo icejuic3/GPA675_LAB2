@@ -5,15 +5,15 @@
 #include "KeyboardTransition.h"
 #include <Qrect>
 
+
 HomeState::HomeState(FiniteStateMachine* fsm)
 	:mFsm{fsm}
+	,mPressedKeys{}
 {
 }
 
 HomeState::~HomeState()
 {
-	
-
 }
 
 void HomeState::draw(QPainter& painter)
@@ -57,7 +57,6 @@ bool HomeState::isValid()
 
 void HomeState::entering()
 {
-
 }
 
 void HomeState::exiting()
@@ -68,5 +67,21 @@ void HomeState::tic(qreal elapsedTime)
 {
 	GamingState* gamingState = static_cast<GamingState*>(mFsm->getState(StateType::Gaming));
 
-	mTransitions.push_back(new KeyboardTransition(gamingState, Qt::Key_Enter));
+
+	for (Qt::Key key : mPressedKeys) {
+		if (key == Qt::Key_1 ) {
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 1 a été pressée
+		}
+		else if (key == Qt::Key_2) {
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 2 a été pressée, faire quelque chose
+		}
+		else if (key == Qt::Key_3) {
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 3 a été pressée, faire quelque chose
+		}
+	}
+}
+
+void HomeState::updateKeys(const PressedKeys& pressedKeys)
+{
+	mPressedKeys = pressedKeys;
 }
