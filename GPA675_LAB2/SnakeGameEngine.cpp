@@ -40,8 +40,11 @@ void SnakeGameEngine::tic(qreal elapsedTime)
         if (!(*i)->isAlive()) {
             delete* i;
             i = mEntities.erase(i);
+            //Ajouter un etat pour l'ajout d'entity
+            randomGrowingPellet();
         }
         else {
+            
             ++i;
         }
     }
@@ -68,17 +71,38 @@ QPoint SnakeGameEngine::randomPosition()
 
 void SnakeGameEngine::randomPellet()
 {
-    Pellet* a = new Pellet(mBoard);
-    a->setPosition(randomPosition());    
-    addEntity(a);
-
+    int pellet = rand() % 100;
+    if (pellet == 1)
+    {
+        randomGrowingPellet();
+    }
+    else
+    {
+        randomAccPellet();
+    }
 }
+
+void SnakeGameEngine::randomGrowingPellet()
+{
+    GrowingPellet* a = new GrowingPellet(mBoard);
+    a->setPosition(randomPosition());
+    addEntity(a);
+}
+
+void SnakeGameEngine::randomAccPellet()
+{
+    AcceleratingPellet* a = new AcceleratingPellet(mBoard);
+    a->setPosition(randomPosition());
+    addEntity(a);
+}
+
+
 
 void SnakeGameEngine::arene()
 {
  
 
-    // Création des obstacles sur les bords verticaux
+    //  Les cotes gauche et droite
     for (size_t i = 0; i < mBoard.getHeight(); ++i) {
         Obstacle* o1 = new Obstacle(mBoard);
         Obstacle* o2 = new Obstacle(mBoard);
@@ -93,7 +117,7 @@ void SnakeGameEngine::arene()
         addEntity(o2);
     }
 
-    // Création des obstacles sur les bords horizontaux
+    // Les cotes haut et bas
     for (size_t i = 0; i < mBoard.getWidth(); ++i) {
         Obstacle* o1 = new Obstacle(mBoard);
         Obstacle* o2 = new Obstacle(mBoard);
@@ -111,26 +135,41 @@ void SnakeGameEngine::arene()
 
 }
 
-void SnakeGameEngine::addSnake()
+void SnakeGameEngine::addSnake(int nbSnake)
 {
-    addEntity(new Snake(mBoard));
-}
-
-void SnakeGameEngine::startGameEngine()
-{
-    clearAllEntity();
-    addEntity(new Snake(mBoard));
-    arene();
-    randomPellet();
-
-    int a = 0;
-    while (a < 64 )
+    if (nbSnake == 1)
     {
-        randomPellet();
-        a++;
+        QPoint point1;
+        point1.setX(mBoard.getWidth() / 2);
+        point1.setY(mBoard.getHeight() / 2);
+        Snake* snake1 = new Snake(mBoard, point1);
+        addEntity(snake1);
     }
-    
+    if (nbSnake == 2)
+    {
+        //Serpen 1
+        QPoint point1;
+        point1.setX(mBoard.getWidth() / 3);
+        point1.setY(mBoard.getHeight() / 2);
+        Snake* snake1 = new Snake(mBoard,point1);
+        snake1->setColors(QColor(240, 0, 0), QColor(120,0, 0));
+        //Serpen 2
+        QPoint point2;
+        point2.setX((mBoard.getWidth() / 3) * 2);
+        point2.setY(100);
+        Snake* snake2 = new Snake(mBoard,point2);    
+        snake2->setColors(QColor(0, 0, 240), QColor(0, 0, 120));
+
+
+        addEntity(snake1);
+        addEntity(snake2);
+    }
+
+
 }
+
+
+
 
 void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)
 {

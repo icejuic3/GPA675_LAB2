@@ -12,14 +12,16 @@ SnakeScenario::~SnakeScenario()
 void SnakeScenario::snakeOrigin()
 {
 	mEngine->clearAllEntity();
-	mEngine->addSnake();
 	mEngine->arene();
-	mEngine->randomPellet();
+	mEngine->addSnake(1);
+	
 }
 
 void SnakeScenario::snakeBlockade()
 {
-	
+	mEngine->clearAllEntity();
+	mEngine->arene();
+	mEngine->addSnake(2);
 }
 
 void SnakeScenario::snakeBoss()

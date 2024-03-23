@@ -15,6 +15,8 @@
 #include "PressedKeys.h"
 #include "control.h"
 #include "Obstacle.h"
+#include "AcceleratingPellet.h"
+#include "GrowingPellet.h"
 
 class QPainter;
 
@@ -38,12 +40,16 @@ public:
 	void clearAllEntity();
 	void addEntity(Entity* entity);
 
-	// random position
+	// Fonction random position
 	QPoint randomPosition();
+
+	//Gestion des pellets
 	void randomPellet();
+	void randomGrowingPellet();
+	void randomAccPellet();
+	//
 	void arene();
-	void addSnake();
-	void startGameEngine();
+	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
 
 };

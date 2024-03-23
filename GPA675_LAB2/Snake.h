@@ -44,7 +44,7 @@ private:
 	PressedKeys mPressedKeys;
 
 public:
-	Snake(Board& board);
+	Snake(Board& board, QPoint point);
 	//Snake(Snake::DynamicEntity other);			//Bonus
 	//Snake& operator=(Snake::DynamicEntity other);	//Bonus
 	~Snake() override;

@@ -18,6 +18,7 @@ SnakeGameApplication::SnakeGameApplication()
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
 
+    //mSnakeScenario.snakeBlockade();
     mSnakeScenario.snakeOrigin();
    // mSnakeGameEngine.startGameEngine();
 }
