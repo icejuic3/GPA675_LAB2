@@ -1,15 +1,13 @@
 #include "SnakeGameEngine.h"
 
 
-
-
-//SnakeGameEngine::SnakeGameEngine(QSize const& size)
 SnakeGameEngine::SnakeGameEngine()
     : mEntities{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
     , mPressedKeys{}
+    , mSnakeScenario{}
 {
 }
 
@@ -100,10 +98,9 @@ void SnakeGameEngine::randomAccPellet()
 
 void SnakeGameEngine::arene()
 {
- 
-
     //  Les cotes gauche et droite
     for (size_t i = 0; i < mBoard.getHeight(); ++i) {
+
         Obstacle* o1 = new Obstacle(mBoard);
         Obstacle* o2 = new Obstacle(mBoard);
         // Bord de gauche
@@ -166,6 +163,11 @@ void SnakeGameEngine::addSnake(int nbSnake)
     }
 
 
+}
+
+void SnakeGameEngine::startGameEngine()
+{
+    //mSnakeScenario.snakeOrigin();
 }
 
 void SnakeGameEngine::endGameEngine()

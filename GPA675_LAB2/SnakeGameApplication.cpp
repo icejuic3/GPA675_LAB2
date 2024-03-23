@@ -4,6 +4,8 @@
 #include "GameOverState.h"
 #include "PauseState.h"
 
+
+
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
     , mFsm{}
@@ -22,7 +24,7 @@ SnakeGameApplication::SnakeGameApplication()
 
     //mSnakeScenario.snakeBlockade();
 
-    mSnakeScenario.snakeOrigin();
+    //mSnakeScenario.snakeOrigin();
 
    // mSnakeGameEngine.startGameEngine();
 
