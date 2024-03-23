@@ -3,7 +3,6 @@
 #include "GameTransition.h"
 
 #include "HomeState.h"
-#include "GamingState.h"
 #include "GameOverState.h"
 #include "PauseState.h"
 
@@ -40,6 +39,7 @@ void GamingState::exiting()
 void GamingState::tic(qreal elapsedTime)
 {
 	mSnakeEngine.tic(elapsedTime);
+	
 
 	PauseState* pauseState = static_cast<PauseState*>(mFsm->getState(StateType::Pause));
 	GameOverState* gameOver = static_cast<GameOverState*>(mFsm->getState(StateType::GameOver));

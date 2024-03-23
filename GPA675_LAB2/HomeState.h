@@ -16,6 +16,5 @@ public:
 	void tic(qreal elapsedTime) override;
 
 private:
-
 	FiniteStateMachine* mFsm;
 };

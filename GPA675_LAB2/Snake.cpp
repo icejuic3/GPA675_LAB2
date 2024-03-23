@@ -122,7 +122,7 @@ void Snake::ticExecute()
         mAlive = false;
         mColliding = nullptr;
     }
-
+ 
 }
 
 void Snake::draw(QPainter& painter)
