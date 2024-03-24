@@ -264,3 +264,4 @@ void Body::draw(QPainter& painter)
 		cur = cur->next;
 	}	
 }
+

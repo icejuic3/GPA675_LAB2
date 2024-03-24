@@ -1,14 +1,16 @@
-//#pragma once
-//
-//#include"Pellet.h"
-//
-//class GrowingPellet : public Pellet
-//{
-//public:
-//
-//	void applyEffectOnSnake(Snake& snake) override;
-//
-//private:
-//
-//};
-//
+#pragma once
+#ifndef GROWING_PELLET_H
+#define GROWING_PELLET_H
+
+#include"Pellet.h"
+
+
+class GrowingPellet : public Pellet
+{
+public:
+	// Changement de couleur en rouge
+	GrowingPellet(Board& board);
+
+};
+
+#endif //GROWING_PELLET_H

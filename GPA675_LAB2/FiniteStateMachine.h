@@ -18,9 +18,13 @@ public:
 	State* currentState();
 	State* getState(StateType stateType);
 
+	const int getGameChoice();
+	void setGameChoice(const int choice);
+
+
 private:
-	
 	std::vector<State*> mStates;
 	State* mInitialState;
 	State* mCurrentState;
-};
+
+	int mGameChoice;

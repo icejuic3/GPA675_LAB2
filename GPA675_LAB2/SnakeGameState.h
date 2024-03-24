@@ -1,6 +1,9 @@
 #pragma once
 #include "State.h"
 #include "SnakeGameEngine.h"
+#include <Qrect>
+#include <qcoreapplication.h>
+
 
 class SnakeGameState: public State
 {

@@ -51,7 +51,7 @@ bool GameOverState::isValid()
 
 void GameOverState::entering()
 {
-	mSnakeEngine.startGameEngine();
+
 }
 
 void GameOverState::exiting()
@@ -61,6 +61,7 @@ void GameOverState::exiting()
 void GameOverState::tic(qreal elapsedTime)
 {
 	//mSnakeEngine.tic(elapsedTime);
+
 }
 
 void GameOverState::updateKeys(const PressedKeys& pressedKeys)

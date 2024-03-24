@@ -1,16 +1,18 @@
 #include "Snake.h"
 #include "Pellet.h"
 #include "Obstacle.h"
+#include "AcceleratingPellet.h"
+#include "GrowingPellet.h"
 
 #include "SnakeKeyboardController.h"
 #include "SnakeKeyboardAbsoluteController.h"
 
-Snake::Snake(Board& board)
+Snake::Snake(Board& board, QPoint point)
     :DynamicEntity(board)
     , mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
-    , mBody{Body(QPoint(32,32))}
+    , mBody{Body(point)}
     , mHeadDirection{ Direction::toUp }
     , mSpeed{10}
     , mSizeToGrow{ 0 }
@@ -95,10 +97,17 @@ void Snake::ticExecute()
     //3) collision avec mur ou lui meme/autre serpent  --> reduire serpent ou le detruire.
 
 
-    if (dynamic_cast<Pellet*>(mColliding)) {    //si collision avec une Pellet
+    if (dynamic_cast<GrowingPellet*>(mColliding)) {    //si collision avec une Growing Pellet
 
         mScore = +1;
         mSizeToGrow = 1;
+        mColliding = nullptr;     //reset l'etat de collision
+
+    }
+    if (dynamic_cast<AcceleratingPellet*>(mColliding)) {    //si collision avec une Accelerating Pellet
+
+        mScore = +1;
+        mSpeed += 1;
         mColliding = nullptr;     //reset l'etat de collision
 
     }

@@ -10,10 +10,10 @@ FiniteStateMachine::FiniteStateMachine()
 	,mCurrentState{nullptr}
 {
 
-	mStates.push_back(new HomeState(this));       // État d'accueil
-	mStates.push_back(new GamingState(this));     // État de jeu
-	mStates.push_back(new GameOverState(this));   // État de fin de jeu
-	mStates.push_back(new PauseState());      // État de pause
+	mStates.push_back(new HomeState(this));       // Ã‰tat d'accueil
+	mStates.push_back(new GamingState(this));     // Ã‰tat de jeu
+	mStates.push_back(new GameOverState(this));   // Ã‰tat de fin de jeu
+	mStates.push_back(new PauseState());      // Ã‰tat de pause
 
 	mInitialState = mStates[0];
 
@@ -26,7 +26,7 @@ FiniteStateMachine::FiniteStateMachine()
 FiniteStateMachine::~FiniteStateMachine()
 {
 	for (State* state : mStates) {
-		delete state;	// Libération de la mémoire allouée à chaque état
+		delete state;	// LibÃ©ration de la mÃ©moire allouÃ©e Å• chaque Ã©tat
 	}
 }
 
@@ -57,4 +57,18 @@ State* FiniteStateMachine::getState(StateType stateType)
 		return mStates[static_cast<size_t>(stateType)];
 	}
 	return nullptr;											
+
 }
+
+const int FiniteStateMachine::getGameChoice()
+{
+	return mGameChoice;
+}
+
+void FiniteStateMachine::setGameChoice(const int choice)
+{
+	mGameChoice = choice;
+}
+
+}
+

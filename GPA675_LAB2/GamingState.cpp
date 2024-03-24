@@ -2,13 +2,19 @@
 #include "KeyboardTransition.h"
 #include "GameTransition.h"
 
+
+#include "SnakeOrigin.h"
+#include "SnakeBlockade.h"
+
+
 #include "HomeState.h"
 #include "GameOverState.h"
 #include "PauseState.h"
 
 GamingState::GamingState(FiniteStateMachine* fsm)
 	:mFsm{ fsm }
-	,mScenario{}
+	,mScenario{nullptr}
+
 {
 }
 
@@ -28,12 +34,30 @@ bool GamingState::isValid()
 
 void GamingState::entering()
 {
-	mSnakeEngine.startGameEngine();
+
+	
+	switch (mFsm->getGameChoice())					//verifie quel mode de jeu on va creer
+	{
+	case 1:
+		mScenario = new SnakeOrigin(mSnakeEngine);
+		break;
+	case 2:
+		mScenario = new SnakeBlockade(mSnakeEngine);
+		break;
+
+	case 3:
+		//mScenario = new									//troisieme jeu
+		break;
+	
+	}
+	mSnakeEngine.setGameMode(mFsm->getGameChoice());	//envoi le mode de jeu au Game Engine
+	mScenario->startGame();								//initialisation de la partie
 }
 
 void GamingState::exiting()
 {
-	mSnakeEngine.endGameEngine();
+	mFsm->setGameChoice(0);
+
 }
 
 void GamingState::tic(qreal elapsedTime)
@@ -46,7 +70,18 @@ void GamingState::tic(qreal elapsedTime)
 
 	if (mScenario->isGameOver()) {
 
+	
 		mTransitions.push_back(new GameTransition(gameOver));
+	}
+
+	for (Qt::Key key : mPressedKeys) {
+		if (key == Qt::Key_Escape) {
+			QCoreApplication::quit();		//met fin a l'application
+		}
+		else if (key == Qt::Key_Space) {
+			mTransitions.push_back(new KeyboardTransition(pauseState));		//met pause a la partie
+		}
+
 	}
 }
 
