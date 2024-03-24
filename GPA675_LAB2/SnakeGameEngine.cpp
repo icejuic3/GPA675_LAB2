@@ -34,7 +34,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             if (snake) {
                 if (!mPressedKeys.empty()) {
                     snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-                    mPressedKeys.clear();
+                    //mPressedKeys.clear();
                 }
             }
             (*i)->ticPrepare(elapsedTime);
@@ -200,6 +200,10 @@ void SnakeGameEngine::addSnake(int nbSnake)
         point1.setY(mBoard.getHeight() / 2);
         Snake* snake1 = new Snake(mBoard, point1);
         addEntity(snake1);
+
+        Controller* mc1 = new SnakeKeyboardAbsoluteController(*snake1, Qt::Key_Up, Qt::Key_Down, Qt::Key_Left, Qt::Key_Right);
+
+        snake1->setController(*(mc1));
     }
     if (nbSnake == 2)
     {
@@ -220,8 +224,11 @@ void SnakeGameEngine::addSnake(int nbSnake)
         addEntity(snake1);
         addEntity(snake2);
 
+        Controller* mc1 = new SnakeKeyboardAbsoluteController(*snake1, Qt::Key_W, Qt::Key_S, Qt::Key_A, Qt::Key_D);
+        Controller* mc2 = new SnakeKeyboardAbsoluteController(*snake1, Qt::Key_Up, Qt::Key_Down, Qt::Key_Left, Qt::Key_Right);
 
-
+        snake1->setController(*(mc1));
+        snake2->setController(*(mc2));
     }
 }
 
