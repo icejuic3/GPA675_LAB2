@@ -9,7 +9,7 @@
 
 Snake::Snake(Board& board, QPoint point)
     :DynamicEntity(board)
-    , mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
+    //, mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
     , mBody{Body(point)}
@@ -74,7 +74,7 @@ void Snake::ticPrepare(real elapsedTime)
         //prepare le changement de direction du serpent
         if (!mPressedKeys.empty()) {                
             mController->control(mPressedKeys);       
-            mPressedKeys.clear();
+            //mPressedKeys.clear();
         }
 
         if (mSizeToGrow) {
@@ -244,6 +244,11 @@ void Snake::reset(QPoint headPosition, Direction headDirection, size_t bodyLengt
     mSpeed = initialSpeed;          //r?initialise la vitesse
     mScore = 0;                     //r?initialise le score
     mSizeToGrow = 0;                //r?initialise la croissance
+}
+
+void Snake::setController(Controller& controller)
+{
+    mController = &controller;
 }
 
 void Snake::setSpeed(SpeedType speed)

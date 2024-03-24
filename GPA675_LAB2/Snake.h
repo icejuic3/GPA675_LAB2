@@ -64,6 +64,7 @@ public:
 	QColor bodyColor();											//fait
 	//bool isReverseProhibited();									//fait
 	Controller* controller();								
+	void setController(Controller& controller);		//a voir
 	void updateKeys(const PressedKeys& pressedKeys);
 	void setName(QString name);									//fait
 	void reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed);	//fait

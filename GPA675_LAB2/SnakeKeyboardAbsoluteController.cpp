@@ -1,8 +1,12 @@
 #include "SnakeKeyboardAbsoluteController.h"
 
-SnakeKeyboardAbsoluteController::SnakeKeyboardAbsoluteController(Snake& snake)
+SnakeKeyboardAbsoluteController::SnakeKeyboardAbsoluteController(Snake& snake, Qt::Key up, Qt::Key down, Qt::Key left, Qt::Key right)
 	:SnakeKeyboardController(snake)
     ,mControlledSnake{ snake }
+    ,mUp{up}
+    ,mDown{down}
+    ,mLeft{left}
+    ,mRight{right}
 {
 }
 
@@ -12,26 +16,21 @@ SnakeKeyboardAbsoluteController::~SnakeKeyboardAbsoluteController()
 
 void SnakeKeyboardAbsoluteController::control(const PressedKeys& pressedKeys)
 {
-
     for (Qt::Key key : pressedKeys) {
 
-        switch (key) {
 
-        case Qt::Key_Up: 
+        if (key == mUp) {
+
             mControlledSnake.goUp();
-            break;
-
-        case Qt::Key_Down: 
+        }
+        else if (key == mDown) {
             mControlledSnake.goDown();
-            break;
-
-        case Qt::Key_Left: 
+        }
+        else if (key == mLeft) {
             mControlledSnake.goLeft();
-            break;
-
-        case Qt::Key_Right: 
+        }
+        else if (key == mRight) {
             mControlledSnake.goRight();
-            break;
         }
     }
 }
