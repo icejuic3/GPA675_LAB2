@@ -5,7 +5,6 @@
 #include "SnakeKeyboardAbsoluteController.h"
 #include "SnakeKeyboardRelativeController.h"
 
-
 SnakeGameEngine::SnakeGameEngine()
     : mEntities{}
     , mSpeed{ 500.0 }
@@ -224,6 +223,10 @@ void SnakeGameEngine::addSnake(int nbSnake)
 
 
     }
+}
+
+void SnakeGameEngine::endGameEngine()
+{
 }
 
 void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)

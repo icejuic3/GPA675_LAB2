@@ -4,8 +4,6 @@
 #include "GameOverState.h"
 #include "PauseState.h"
 
-
-
 SnakeGameApplication::SnakeGameApplication()
     : QWidget(nullptr)
     , mFsm{}
@@ -20,14 +18,6 @@ SnakeGameApplication::SnakeGameApplication()
     mTimer.setSingleShot(true);
     connect(&mTimer, &QTimer::timeout, this, &SnakeGameApplication::tic);
     mTimer.start();
-
-
-    //mSnakeScenario.snakeBlockade();
-
-    //mSnakeScenario.snakeOrigin();
-
-   // mSnakeGameEngine.startGameEngine();
-
 }
 
 void SnakeGameApplication::keyPressEvent(QKeyEvent* event)

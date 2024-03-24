@@ -2,6 +2,7 @@
 #include "KeyboardTransition.h"
 #include "GameTransition.h"
 
+
 #include "SnakeOrigin.h"
 #include "SnakeBlockade.h"
 
@@ -13,6 +14,7 @@
 GamingState::GamingState(FiniteStateMachine* fsm)
 	:mFsm{ fsm }
 	,mScenario{nullptr}
+
 {
 }
 
@@ -32,6 +34,7 @@ bool GamingState::isValid()
 
 void GamingState::entering()
 {
+
 	
 	switch (mFsm->getGameChoice())					//verifie quel mode de jeu on va creer
 	{
@@ -54,6 +57,7 @@ void GamingState::entering()
 void GamingState::exiting()
 {
 	mFsm->setGameChoice(0);
+
 }
 
 void GamingState::tic(qreal elapsedTime)
@@ -65,6 +69,7 @@ void GamingState::tic(qreal elapsedTime)
 	GameOverState* gameOver = static_cast<GameOverState*>(mFsm->getState(StateType::GameOver));
 
 	if (mScenario->isGameOver()) {
+
 	
 		mTransitions.push_back(new GameTransition(gameOver));
 	}
@@ -76,6 +81,7 @@ void GamingState::tic(qreal elapsedTime)
 		else if (key == Qt::Key_Space) {
 			mTransitions.push_back(new KeyboardTransition(pauseState));		//met pause a la partie
 		}
+
 	}
 }
 

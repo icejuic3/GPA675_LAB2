@@ -4,6 +4,8 @@
 #include "PauseState.h"
 #include "KeyboardTransition.h"
 
+#include <Qrect>
+
 
 HomeState::HomeState(FiniteStateMachine* fsm)
 	:mFsm{fsm}
@@ -21,8 +23,8 @@ void HomeState::draw(QPainter& painter)
 	QFont font = painter.font();
 
 	//affichage du titre
-	painter.fillRect(rect, QColor(50, 180, 64));	//couleur fond
 
+	painter.fillRect(rect, QColor(50, 180, 64));	//couleur fond
 	font.setPixelSize(16);
 	painter.setFont(font);
 	painter.setPen(QColor(0, 85, 102));		//couleur titre
@@ -32,6 +34,7 @@ void HomeState::draw(QPainter& painter)
 	font.setPixelSize(4);
 	painter.setFont(font);
 	painter.setPen(QColor(0,125,255));
+
 
 	QRect rectForPress1 = rect.adjusted(0, 24, 0, -32);
 	painter.drawText(rectForPress1, Qt::AlignVCenter , "Press 1: SnakeOrigin");
@@ -69,17 +72,17 @@ void HomeState::tic(qreal elapsedTime)
 
 	for (Qt::Key key : mPressedKeys) {
 		if (key == Qt::Key_1 ) {
-			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 1 a été pressée
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 1 a Ã©tÃ© pressÃ©e
 			mFsm->setGameChoice(1);
 
 		}
 		else if (key == Qt::Key_2) {
-			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 2 a été pressée
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 2 a Ã©tÃ© pressÃ©e
 			mFsm->setGameChoice(2);
 
 		}
 		else if (key == Qt::Key_3) {
-			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 3 a été pressée
+			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 3 a Ã©tÃ© pressÃ©e
 			mFsm->setGameChoice(3);
 
 		}
@@ -92,4 +95,5 @@ void HomeState::tic(qreal elapsedTime)
 void HomeState::updateKeys(const PressedKeys& pressedKeys)
 {
 	mPressedKeys = pressedKeys;
+}
 }

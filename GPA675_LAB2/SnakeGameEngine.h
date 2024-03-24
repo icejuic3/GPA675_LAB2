@@ -1,14 +1,14 @@
 #pragma once
 #ifndef SNAKE_GAME_ENGINE
 #define SNAKE_GAME_ENGINE
-
-//#include <QtWidgets/QWidget>
 #include <QTimer>
 #include <QElapsedTimer>
 //#include <QSize>
 
 #include "SnakeGameScenario.h"
 //#include "SnakeScenario.h"
+
+#include "SnakeGameScenario.h"
 
 #include "Entity.h"
 #include "Snake.h"
@@ -46,6 +46,7 @@ public:
 
 	//
 	void arene();
+
 	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
 

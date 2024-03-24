@@ -4,6 +4,7 @@
 #include <Qrect>
 #include <qcoreapplication.h>
 
+
 class SnakeGameState: public State
 {
 public:

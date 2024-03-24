@@ -10,7 +10,6 @@ public:
 	virtual ~SnakeGameScenario() = default;
 
 	virtual void startGame() = 0;
-
 	void resetGame();
 	bool isGameOver();
 

@@ -21,9 +21,10 @@ public:
 	const int getGameChoice();
 	void setGameChoice(const int choice);
 
+
 private:
 	std::vector<State*> mStates;
 	State* mInitialState;
 	State* mCurrentState;
+
 	int mGameChoice;
-};
