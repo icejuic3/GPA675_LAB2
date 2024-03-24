@@ -58,3 +58,13 @@ State* FiniteStateMachine::getState(StateType stateType)
 	}
 	return nullptr;											
 }
+
+const int FiniteStateMachine::getGameChoice()
+{
+	return mGameChoice;
+}
+
+void FiniteStateMachine::setGameChoice(const int choice)
+{
+	mGameChoice = choice;
+}

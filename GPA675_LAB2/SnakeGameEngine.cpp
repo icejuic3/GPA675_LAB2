@@ -1,4 +1,9 @@
 #include "SnakeGameEngine.h"
+#include "SnakeOrigin.h"
+
+#include "control.h"
+#include "SnakeKeyboardAbsoluteController.h"
+#include "SnakeKeyboardRelativeController.h"
 
 
 SnakeGameEngine::SnakeGameEngine()
@@ -7,7 +12,7 @@ SnakeGameEngine::SnakeGameEngine()
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
     , mPressedKeys{}
-    , mSnakeScenario{nullptr}
+    , mGameMode()
 {
 }
 
@@ -18,32 +23,73 @@ SnakeGameEngine::~SnakeGameEngine()
 void SnakeGameEngine::tic(qreal elapsedTime)
 {
     mTotalElapsedTime += elapsedTime;
-    for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
 
-        Snake* snake{ dynamic_cast<Snake*>(*i) };
 
-        if (snake) {
-            if (!mPressedKeys.empty()) {   
-                snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-                mPressedKeys.clear();   
+    //boucle pour le premier mode de jeu
+    if ( mGameMode == 1) {
+
+        for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
+
+            Snake* snake{ dynamic_cast<Snake*>(*i) };
+
+            if (snake) {
+                if (!mPressedKeys.empty()) {
+                    snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
+                    mPressedKeys.clear();
+                }
             }
-        } 
-        (*i)->ticPrepare(elapsedTime);
-        (*i)->ticExecute();
+            (*i)->ticPrepare(elapsedTime);
+            (*i)->ticExecute();
+        }
     }
 
+    //boucle pour le deuxieme mode de jeu            *********devons changer cette boucle pour que les snakes ai chacun leur propre controller
+    else if(mGameMode == 2) {
 
+        for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
 
+            Snake* snake{ dynamic_cast<Snake*>(*i) };
+
+            if (snake) {
+                if (!mPressedKeys.empty()) {
+                    snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
+                    //mPressedKeys.clear();
+                }
+            }
+            (*i)->ticPrepare(elapsedTime);
+            (*i)->ticExecute();
+        }
+    }
+
+    //boucle pour le troisieme mode de jeu
+    else if (mGameMode == 3) {
+
+    }
+
+    //Verification de destruction des entitees
     for (auto i = mEntities.begin(); i != mEntities.end();) {
+
         if (!(*i)->isAlive()) {
+
+            if ((*i) == dynamic_cast<Pellet*> (*i)) {   //verifie si l'entite morte est une Statique
+
+                if (mGameMode == 1) {
+
+                    randomGrowingPellet();  //rajoute une pomme sur le jeu
+                }
+                else if (mGameMode == 2) {
+
+                    randomPellet();         //Rajoute pastille aleatoire
+                }
+                else if (mGameMode == 3) {
+                    //a determiner
+                }
+
+            }
+
             delete* i;
             i = mEntities.erase(i);
             //Ajouter un etat pour l'ajout d'entity
-            
-            if ((*i) == dynamic_cast<StaticEntity*> (*i)) {
-
-                randomGrowingPellet();  //verifie si l'entite morte est une Statique
-            }
         }
         else {
             
@@ -57,10 +103,16 @@ void SnakeGameEngine::addEntity(Entity* entity)
     mEntities.push_back(entity);
 }
 
+void SnakeGameEngine::setGameMode(const int gameMode)
+{
+    mGameMode = gameMode;
+}
+
 QPoint SnakeGameEngine::randomPosition()
 {
     int xPos = rand() % 64;
     int yPos = rand() % 64;
+
     while (nullptr != mBoard.value(xPos,yPos))
     {
         xPos = rand() % 64;
@@ -148,38 +200,26 @@ void SnakeGameEngine::addSnake(int nbSnake)
     }
     if (nbSnake == 2)
     {
-        //Serpen 1
+        //Serpent 1
         QPoint point1;
         point1.setX(mBoard.getWidth() / 3);
         point1.setY(mBoard.getHeight() / 2);
         Snake* snake1 = new Snake(mBoard,point1);
         snake1->setColors(QColor(240, 0, 0), QColor(120,0, 0));
-        //Serpen 2
+
+        //Serpent 2
         QPoint point2;
         point2.setX((mBoard.getWidth() / 3) * 2);
-        point2.setY(100);
+        point2.setY(mBoard.getHeight() / 2);
         Snake* snake2 = new Snake(mBoard,point2);    
-        snake2->setColors(QColor(0, 0, 240), QColor(0, 0, 120));
-
+        snake2->setColors(QColor(0, 240, 0), QColor(0, 120, 0));
 
         addEntity(snake1);
         addEntity(snake2);
+
+
+
     }
-
-
-}
-
-void SnakeGameEngine::startGameEngine()
-{
-
-
-
-
-    //mSnakeScenario.snakeOrigin();
-}
-
-void SnakeGameEngine::endGameEngine()
-{
 }
 
 void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)
@@ -196,7 +236,6 @@ void SnakeGameEngine::clearAllEntity()
         (*i)->setDead();
         
     }
-
 }
 
 void SnakeGameEngine::draw(QPainter& painter)

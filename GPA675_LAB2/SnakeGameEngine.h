@@ -34,6 +34,8 @@ public:
 	void clearAllEntity();
 	void addEntity(Entity* entity);
 
+	void setGameMode(const int gameMode);
+
 	// Fonction random position
 	QPoint randomPosition();
 
@@ -41,16 +43,10 @@ public:
 	void randomPellet();
 	void randomGrowingPellet();
 	void randomAccPellet();
+
 	//
 	void arene();
-
-
 	void addSnake(int nbSnake);
-
-	void startGameEngine();
-	void endGameEngine();
-
-
 	void snakeDirection(const PressedKeys& pressedKeys);
 
 private:
@@ -60,8 +56,7 @@ private:
 	qreal mTotalElapsedTime;
 	Board mBoard;
 	PressedKeys mPressedKeys;
-
-	SnakeGameScenario* mSnakeScenario;
+	int mGameMode;
 };
 
 #endif

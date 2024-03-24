@@ -1,7 +1,7 @@
 #pragma once
 #include "SnakeGameState.h"
 #include "FiniteStateMachine.h"
-#include "SnakeScenario.h"
+//#include "SnakeScenario.h"
 #include "SnakeGameScenario.h"
 
 class GamingState : public SnakeGameState

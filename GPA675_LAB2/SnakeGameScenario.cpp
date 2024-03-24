@@ -1,4 +1,5 @@
 #include "SnakeGameScenario.h"
+#include "SnakeGameEngine.h"
 
 SnakeGameScenario::SnakeGameScenario(SnakeGameEngine& engine)
 	:mEngine(engine)

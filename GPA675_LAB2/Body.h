@@ -17,12 +17,8 @@ private:
 			, next{ next }
 			, previous{ previous }
 		{}
-		~BodyPart() {
-			delete next;
-			delete previous;
-		}
+		~BodyPart() = default;
 	};
-
 
 public:
 

@@ -16,16 +16,20 @@ void SnakeKeyboardAbsoluteController::control(const PressedKeys& pressedKeys)
     for (Qt::Key key : pressedKeys) {
 
         switch (key) {
-        case Qt::Key_W: // Utiliser 'W' pour monter 
+
+        case Qt::Key_Up: 
             mControlledSnake.goUp();
             break;
-        case Qt::Key_S: // Utiliser 'S' pour descendre
+
+        case Qt::Key_Down: 
             mControlledSnake.goDown();
             break;
-        case Qt::Key_A: // Utiliser 'A' pour aller à gauche
+
+        case Qt::Key_Left: 
             mControlledSnake.goLeft();
             break;
-        case Qt::Key_D: // Utiliser 'D' pour aller à droite
+
+        case Qt::Key_Right: 
             mControlledSnake.goRight();
             break;
         }

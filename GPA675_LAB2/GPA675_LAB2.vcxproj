@@ -107,6 +107,7 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Pellet.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakeBlockade.cpp" />
     <ClCompile Include="SnakeGameApplication.cpp" />
     <ClCompile Include="SnakeGameEngine.cpp" />
     <ClCompile Include="SnakeGameScenario.cpp" />
@@ -115,7 +116,6 @@
     <ClCompile Include="SnakeKeyboardController.cpp" />
     <ClCompile Include="SnakeKeyboardRelativeController.cpp" />
     <ClCompile Include="SnakeOrigin.cpp" />
-    <ClCompile Include="SnakeScenario.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
     <ClCompile Include="Transition.cpp" />
@@ -139,10 +139,10 @@
     <ClInclude Include="Pellet.h" />
     <ClInclude Include="PressedKeys.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="SnakeBlockade.h" />
     <ClInclude Include="SnakeGameScenario.h" />
     <ClInclude Include="SnakeGameState.h" />
     <ClInclude Include="SnakeOrigin.h" />
-    <ClInclude Include="SnakeScenario.h" />
     <ClInclude Include="Transition.h" />
     <QtMoc Include="SnakeGameApplication.h" />
     <ClInclude Include="SnakeGameEngine.h" />

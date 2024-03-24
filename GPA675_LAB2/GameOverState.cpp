@@ -51,7 +51,7 @@ bool GameOverState::isValid()
 
 void GameOverState::entering()
 {
-	mSnakeEngine.startGameEngine();
+	
 }
 
 void GameOverState::exiting()

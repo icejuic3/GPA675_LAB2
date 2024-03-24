@@ -86,9 +86,6 @@
     <ClCompile Include="SnakeGameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SnakeScenario.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GamingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,6 +108,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SnakeOrigin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeBlockade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -175,9 +175,6 @@
     <ClInclude Include="SnakeGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SnakeScenario.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GamingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -200,6 +197,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SnakeOrigin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeBlockade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
