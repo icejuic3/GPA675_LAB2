@@ -189,7 +189,11 @@ void SnakeGameEngine::arene()
 }
 
 void SnakeGameEngine::addSnake(int nbSnake)
-{
+{   //*********************IMPORTANT
+    //**********changement de logique du controller on doit faire des new absolute ou relatif avec les touches necessaire et ensuite les assigner aux snakes correspondant
+    //**********iL va falloir aussi changer les SnakeKeyboardAbsoluteController.h et SnakeKeyboardRelativeController.h pour la nouvelle logique 
+    // ainsi que le constructeur du snake pour ne pas creer un new controller a cet endroit la
+
     if (nbSnake == 1)
     {
         QPoint point1;
