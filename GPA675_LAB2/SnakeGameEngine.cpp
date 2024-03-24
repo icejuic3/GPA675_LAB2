@@ -225,7 +225,7 @@ void SnakeGameEngine::addSnake(int nbSnake)
         addEntity(snake2);
 
         Controller* mc1 = new SnakeKeyboardAbsoluteController(*snake1, Qt::Key_W, Qt::Key_S, Qt::Key_A, Qt::Key_D);
-        Controller* mc2 = new SnakeKeyboardAbsoluteController(*snake1, Qt::Key_Up, Qt::Key_Down, Qt::Key_Left, Qt::Key_Right);
+        Controller* mc2 = new SnakeKeyboardAbsoluteController(*snake2, Qt::Key_I, Qt::Key_K, Qt::Key_J, Qt::Key_L);
 
         snake1->setController(*(mc1));
         snake2->setController(*(mc2));
