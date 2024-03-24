@@ -15,4 +15,3 @@ bool SnakeGameScenario::isGameOver()
 {
 	return false;
 }
-}

@@ -28,3 +28,4 @@ private:
 	State* mCurrentState;
 
 	int mGameChoice;
+};

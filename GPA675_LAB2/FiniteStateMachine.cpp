@@ -69,6 +69,3 @@ void FiniteStateMachine::setGameChoice(const int choice)
 {
 	mGameChoice = choice;
 }
-
-}
-

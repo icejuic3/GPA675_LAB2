@@ -92,8 +92,8 @@ void HomeState::tic(qreal elapsedTime)
 	}
 }
 
-void HomeState::updateKeys(const PressedKeys& pressedKeys)
-{
+void HomeState::updateKeys(const PressedKeys& pressedKeys) {
+
 	mPressedKeys = pressedKeys;
-}
+
 }
