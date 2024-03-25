@@ -29,7 +29,6 @@ void SnakeGameApplication::keyPressEvent(QKeyEvent* event)
         if (mFsm.currentState() != nullptr) {
 
             auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
-            
             state->updateKeys(mPressedKeys);
         }
     }
@@ -41,6 +40,13 @@ void SnakeGameApplication::keyReleaseEvent(QKeyEvent* event)
         auto it = std::find(mPressedKeys.begin(), mPressedKeys.end(), event->key());
         if (it != mPressedKeys.end()) {
             mPressedKeys.erase(it);
+
+
+            if (mFsm.currentState() != nullptr) {
+
+                auto* state = dynamic_cast<SnakeGameState*> (mFsm.currentState());
+                state->updateKeys(mPressedKeys);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
 
 PauseState::PauseState(FiniteStateMachine* fsm)
 	:mFsm{ fsm }
-	,mPressedKeys{}
+	//,mPressedKeys{}
 {
 }
 
@@ -31,6 +31,8 @@ void PauseState::entering()
 
 void PauseState::exiting()
 {
+	mPressedKeys.clear();
+	mTransitions.clear();
 }
 
 void PauseState::tic(qreal elapsedTime)

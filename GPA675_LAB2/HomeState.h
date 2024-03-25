@@ -19,5 +19,5 @@ public:
 private:
 
 	FiniteStateMachine* mFsm;
-	PressedKeys mPressedKeys;
+	//PressedKeys mPressedKeys;
 };

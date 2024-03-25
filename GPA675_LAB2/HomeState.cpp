@@ -9,7 +9,7 @@
 
 HomeState::HomeState(FiniteStateMachine* fsm)
 	:mFsm{fsm}
-	,mPressedKeys{}
+	//,mPressedKeys{}
 {
 }
 
@@ -63,6 +63,8 @@ void HomeState::entering()
 
 void HomeState::exiting()
 {
+	mPressedKeys.clear();
+	mTransitions.clear();
 }
 
 void HomeState::tic(qreal elapsedTime)

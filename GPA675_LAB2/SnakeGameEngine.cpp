@@ -34,7 +34,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             if (snake) {
                 if (!mPressedKeys.empty()) {
                     snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-                    //mPressedKeys.clear();
+                    mPressedKeys.clear();
                 }
             }
             (*i)->ticPrepare(elapsedTime);

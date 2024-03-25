@@ -8,6 +8,7 @@ FiniteStateMachine::FiniteStateMachine()
 	:mStates{}
 	,mInitialState{nullptr}
 	,mCurrentState{nullptr}
+	,mGameChoice{}
 {
 
 	mStates.push_back(new HomeState(this));       // État d'accueil
@@ -32,8 +33,6 @@ FiniteStateMachine::~FiniteStateMachine()
 
 void FiniteStateMachine::tic(qreal elapsedTime)
 {
-	//mCurrentState = mInitialState;
-
 	mCurrentState->tic(elapsedTime);	//fait le tic pour l'etat present
 
 	State* nextState = dynamic_cast<State*>(mCurrentState->isTransiting());

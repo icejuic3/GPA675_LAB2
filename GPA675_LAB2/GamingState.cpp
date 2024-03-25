@@ -14,7 +14,7 @@
 GamingState::GamingState(FiniteStateMachine* fsm)
 	:mFsm{ fsm }
 	,mScenario{nullptr}
-
+	//,mPressedKeys{}
 {
 }
 
@@ -34,27 +34,33 @@ bool GamingState::isValid()
 
 void GamingState::entering()
 {
-	switch (mFsm->getGameChoice())					//verifie quel mode de jeu on va creer
-	{
-	case 1:
-		mScenario = new SnakeOrigin(mSnakeEngine);
-		break;
-	case 2:
-		mScenario = new SnakeBlockade(mSnakeEngine);
-		break;
 
-	case 3:
-		//mScenario = new									//troisieme jeu
-		break;
-	
+	if (mFsm->getGameChoice() != 0) {
+
+		switch (mFsm->getGameChoice())					//verifie quel mode de jeu on va creer
+		{
+		case 1:
+			mScenario = new SnakeOrigin(mSnakeEngine);
+			break;
+		case 2:
+			mScenario = new SnakeBlockade(mSnakeEngine);
+			break;
+
+		case 3:
+			//mScenario = new									//troisieme jeu
+			break;
+
+		}
+		mSnakeEngine.setGameMode(mFsm->getGameChoice());	//envoi le mode de jeu au Game Engine
+		mScenario->startGame();								//initialisation de la partie
 	}
-	mSnakeEngine.setGameMode(mFsm->getGameChoice());	//envoi le mode de jeu au Game Engine
-	mScenario->startGame();								//initialisation de la partie
 }
 
 void GamingState::exiting()
 {
 	mFsm->setGameChoice(0);
+	mPressedKeys.clear();
+	mTransitions.clear();
 }
 
 void GamingState::tic(qreal elapsedTime)
