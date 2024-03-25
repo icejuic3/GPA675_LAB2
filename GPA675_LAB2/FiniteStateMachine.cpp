@@ -13,7 +13,7 @@ FiniteStateMachine::FiniteStateMachine()
 	mStates.push_back(new HomeState(this));       // État d'accueil
 	mStates.push_back(new GamingState(this));     // État de jeu
 	mStates.push_back(new GameOverState(this));   // État de fin de jeu
-	mStates.push_back(new PauseState());      // État de pause
+	mStates.push_back(new PauseState(this));      // État de pause
 
 	mInitialState = mStates[0];
 

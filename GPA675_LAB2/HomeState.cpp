@@ -74,17 +74,14 @@ void HomeState::tic(qreal elapsedTime)
 		if (key == Qt::Key_1 ) {
 			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 1 a été pressée
 			mFsm->setGameChoice(1);
-
 		}
 		else if (key == Qt::Key_2) {
 			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 2 a été pressée
 			mFsm->setGameChoice(2);
-
 		}
 		else if (key == Qt::Key_3) {
 			mTransitions.push_back(new KeyboardTransition(gamingState)); // La touche 3 a été pressée
 			mFsm->setGameChoice(3);
-
 		}
 		else if (key == Qt::Key_Escape) {
 			QCoreApplication::quit();		//met fin a l'application
@@ -95,5 +92,4 @@ void HomeState::tic(qreal elapsedTime)
 void HomeState::updateKeys(const PressedKeys& pressedKeys) {
 
 	mPressedKeys = pressedKeys;
-
 }

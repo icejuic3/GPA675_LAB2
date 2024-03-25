@@ -34,8 +34,6 @@ bool GamingState::isValid()
 
 void GamingState::entering()
 {
-
-	
 	switch (mFsm->getGameChoice())					//verifie quel mode de jeu on va creer
 	{
 	case 1:
@@ -57,31 +55,27 @@ void GamingState::entering()
 void GamingState::exiting()
 {
 	mFsm->setGameChoice(0);
-
 }
 
 void GamingState::tic(qreal elapsedTime)
 {
 	mSnakeEngine.tic(elapsedTime);
 	
-
 	PauseState* pauseState = static_cast<PauseState*>(mFsm->getState(StateType::Pause));
 	GameOverState* gameOver = static_cast<GameOverState*>(mFsm->getState(StateType::GameOver));
 
 	if (mScenario->isGameOver()) {
-
-	
 		mTransitions.push_back(new GameTransition(gameOver));
 	}
 
 	for (Qt::Key key : mPressedKeys) {
+
 		if (key == Qt::Key_Escape) {
 			QCoreApplication::quit();		//met fin a l'application
 		}
 		else if (key == Qt::Key_Space) {
 			mTransitions.push_back(new KeyboardTransition(pauseState));		//met pause a la partie
 		}
-
 	}
 }
 
