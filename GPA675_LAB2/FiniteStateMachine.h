@@ -26,6 +26,5 @@ private:
 	std::vector<State*> mStates;
 	State* mInitialState;
 	State* mCurrentState;
-
 	int mGameChoice;
 };

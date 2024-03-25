@@ -17,6 +17,7 @@ public:
 	void updateKeys(const PressedKeys& pressedKeys) override;
 
 private:
+
 	FiniteStateMachine* mFsm;
-	PressedKeys mPressedKeys;
+	//PressedKeys mPressedKeys;
 };

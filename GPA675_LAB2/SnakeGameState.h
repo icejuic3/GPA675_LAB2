@@ -20,4 +20,5 @@ public:
 	
 protected:
 	SnakeGameEngine mSnakeEngine;
+	PressedKeys mPressedKeys;
 };

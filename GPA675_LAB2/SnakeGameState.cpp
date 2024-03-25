@@ -2,5 +2,6 @@
 
 SnakeGameState::SnakeGameState()
 	:mSnakeEngine{}
+	,mPressedKeys{}
 {
 }

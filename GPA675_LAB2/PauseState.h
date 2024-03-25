@@ -1,10 +1,11 @@
 #pragma once
 #include "SnakeGameState.h"
+#include "FiniteStateMachine.h"
 
 class PauseState : public SnakeGameState
 {
 public:
-	PauseState();
+	PauseState(FiniteStateMachine* fsm);
 	~PauseState() override;
 
 	void draw(QPainter& painter) override;
@@ -15,6 +16,8 @@ public:
 	void updateKeys(const PressedKeys& pressedKeys) override;
 
 private:
-	PressedKeys mPressedKeys;
+
+	FiniteStateMachine* mFsm;
+	//PressedKeys mPressedKeys;
 };
 

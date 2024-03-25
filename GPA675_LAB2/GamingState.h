@@ -19,7 +19,6 @@ public:
 private:
 	FiniteStateMachine* mFsm;
 	SnakeGameScenario* mScenario;
-	PressedKeys mPressedKeys;
 	//GameOverState* mGameOver;
 	//PauseState* mPause;
 };
