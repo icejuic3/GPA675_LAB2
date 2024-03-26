@@ -47,7 +47,7 @@ public:
 	void randomAccPellet();
 	void randomObstaclePellet();
 	void randomObstacle();
-	void deletObstacle();
+	void deleteObstacle();
 	//
 	void arene();
 
@@ -66,6 +66,7 @@ private:
 	PressedKeys mPressedKeys;
 	int mGameMode;
 	bool mDeadSnake;
+	int nbObstacle=0;
 };
 
 #endif

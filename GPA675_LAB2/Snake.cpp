@@ -8,6 +8,7 @@
 
 #include "SnakeKeyboardController.h"
 #include "SnakeKeyboardAbsoluteController.h"
+#include "SnakeGameEngine.h"
 
 Snake::Snake(Board& board, QPoint point)
     :DynamicEntity(board)
@@ -111,7 +112,7 @@ void Snake::ticExecute()
     }
     if (dynamic_cast<AddObstaclePellet*>(mColliding)) {    //si collision avec une Pellet
 
-		
+        
 		mColliding = nullptr;  //reset l'etat de collision
     }
     if (dynamic_cast<Obstacle*>(mColliding)) {    //si collision avec un Obstacle

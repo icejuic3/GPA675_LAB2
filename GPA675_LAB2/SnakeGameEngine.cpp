@@ -102,7 +102,9 @@ void SnakeGameEngine::tic(qreal elapsedTime)
                     
                     randomObstacle(); 
                     
-                    randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
+                    if (nbObstacle >= 3 && nbObstacle <= 3) {
+                        randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
+                    }
                    
                 }
 
@@ -116,7 +118,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
                 i = mEntities.erase(i);
                 if (mGameMode == 3)
                 {
-                    deletObstacle();
+                    deleteObstacle();
                 }
             }
             //Ajouter un etat pour l'ajout d'entity
@@ -143,12 +145,12 @@ void SnakeGameEngine::setGameMode(const int gameMode)
 QPoint SnakeGameEngine::randomPosition()
 {
     int xPos = rand() % 64;
-    int yPos = rand() % 64;
+    int yPos = rand() % 42;
 
     while (nullptr != mBoard.value(xPos,yPos))
     {
         xPos = rand() % 64;
-        yPos = rand() % 64;
+        yPos = rand() % 42;
     }
     QPoint a(xPos, yPos);
 
@@ -194,11 +196,13 @@ void SnakeGameEngine::randomObstacle()
     Obstacle* a = new Obstacle(mBoard);
     a->setPosition(randomPosition());
     addEntity(a);
+    nbObstacle++;
 }
 
-void SnakeGameEngine::deletObstacle()
+void SnakeGameEngine::deleteObstacle()
 {
-
+    //clearAllEntity();
+    //nbObstacle = 0;
 }
 
 
