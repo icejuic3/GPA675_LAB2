@@ -50,6 +50,8 @@ public:
 	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
 
+	bool deadSnake() const;
+
 private:
 
 	std::list<Entity*> mEntities;
@@ -58,6 +60,7 @@ private:
 	Board mBoard;
 	PressedKeys mPressedKeys;
 	int mGameMode;
+	bool mDeadSnake;
 };
 
 #endif

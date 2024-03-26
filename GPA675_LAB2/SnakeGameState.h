@@ -19,6 +19,6 @@ public:
 	virtual void updateKeys(const PressedKeys& pressedKeys) = 0;
 	
 protected:
-	SnakeGameEngine mSnakeEngine;
+	SnakeGameEngine& mSnakeEngine;
 	PressedKeys mPressedKeys;
 };

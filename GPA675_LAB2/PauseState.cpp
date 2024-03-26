@@ -6,7 +6,7 @@
 #include "KeyboardTransition.h"
 
 PauseState::PauseState(FiniteStateMachine* fsm)
-	:mFsm{ fsm }
+	:mFsm{fsm}
 	//,mPressedKeys{}
 {
 }
@@ -17,7 +17,8 @@ PauseState::~PauseState()
 
 void PauseState::draw(QPainter& painter)
 {
-	mSnakeEngine.draw(painter);
+	GamingState* gamingState = static_cast<GamingState*>(mFsm->getState(StateType::Gaming));
+	gamingState->draw(painter);
 }
 
 bool PauseState::isValid()
@@ -37,7 +38,6 @@ void PauseState::exiting()
 
 void PauseState::tic(qreal elapsedTime)
 {
-	mSnakeEngine.tic(elapsedTime);
 
 	GamingState* gamingState = static_cast<GamingState*>(mFsm->getState(StateType::Gaming));
 

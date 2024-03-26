@@ -4,14 +4,16 @@
 #include "control.h"
 #include "SnakeKeyboardAbsoluteController.h"
 #include "SnakeKeyboardRelativeController.h"
+#include "State.h"
 
 SnakeGameEngine::SnakeGameEngine()
     : mEntities{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
-    , mBoard{ Board(64, 64) }
+    , mBoard{ Board(48, 64) }
     , mPressedKeys{}
     , mGameMode()
+    , mDeadSnake{false}
 {
 }
 
@@ -34,7 +36,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             if (snake) {
                 if (!mPressedKeys.empty()) {
                     snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-                    mPressedKeys.clear();
+                    //mPressedKeys.clear();
                 }
             }
             (*i)->ticPrepare(elapsedTime);
@@ -85,13 +87,20 @@ void SnakeGameEngine::tic(qreal elapsedTime)
                 }
 
             }
-
-            delete* i;
-            i = mEntities.erase(i);
+            if ((*i) == dynamic_cast<Snake*> (*i)) {
+                mDeadSnake = true;
+                ++i;
+            }
+            else {
+                delete* i;
+                i = mEntities.erase(i);
+            }
             //Ajouter un etat pour l'ajout d'entity
+            
+
         }
         else {
-            
+
             ++i;
         }
     }
@@ -258,4 +267,9 @@ void SnakeGameEngine::draw(QPainter& painter)
         // puis appeler la m?thode ou acc?der aux membres
         
     }
+}
+
+bool SnakeGameEngine::deadSnake() const
+{
+    return mDeadSnake;
 }
