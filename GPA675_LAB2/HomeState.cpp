@@ -43,7 +43,7 @@ void HomeState::draw(QPainter& painter)
 	painter.drawText(rectForPress2, Qt::AlignVCenter, "Press 2: SnakeBlockade");
 	
 	QRect rectForPress3 = rect.adjusted(0, 36, 0, -20);
-	painter.drawText(rectForPress3, Qt::AlignVCenter , "Press 3: a finir");
+	painter.drawText(rectForPress3, Qt::AlignVCenter , "Press 3: Snakify");
 
 	QRect rectForPress4 = rect.adjusted(0, 42, 0, -14);
 	painter.drawText(rectForPress4, Qt::AlignVCenter, "Press Spacebar to pause the game");

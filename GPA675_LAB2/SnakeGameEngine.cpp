@@ -1,5 +1,6 @@
 #include "SnakeGameEngine.h"
 #include "SnakeOrigin.h"
+#include "Snakify.h"
 
 #include "control.h"
 #include "SnakeKeyboardAbsoluteController.h"
@@ -10,7 +11,7 @@ SnakeGameEngine::SnakeGameEngine()
     : mEntities{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
-    , mBoard{ Board(48, 64) }
+    , mBoard{ Board(64, 64) }
     , mPressedKeys{}
     , mGameMode()
     , mDeadSnake{false}
@@ -65,6 +66,19 @@ void SnakeGameEngine::tic(qreal elapsedTime)
     //boucle pour le troisieme mode de jeu
     else if (mGameMode == 3) {
 
+		for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
+
+			Snake* snake{ dynamic_cast<Snake*>(*i) };
+
+			if (snake) {
+				if (!mPressedKeys.empty()) {
+					snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
+					//mPressedKeys.clear();
+				}
+			}
+			(*i)->ticPrepare(elapsedTime);
+			(*i)->ticExecute();
+		}
     }
 
     //Verification de destruction des entitees
@@ -83,7 +97,13 @@ void SnakeGameEngine::tic(qreal elapsedTime)
                     randomPellet();         //Rajoute pastille aleatoire
                 }
                 else if (mGameMode == 3) {
-                    //a determiner
+
+					randomGrowingPellet();  //rajoute une pomme sur le jeu
+                    
+                    randomObstacle(); 
+                    
+                    randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
+                   
                 }
 
             }
@@ -94,6 +114,10 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             else {
                 delete* i;
                 i = mEntities.erase(i);
+                if (mGameMode == 3)
+                {
+                    deletObstacle();
+                }
             }
             //Ajouter un etat pour l'ajout d'entity
             
@@ -158,6 +182,24 @@ void SnakeGameEngine::randomAccPellet()
     addEntity(a);
 }
 
+void SnakeGameEngine::randomObstaclePellet()
+{
+	AddObstaclePellet* a = new AddObstaclePellet(mBoard);
+	a->setPosition(randomPosition());
+	addEntity(a);
+}
+
+void SnakeGameEngine::randomObstacle()
+{
+    Obstacle* a = new Obstacle(mBoard);
+    a->setPosition(randomPosition());
+    addEntity(a);
+}
+
+void SnakeGameEngine::deletObstacle()
+{
+
+}
 
 
 void SnakeGameEngine::arene()

@@ -37,12 +37,12 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.6.1_msvc2019_64</QtInstall>
+    <QtInstall>6.6.2_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>6.6.1_msvc2019_64</QtInstall>
+    <QtInstall>6.6.2_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AcceleratingPellet.cpp" />
+    <ClCompile Include="AddObstaclePellet.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -116,12 +117,14 @@
     <ClCompile Include="SnakeKeyboardController.cpp" />
     <ClCompile Include="SnakeKeyboardRelativeController.cpp" />
     <ClCompile Include="SnakeOrigin.cpp" />
+    <ClCompile Include="Snakify.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
     <ClCompile Include="Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AcceleratingPellet.h" />
+    <ClInclude Include="AddObstaclePellet.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Controller.h" />
@@ -140,10 +143,10 @@
     <ClInclude Include="PressedKeys.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="SnakeBlockade.h" />
-
     <ClInclude Include="SnakeGameScenario.h" />
     <ClInclude Include="SnakeGameState.h" />
     <ClInclude Include="SnakeOrigin.h" />
+    <ClInclude Include="Snakify.h" />
     <ClInclude Include="Transition.h" />
     <QtMoc Include="SnakeGameApplication.h" />
     <ClInclude Include="SnakeGameEngine.h" />

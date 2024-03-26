@@ -1,8 +1,10 @@
 #include "Snake.h"
 #include "Pellet.h"
 #include "Obstacle.h"
+//Pellet
 #include "AcceleratingPellet.h"
 #include "GrowingPellet.h"
+#include "AddObstaclePellet.h"
 
 #include "SnakeKeyboardController.h"
 #include "SnakeKeyboardAbsoluteController.h"
@@ -107,7 +109,12 @@ void Snake::ticExecute()
         mColliding = nullptr;     //reset l'etat de collision
 
     }
-    if (dynamic_cast<Obstacle*>(mColliding)) {    //si collision avec une Pellet
+    if (dynamic_cast<AddObstaclePellet*>(mColliding)) {    //si collision avec une Pellet
+
+		
+		mColliding = nullptr;  //reset l'etat de collision
+    }
+    if (dynamic_cast<Obstacle*>(mColliding)) {    //si collision avec un Obstacle
 
         mAlive = false;
         mColliding = nullptr;                  //reset l'etat de collision

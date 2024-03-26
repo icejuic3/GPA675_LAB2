@@ -134,6 +134,12 @@
     <ClCompile Include="PauseState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Snakify.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddObstaclePellet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AcceleratingPellet.h">
@@ -242,6 +248,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PauseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Snakify.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddObstaclePellet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

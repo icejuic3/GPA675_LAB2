@@ -16,8 +16,10 @@
 #include "PressedKeys.h"
 #include "control.h"
 #include "Obstacle.h"
+//Pellet
 #include "AcceleratingPellet.h"
 #include "GrowingPellet.h"
+#include "AddObstaclePellet.h"
 
 class QPainter;
 
@@ -43,7 +45,9 @@ public:
 	void randomPellet();
 	void randomGrowingPellet();
 	void randomAccPellet();
-
+	void randomObstaclePellet();
+	void randomObstacle();
+	void deletObstacle();
 	//
 	void arene();
 
@@ -58,6 +62,7 @@ private:
 	qreal mSpeed;
 	qreal mTotalElapsedTime;
 	Board mBoard;
+	
 	PressedKeys mPressedKeys;
 	int mGameMode;
 	bool mDeadSnake;

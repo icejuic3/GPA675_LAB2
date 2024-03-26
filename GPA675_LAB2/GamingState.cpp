@@ -5,6 +5,7 @@
 
 #include "SnakeOrigin.h"
 #include "SnakeBlockade.h"
+#include "Snakify.h"
 
 
 #include "HomeState.h"
@@ -47,7 +48,7 @@ void GamingState::entering()
 			break;
 
 		case 3:
-			//mScenario = new									//troisieme jeu
+			mScenario = new	Snakify(mSnakeEngine);								//troisieme jeu
 			break;
 
 		}
