@@ -102,9 +102,9 @@ void SnakeGameEngine::tic(qreal elapsedTime)
                     
                     randomObstacle(); 
                     
-                    if (nbObstacle >= 3 && nbObstacle <= 3) {
-                        randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
-                    }
+                    //if (nbObstacle >= 3 && nbObstacle < 4) {
+                    //    randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
+                    //}
                    
                 }
 
@@ -118,7 +118,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
                 i = mEntities.erase(i);
                 if (mGameMode == 3)
                 {
-                    deleteObstacle();
+                   deleteObstacle();
                 }
             }
             //Ajouter un etat pour l'ajout d'entity
@@ -201,8 +201,6 @@ void SnakeGameEngine::randomObstacle()
 
 void SnakeGameEngine::deleteObstacle()
 {
-    //clearAllEntity();
-    //nbObstacle = 0;
 }
 
 

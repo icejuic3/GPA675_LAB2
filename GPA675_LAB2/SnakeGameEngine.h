@@ -54,6 +54,7 @@ public:
 	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
 
+
 	bool deadSnake() const;
 
 private:
