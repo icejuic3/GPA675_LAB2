@@ -1,7 +1,7 @@
 #include "SnakeGameState.h"
 
 SnakeGameState::SnakeGameState()
-	:mSnakeEngine{}
+	:mSnakeEngine{*(new SnakeGameEngine())}
 	,mPressedKeys{}
 {
 }

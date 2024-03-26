@@ -54,12 +54,8 @@ bool Snake::isValid()
 
 bool Snake::isAlive()
 {
-    
-    if (mBody.size() < 2 || !mAlive) {
-        return false;
-    }
 
-    return true;
+    return mAlive;
 }
 
 void Snake::ticPrepare(real elapsedTime)

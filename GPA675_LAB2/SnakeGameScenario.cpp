@@ -13,5 +13,6 @@ void SnakeGameScenario::resetGame()
 
 bool SnakeGameScenario::isGameOver()
 {
-	return false;
+	return mEngine.deadSnake();
 }
+
