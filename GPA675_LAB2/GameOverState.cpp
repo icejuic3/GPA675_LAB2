@@ -5,7 +5,6 @@
 
 GameOverState::GameOverState(FiniteStateMachine* fsm)
 	:mFsm{ fsm }
-	//,mPressedKeys{}
 {
 }
 

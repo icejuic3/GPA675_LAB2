@@ -15,7 +15,6 @@
 GamingState::GamingState(FiniteStateMachine* fsm)
 	:mFsm{ fsm }
 	,mScenario{nullptr}
-	//,mPressedKeys{}
 {
 }
 
@@ -38,7 +37,7 @@ void GamingState::entering()
 
 	if (mFsm->getGameChoice() != 0) {
 
-		switch (mFsm->getGameChoice())					//verifie quel mode de jeu on va creer
+		switch (mFsm->getGameChoice())						//verifie quel mode de jeu on va creer
 		{
 		case 1:
 			mScenario = new SnakeOrigin(mSnakeEngine);
@@ -48,7 +47,7 @@ void GamingState::entering()
 			break;
 
 		case 3:
-			mScenario = new	Snakify(mSnakeEngine);								//troisieme jeu
+			mScenario = new	Snakify(mSnakeEngine);			//troisieme jeu
 			break;
 
 		}
