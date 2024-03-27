@@ -37,6 +37,47 @@ void GameOverState::draw(QPainter& painter)
 	GamingState* gamingState = static_cast<GamingState*>(mFsm->getState(StateType::Gaming));
 	gamingState->draw(painter);
 
+	std::list<Snake*> Snakes = gamingState->getEngine().getSnakes();
+
+	font.setPixelSize(5);
+	painter.setFont(font);
+
+	if (Snakes.size() > 1) {
+		int score1 = Snakes.front()->score();
+		int score2 = Snakes.back()->score();
+
+		QString winner = "";
+		QString score = "";
+		if (score1 > score2) {
+			painter.setPen(Qt::darkGreen);
+			winner = "Player 1 WINS";
+			score = QString::number(score1);
+		}
+		else if (score2 > score1) {
+			painter.setPen(Qt::darkRed);
+			winner = "Player 2 WINS";
+			score = QString::number(score2);
+		}
+		else {
+			painter.setPen(Qt::blue);
+			winner = "DRAW";
+			score = QString::number(score2);
+		}
+		
+		painter.drawText(rect, Qt::AlignVCenter | Qt::AlignHCenter, winner);
+
+		font.setPixelSize(2);
+		painter.setFont(font);
+		QRect rectForScore = rect.adjusted(0, 10, 0, 0);
+		painter.drawText(rectForScore, Qt::AlignVCenter | Qt::AlignHCenter, "With Score: " + score);
+	}
+	else {
+		QString score1 = QString::number(Snakes.front()->score());
+		font.setPixelSize(3);
+		painter.setFont(font);
+		painter.setPen(Qt::darkGreen);
+		painter.drawText(rect, Qt::AlignVCenter | Qt::AlignHCenter, "Final Score: " + score1);
+	}
 }
 
 bool GameOverState::isValid()
@@ -51,8 +92,11 @@ void GameOverState::entering()
 
 void GameOverState::exiting()
 {
+	GamingState* gamingState = static_cast<GamingState*>(mFsm->getState(StateType::Gaming));
+
 	mPressedKeys.clear();
 	mTransitions.clear();
+
 }
 
 void GameOverState::tic(qreal elapsedTime)

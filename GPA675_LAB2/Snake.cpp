@@ -75,6 +75,7 @@ void Snake::ticPrepare(real elapsedTime)
             advance(1);
         }
 
+        mAge += mTicTime;
         mTicTime = 0;
     }
 }

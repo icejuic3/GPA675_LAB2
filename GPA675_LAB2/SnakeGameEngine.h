@@ -51,10 +51,12 @@ public:
 	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
 	bool deadSnake() const;
+	std::list<Snake*> getSnakes() const;
 
 private:
 
 	std::list<Entity*> mEntities;
+	std::list<Snake*> mSnakes;
 	qreal mSpeed;
 	qreal mTotalElapsedTime;
 	Board mBoard;

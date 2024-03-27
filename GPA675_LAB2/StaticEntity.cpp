@@ -26,6 +26,12 @@ bool StaticEntity::isAlive()
 
 void StaticEntity::ticPrepare(real elapsedTime)
 {
+    if (elapsedTime > 0) {
+        mTicTime += elapsedTime;
+        mAge += mTicTime;
+        mTicTime = 0;
+    }
+
     if (isColliding(mPosition)) {
         mAlive = false;
         return;
@@ -35,7 +41,7 @@ void StaticEntity::ticPrepare(real elapsedTime)
 
 void StaticEntity::ticExecute()
 {
-    mAge += 1;
+    
 }
 
 void StaticEntity::draw(QPainter& painter)

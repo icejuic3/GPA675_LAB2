@@ -3,9 +3,9 @@
 
 enum class StateType :size_t {
 	Home = 0,
-	Gaming = 1,
-	GameOver = 2,
-	Pause = 3,
+	GameOver = 1,
+	Pause = 2,
+	Gaming = 3,
 };
 
 class FiniteStateMachine
@@ -20,6 +20,7 @@ public:
 
 	const int getGameChoice();
 	void setGameChoice(const int choice);
+	void resetGame();
 
 
 private:
