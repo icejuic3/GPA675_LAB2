@@ -101,8 +101,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
 					randomGrowingPellet();  //rajoute une pomme sur le jeu
                     
                     randomObstacle(); 
-                    
-                    randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
                    
                 }
 
@@ -114,10 +112,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             else {
                 delete* i;
                 i = mEntities.erase(i);
-                if (mGameMode == 3)
-                {
-                    deletObstacle();
-                }
             }
             //Ajouter un etat pour l'ajout d'entity
             
@@ -194,11 +188,11 @@ void SnakeGameEngine::randomObstacle()
     Obstacle* a = new Obstacle(mBoard);
     a->setPosition(randomPosition());
     addEntity(a);
+    nbObstacle++;
 }
 
-void SnakeGameEngine::deletObstacle()
+void SnakeGameEngine::deleteObstacle()
 {
-
 }
 
 

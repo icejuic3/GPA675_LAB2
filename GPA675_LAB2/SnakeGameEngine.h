@@ -47,12 +47,13 @@ public:
 	void randomAccPellet();
 	void randomObstaclePellet();
 	void randomObstacle();
-	void deletObstacle();
+	void deleteObstacle();
 	//
 	void arene();
 
 	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
+
 
 	bool deadSnake() const;
 
@@ -66,6 +67,7 @@ private:
 	PressedKeys mPressedKeys;
 	int mGameMode;
 	bool mDeadSnake;
+	int nbObstacle=0;
 };
 
 #endif

@@ -8,6 +8,7 @@
 
 #include "SnakeKeyboardController.h"
 #include "SnakeKeyboardAbsoluteController.h"
+#include "SnakeGameEngine.h"
 
 Snake::Snake(Board& board, QPoint point)
     :DynamicEntity(board)
@@ -95,7 +96,7 @@ void Snake::ticExecute()
     //3) collision avec mur ou lui meme/autre serpent  --> reduire serpent ou le detruire.
 
 
-    if (dynamic_cast<GrowingPellet*>(mColliding)) {    //si collision avec une Growing Pellet
+    if (dynamic_cast<GrowingPellet*>(mColliding)) {         //si collision avec une Growing Pellet
 
         mScore = +1;
         mSizeToGrow = 1;
@@ -109,15 +110,15 @@ void Snake::ticExecute()
         mColliding = nullptr;     //reset l'etat de collision
 
     }
-    if (dynamic_cast<AddObstaclePellet*>(mColliding)) {    //si collision avec une Pellet
+    if (dynamic_cast<AddObstaclePellet*>(mColliding)) {     //si collision avec une Obstacle Pellet
 
-		
-		mColliding = nullptr;  //reset l'etat de collision
+        
+		mColliding = nullptr;     //reset l'etat de collision
     }
-    if (dynamic_cast<Obstacle*>(mColliding)) {    //si collision avec un Obstacle
+    if (dynamic_cast<Obstacle*>(mColliding)) {              //si collision avec un Obstacle
 
         mAlive = false;
-        mColliding = nullptr;                  //reset l'etat de collision
+        mColliding = nullptr;     //reset l'etat de collision
     }
    
     if (dynamic_cast<Snake*>(mColliding)) {
