@@ -6,7 +6,6 @@
 
 PauseState::PauseState(FiniteStateMachine* fsm)
 	:mFsm{fsm}
-	//,mPressedKeys{}
 {
 }
 

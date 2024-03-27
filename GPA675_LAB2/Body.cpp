@@ -54,7 +54,7 @@ QPoint* Body::last() const
 
 void Body::addFirst(QPoint position)
 {
-	if (!mHead) { // la liste est vide
+	if (!mHead) {						// la liste est vide
 		mHead = new BodyPart(position, nullptr, nullptr);
 		mTail = mHead;
 	}
@@ -72,7 +72,7 @@ void Body::addFirst(QPoint position)
 
 void Body::addLast(QPoint position)
 {
-	if (mHead == nullptr) { // la liste est vide
+	if (mHead == nullptr) {				//la liste est vide
 		addFirst(position);
 	}
 	else {
@@ -108,7 +108,7 @@ void Body::add(size_t index, QPoint position)
 			--next;
 		}
 	}
-	BodyPart* previous = next->previous;		// a verfifier si removed se decremente lui-meme
+	BodyPart* previous = next->previous;		
 	BodyPart* added = new BodyPart(position, previous, next);
 	next->previous = added;
 	previous->next = added;

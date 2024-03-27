@@ -45,7 +45,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             if (snake) {
                 if (!mPressedKeys.empty()) {
                     snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-                    //mPressedKeys.clear();
                 }
             }
             (*i)->ticPrepare(elapsedTime);
@@ -53,7 +52,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
         }
     }
 
-    //boucle pour le deuxieme mode de jeu            *********devons changer cette boucle pour que les snakes ai chacun leur propre controller
+    //boucle pour le deuxieme mode de jeu           
     else if(mGameMode == 2) {
 
         for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
@@ -63,7 +62,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             if (snake) {
                 if (!mPressedKeys.empty()) {
                     snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-                    //mPressedKeys.clear();
                 }
             }
             (*i)->ticPrepare(elapsedTime);
@@ -81,7 +79,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
 			if (snake) {
 				if (!mPressedKeys.empty()) {
 					snake->updateKeys(mPressedKeys);    //met a jour le changement de direction du serpent
-					//mPressedKeys.clear();
 				}
 			}
 			(*i)->ticPrepare(elapsedTime);
@@ -109,8 +106,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
 					randomGrowingPellet();  //rajoute une pomme sur le jeu
                     
                     randomObstacle(); 
-                    
-                    randomObstaclePellet(); //ajoute une pellet de reduction d'obstacle
                    
                 }
 
@@ -122,14 +117,7 @@ void SnakeGameEngine::tic(qreal elapsedTime)
             else {
                 delete* i;
                 i = mEntities.erase(i);
-                if (mGameMode == 3)
-                {
-                    deletObstacle();
-                }
             }
-            //Ajouter un etat pour l'ajout d'entity
-            
-
         }
         else {
 
@@ -202,11 +190,11 @@ void SnakeGameEngine::randomObstacle()
     Obstacle* a = new Obstacle(mBoard);
     a->setPosition(randomPosition());
     addEntity(a);
+    nbObstacle++;
 }
 
-void SnakeGameEngine::deletObstacle()
+void SnakeGameEngine::deleteObstacle()
 {
-
 }
 
 
@@ -302,9 +290,6 @@ void SnakeGameEngine::snakeDirection(const PressedKeys& pressedKeys)
 void SnakeGameEngine::clearAllEntity()
 {
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
-        // *it pointe vers un pointeur d'Entity
-        // Pour acc?der aux donn?es de l'objet Entity, on doit d?r?f?rencer le pointeur
-        // puis appeler la m?thode ou acc?der aux membres
         (*i)->setDead();
         
     }
@@ -314,11 +299,6 @@ void SnakeGameEngine::draw(QPainter& painter)
 {
     for (auto i = mEntities.begin(); i != mEntities.end(); ++i) {
         (*i)->draw(painter);
-
-        // *it pointe vers un pointeur d'Entity
-        // Pour acc?der aux donn?es de l'objet Entity, on doit d?r?f?rencer le pointeur
-        // puis appeler la m?thode ou acc?der aux membres
-        
     }
 }
 

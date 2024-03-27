@@ -3,10 +3,8 @@
 #define SNAKE_GAME_ENGINE
 #include <QTimer>
 #include <QElapsedTimer>
-//#include <QSize>
 
 #include "SnakeGameScenario.h"
-//#include "SnakeScenario.h"
 
 #include "SnakeGameScenario.h"
 
@@ -26,7 +24,6 @@ class QPainter;
 class SnakeGameEngine
 {
 public:
-	//
 	//SnakeGameEngine(QSize const& size); 
 	SnakeGameEngine();
 	~SnakeGameEngine();
@@ -38,7 +35,7 @@ public:
 
 	void setGameMode(const int gameMode);
 
-	// Fonction random position
+	//Fonction random position
 	QPoint randomPosition();
 
 	//Gestion des pellets
@@ -48,12 +45,11 @@ public:
 	void randomObstaclePellet();
 	void randomObstacle();
 	void deletObstacle();
-	//
 	void arene();
 
+	//Serpent
 	void addSnake(int nbSnake);
 	void snakeDirection(const PressedKeys& pressedKeys);
-
 	bool deadSnake() const;
 	std::list<Snake*> getSnakes() const;
 
@@ -68,6 +64,7 @@ private:
 	PressedKeys mPressedKeys;
 	int mGameMode;
 	bool mDeadSnake;
+	int nbObstacle=0;
 };
 
 #endif

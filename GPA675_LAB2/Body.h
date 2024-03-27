@@ -31,20 +31,20 @@ public:
 		Iterator& operator=(Iterator const&) = default;
 		~Iterator() = default;
 
-		Iterator& operator++() { // pre-incrementation
+		Iterator& operator++() {	// pre-incrementation
 			if (mRefBodyPart) {
 				mRefBodyPart = mRefBodyPart->next;
 			}
 			return *this;
 		}
 
-		Iterator operator++(int) { // post-incrementation
+		Iterator operator++(int) {	// post-incrementation
 			Iterator temp(*this);
 			++(*this);
 			return temp;
 		}
 
-		Iterator& operator--() { // pre-decrementation
+		Iterator& operator--() {	// pre-decrementation
 			if (mRefBodyPart) {
 				mRefBodyPart = mRefBodyPart->previous;
 			}

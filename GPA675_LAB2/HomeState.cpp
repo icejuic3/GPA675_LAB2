@@ -9,7 +9,6 @@
 
 HomeState::HomeState(FiniteStateMachine* fsm)
 	:mFsm{fsm}
-	//,mPressedKeys{}
 {
 }
 
@@ -27,7 +26,7 @@ void HomeState::draw(QPainter& painter)
 	painter.fillRect(rect, QColor(50, 180, 64));	//couleur fond
 	font.setPixelSize(16);
 	painter.setFont(font);
-	painter.setPen(QColor(0, 85, 102));		//couleur titre
+	painter.setPen(QColor(0, 85, 102));				//couleur titre
 	painter.drawText(rect, Qt::AlignHCenter | Qt::AlignTop, "SNAKE!");
 
 	//section pour l'affichage du texte
