@@ -5,3 +5,8 @@ SnakeGameState::SnakeGameState()
 	,mPressedKeys{}
 {
 }
+
+SnakeGameEngine& SnakeGameState::getEngine() const
+{
+	return mSnakeEngine;
+}

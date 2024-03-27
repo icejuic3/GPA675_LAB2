@@ -12,9 +12,9 @@ FiniteStateMachine::FiniteStateMachine()
 {
 
 	mStates.push_back(new HomeState(this));       // État d'accueil
-	mStates.push_back(new GamingState(this));     // État de jeu
 	mStates.push_back(new GameOverState(this));   // État de fin de jeu
 	mStates.push_back(new PauseState(this));      // État de pause
+	mStates.push_back(new GamingState(this));     // État de jeu
 
 	mInitialState = mStates[0];
 
@@ -67,4 +67,11 @@ const int FiniteStateMachine::getGameChoice()
 void FiniteStateMachine::setGameChoice(const int choice)
 {
 	mGameChoice = choice;
+}
+
+void FiniteStateMachine::resetGame()
+{
+	delete mStates.back();
+	mStates.pop_back();
+	mStates.push_back(new GamingState(this));
 }

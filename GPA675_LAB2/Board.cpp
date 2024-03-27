@@ -34,8 +34,8 @@ Board& Board::operator=(Board const&)
 
 Board::~Board()
 {
-    //delete[]mBoard;
-    //mBoard = nullptr;
+    delete[]mBoard;
+    mBoard = nullptr;
 }
 
 size_t Board::getWidth() const

@@ -59,6 +59,7 @@ bool HomeState::isValid()
 
 void HomeState::entering()
 {
+	mFsm->resetGame();
 }
 
 void HomeState::exiting()

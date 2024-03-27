@@ -3,6 +3,9 @@
 #include "SnakeGameEngine.h"
 #include <Qrect>
 #include <qcoreapplication.h>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 
 class SnakeGameState: public State
@@ -17,8 +20,10 @@ public:
 	virtual void exiting() = 0;
 	virtual void tic(qreal elapsedTime) = 0;
 	virtual void updateKeys(const PressedKeys& pressedKeys) = 0;
+	SnakeGameEngine& getEngine() const;
 	
 protected:
 	SnakeGameEngine& mSnakeEngine;
 	PressedKeys mPressedKeys;
+
 };

@@ -9,6 +9,7 @@
 
 SnakeGameEngine::SnakeGameEngine()
     : mEntities{}
+    , mSnakes{}
     , mSpeed{ 500.0 }
     , mTotalElapsedTime{ 0.0 }
     , mBoard{ Board(64, 64) }
@@ -20,6 +21,13 @@ SnakeGameEngine::SnakeGameEngine()
 
 SnakeGameEngine::~SnakeGameEngine()
 {
+    for (auto i = mEntities.begin(); i != mEntities.end();) {
+
+                delete* i;
+                i = mEntities.erase(i);
+    }
+
+    mBoard.~Board();
 }
 
 void SnakeGameEngine::tic(qreal elapsedTime)
@@ -239,7 +247,7 @@ void SnakeGameEngine::arene()
 }
 
 void SnakeGameEngine::addSnake(int nbSnake)
-{   //*********************IMPORTANT
+ {   //*********************IMPORTANT
     //**********changement de logique du controller on doit faire des new absolute ou relatif avec les touches necessaire et ensuite les assigner aux snakes correspondant
     //**********iL va falloir aussi changer les SnakeKeyboardAbsoluteController.h et SnakeKeyboardRelativeController.h pour la nouvelle logique 
     // ainsi que le constructeur du snake pour ne pas creer un new controller a cet endroit la
@@ -255,6 +263,7 @@ void SnakeGameEngine::addSnake(int nbSnake)
         Controller* mc1 = new SnakeKeyboardAbsoluteController(*snake1, Qt::Key_Up, Qt::Key_Down, Qt::Key_Left, Qt::Key_Right);
 
         snake1->setController(*(mc1));
+        mSnakes.push_back(snake1);
     }
     if (nbSnake == 2)
     {
@@ -263,7 +272,7 @@ void SnakeGameEngine::addSnake(int nbSnake)
         point1.setX(mBoard.getWidth() / 3);
         point1.setY(mBoard.getHeight() / 2);
         Snake* snake1 = new Snake(mBoard,point1);
-        snake1->setColors(QColor(240, 0, 0), QColor(120,0, 0));
+        snake1->setColors(QColor(240, 0, 0), QColor(120, 0, 0));
 
         //Serpent 2
         QPoint point2;
@@ -280,6 +289,8 @@ void SnakeGameEngine::addSnake(int nbSnake)
 
         snake1->setController(*(mc1));
         snake2->setController(*(mc2));
+        mSnakes.push_back(snake2);
+        mSnakes.push_back(snake1);
     }
 }
 
@@ -314,4 +325,10 @@ void SnakeGameEngine::draw(QPainter& painter)
 bool SnakeGameEngine::deadSnake() const
 {
     return mDeadSnake;
+}
+
+std::list<Snake*> SnakeGameEngine::getSnakes() const
+{
+
+    return mSnakes;
 }

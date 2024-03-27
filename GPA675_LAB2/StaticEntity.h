@@ -30,6 +30,7 @@ private:
 	QPoint mPosition;
 	QColor mColor;
 	qreal  mRadius;
+	qreal mTicTime;
 };
 
 #endif //STATIC_ENTITY_H
