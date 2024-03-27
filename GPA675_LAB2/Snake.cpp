@@ -8,6 +8,7 @@
 
 #include "SnakeKeyboardController.h"
 #include "SnakeKeyboardAbsoluteController.h"
+#include "SnakeGameEngine.h"
 
 Snake::Snake(Board& board, QPoint point)
     :DynamicEntity(board)

@@ -45,8 +45,6 @@ public:
 	void randomObstaclePellet();
 	void randomObstacle();
 	void deletObstacle();
-
-	//Arene
 	void arene();
 
 	//Serpent
@@ -64,6 +62,7 @@ private:
 	PressedKeys mPressedKeys;
 	int mGameMode;
 	bool mDeadSnake;
+	int nbObstacle=0;
 };
 
 #endif

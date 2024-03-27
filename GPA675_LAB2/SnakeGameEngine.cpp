@@ -98,7 +98,6 @@ void SnakeGameEngine::tic(qreal elapsedTime)
 					randomGrowingPellet();  //rajoute une pomme sur le jeu
                     
                     randomObstacle(); 
-                    
                    
                 }
 
@@ -183,11 +182,11 @@ void SnakeGameEngine::randomObstacle()
     Obstacle* a = new Obstacle(mBoard);
     a->setPosition(randomPosition());
     addEntity(a);
+    nbObstacle++;
 }
 
-void SnakeGameEngine::deletObstacle()
+void SnakeGameEngine::deleteObstacle()
 {
-
 }
 
 
