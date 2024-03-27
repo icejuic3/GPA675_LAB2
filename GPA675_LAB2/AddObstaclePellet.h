@@ -9,7 +9,7 @@ class AddObstaclePellet : public Pellet
 {
 public:
 
-	// Changement de couleur en rouge
+	// Changement de couleur en jaune
 	AddObstaclePellet(Board& board);
 
 private:

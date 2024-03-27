@@ -12,7 +12,6 @@
 
 Snake::Snake(Board& board, QPoint point)
     :DynamicEntity(board)
-    //, mController{ new SnakeKeyboardAbsoluteController(*this)}    //controller par default
     , mName{}
     , mScore{ 0 }
     , mBody{Body(point)}
@@ -32,26 +31,18 @@ Snake::Snake(Board& board, QPoint point)
 {
     grow(mBodylength);
 
-    //mBoard.setValue(32, 32, this);  //assigne un pointeur du board au premier Body
 }
 
 Snake::~Snake()
 {
-    //delete mController;
 }
 
 bool Snake::isValid()
 {
-    // v?rifie la taille minimal du serpent
+    // verifie la taille minimal du serpent
     if (mBody.size() < 2) { //la verification pour la taille du corps inclus la tete ou seulement le reste du corps?
         return false;
     }
-
-
-    //verifier que nous n'avons pas des positions dupliquees?
-
-    //verifier la tete du serpent se trouve dans les limites de l'arene?
-
     return true;
 }
 
@@ -73,7 +64,6 @@ void Snake::ticPrepare(real elapsedTime)
         //prepare le changement de direction du serpent
         if (!mPressedKeys.empty()) {                
             mController->control(mPressedKeys);       
-            //mPressedKeys.clear();
         }
 
         if (mSizeToGrow) {
@@ -100,25 +90,25 @@ void Snake::ticExecute()
 
         mScore = +1;
         mSizeToGrow = 1;
-        mColliding = nullptr;     //reset l'etat de collision
+        mColliding = nullptr;       //reset l'etat de collision
 
     }
     if (dynamic_cast<AcceleratingPellet*>(mColliding)) {    //si collision avec une Accelerating Pellet
 
         mScore = +1;
         mSpeed += 1;
-        mColliding = nullptr;     //reset l'etat de collision
+        mColliding = nullptr;       //reset l'etat de collision
 
     }
-    if (dynamic_cast<AddObstaclePellet*>(mColliding)) {     //si collision avec une Obstacle Pellet
+    if (dynamic_cast<AddObstaclePellet*>(mColliding)) {     //si collision avec une Pellet
 
-        
-		mColliding = nullptr;     //reset l'etat de collision
+		
+		mColliding = nullptr;       //reset l'etat de collision
     }
     if (dynamic_cast<Obstacle*>(mColliding)) {              //si collision avec un Obstacle
 
         mAlive = false;
-        mColliding = nullptr;     //reset l'etat de collision
+        mColliding = nullptr;       //reset l'etat de collision
     }
    
     if (dynamic_cast<Snake*>(mColliding)) {
@@ -131,10 +121,6 @@ void Snake::ticExecute()
 
 void Snake::draw(QPainter& painter)
 {
-    /**************configuration t?te********************************/
-    //section a revoir si on dessine une forme comme un rectangle pour utiliser le Qbrush
-    //ou si nous changeons directement la couleur du pixel avec painter.drawPoint();
-    //painter.setBrush(QBrush(mHeadColor));
 
     if (!mBody.isEmpty()) {
 
@@ -154,7 +140,7 @@ void Snake::draw(QPainter& painter)
 
 bool Snake::isColliding(QPoint const& position)
 {
-    return mColliding; //voir avec william pour l'implementation
+    return mColliding;
 }
 
 QString Snake::name()
@@ -214,10 +200,10 @@ void Snake::setName(QString name)
 
 void Snake::reset(QPoint headPosition, Direction headDirection, size_t bodyLength, SpeedType initialSpeed)
 {
-    //R?initialise la t?te du serpent
+    //Reinitialise la tete du serpent
     mBody.clear();                      //on s'assure que le corps est vide
-    addFirst(headPosition);       //cr?er la t?te ? la position donn?e
-    mHeadDirection = headDirection;     //r?initialise la direction
+    addFirst(headPosition);             //creer la tete ? la position donnee
+    mHeadDirection = headDirection;     //reinitialise la direction
 
     //on calcule chaque position ? rajouter au serpent individuellement
     QPoint pos = headPosition;
@@ -242,12 +228,12 @@ void Snake::reset(QPoint headPosition, Direction headDirection, size_t bodyLengt
             pos.setX(pos.x() + 1);
             break;
         }
-        addLast(pos);         //apr?s le calcul, nous rajoutons la partie du serpent
+        addLast(pos);         //apres le calcul, nous rajoutons la partie du serpent
     }
 
-    mSpeed = initialSpeed;          //r?initialise la vitesse
-    mScore = 0;                     //r?initialise le score
-    mSizeToGrow = 0;                //r?initialise la croissance
+    mSpeed = initialSpeed;          //reinitialise la vitesse
+    mScore = 0;                     //reinitialise le score
+    mSizeToGrow = 0;                //reinitialise la croissance
 }
 
 void Snake::setController(Controller& controller)
@@ -278,7 +264,7 @@ void Snake::addFirst(QPoint pos)
 
 void Snake::decelerate(SpeedType percentLess)
 {
-    mSpeed *= 1 - percentLess; //percentless doit etre deja en pourcentage
+    mSpeed *= 1 - percentLess; 
 }
 
 void Snake::advance(size_t size)

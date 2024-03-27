@@ -8,7 +8,7 @@ class AcceleratingPellet : public Pellet
 {
 public:
 
-	// Changement de couleur en rouge
+	// Changement de couleur en magenta
 	AcceleratingPellet(Board& board);
 
 private:

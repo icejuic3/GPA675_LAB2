@@ -13,8 +13,6 @@ public:
 	int score();									//query
 	void setScore(int score);
 
-	//virtual void applyEffectOnSnake(Pellet::Entity& snake) = 0;
-
 private:
 	int mScore;
 };

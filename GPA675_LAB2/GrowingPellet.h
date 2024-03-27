@@ -8,6 +8,7 @@
 class GrowingPellet : public Pellet
 {
 public:
+
 	// Changement de couleur en rouge
 	GrowingPellet(Board& board);
 

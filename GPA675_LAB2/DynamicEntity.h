@@ -8,7 +8,6 @@ public:
 	DynamicEntity(Board& board);
 	~DynamicEntity();
 
-
 	// Inherited via Entity
 	virtual bool isValid() = 0;
 	virtual bool isAlive() = 0;

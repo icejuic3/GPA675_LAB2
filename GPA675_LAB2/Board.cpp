@@ -23,7 +23,7 @@ Board::Board(size_t height, size_t width)
     }
 
     for (DataType cur{ mBoard }; cur < mBoard + mSize; ++cur) {
-        *cur = nullptr;											//l'état est sauvegarder a l'endroit où pointe le pointeur
+        *cur = nullptr;											    //l'état est sauvegarder a l'endroit où pointe le pointeur
     }
 }
 
@@ -34,8 +34,6 @@ Board& Board::operator=(Board const&)
 
 Board::~Board()
 {
-    //delete[]mBoard;
-    //mBoard = nullptr;
 }
 
 size_t Board::getWidth() const

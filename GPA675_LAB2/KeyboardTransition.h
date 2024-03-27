@@ -11,10 +11,6 @@ public:
 
 	bool isTransiting() override;
 
-protected:
-	//void keyPressEvent(QKeyEvent* event);
-	//void keyReleaseEvent(QKeyEvent* event);
-
 private:
 
 	State* mNextState;

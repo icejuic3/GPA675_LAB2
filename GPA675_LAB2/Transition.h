@@ -13,5 +13,5 @@ public:
 	void setState(State* state);		//Mutateur
 
 private:
-	State* mNextState;					//
+	State* mNextState;					
 };
